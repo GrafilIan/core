@@ -9,18 +9,6 @@ class UserLoginForm(AuthenticationForm):
         model = User
         fields = ['username', 'password']
 
-    def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Username',
-            'required': 'True'
-        })
-        self.fields['password'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Password',
-            'required': 'True'
-        })
 
 # Customizing Registration Form from UserCreationForm
 class UserRegistrationForm(UserCreationForm):
