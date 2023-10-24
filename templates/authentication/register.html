@@ -1,31 +1,158 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Register Panel</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/modules/fontawesome/css/all.min.css' %}">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{% static 'assets/modules/jquery-selectric/selectric.css' %}">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
 </head>
 <body>
 
-<p>Register Page</p>
+<div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="{% static 'assets/img/SSUlogo.png' %}" alt="logo" width="100" class="shadow-light rounded-circle">
+            </div>
 
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+            <div class="card card-primary">
+              <div class="card-header"><h4>Register</h4></div>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
+                {% if messages %}
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
 
-    <input type="submit" value="Submit">
+              <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="first_name">First Name</label>
+                      {{ form.first_name }}
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="last_name">Last Name</label>
+                      {{ form.last_name }}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    {{ form.email }}
+                    <div class="invalid-feedback">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Username</label>
+                    {{ form.username }}
+
+                    <div class="invalid-feedback">
+                    </div>
+                  </div>
 
 
-</form>
 
-<p>To login: <a href="{% url 'login' %}">Click Here</a></p>
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="password1" class="d-block">Password</label>
+                      {{ form.password1 }}
+                      <div id="pwindicator" class="pwindicator">
+                        <div class="bar"></div>
+                        <div class="label"></div>
+                      </div>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="password2" class="d-block">Password Confirmation</label>
+                      {{ form.password2 }}
+                    </div>
+                  </div>
+
+{#                  <div class="form-divider">#}
+{#                    Your Home#}
+{#                  </div>#}
+{#                  <div class="row">#}
+{#                    <div class="form-group col-6">#}
+{#                      <label>Country</label>#}
+{#                      <div class="selectric-wrapper selectric-form-control selectric-selectric"><div class="selectric-hide-select"><select class="form-control selectric" tabindex="-1">#}
+{#                        <option>Indonesia</option>#}
+{#                        <option>Palestine</option>#}
+{#                        <option>Syria</option>#}
+{#                        <option>Malaysia</option>#}
+{#                        <option>Thailand</option>#}
+{#                      </select></div><div class="selectric"><span class="label">Indonesia</span><b class="button">▾</b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">Indonesia</li><li data-index="1" class="">Palestine</li><li data-index="2" class="">Syria</li><li data-index="3" class="">Malaysia</li><li data-index="4" class="last">Thailand</li></ul></div></div><input class="selectric-input" tabindex="0"></div>#}
+{#                    </div>#}
+{#                    <div class="form-group col-6">#}
+{#                      <label>Province</label>#}
+{#                      <div class="selectric-wrapper selectric-form-control selectric-selectric"><div class="selectric-hide-select"><select class="form-control selectric" tabindex="-1">#}
+{#                        <option>West Java</option>#}
+{#                        <option>East Java</option>#}
+{#                      </select></div><div class="selectric"><span class="label">West Java</span><b class="button">▾</b></div><div class="selectric-items" tabindex="-1"><div class="selectric-scroll"><ul><li data-index="0" class="selected">West Java</li><li data-index="1" class="last">East Java</li></ul></div></div><input class="selectric-input" tabindex="0"></div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                  <div class="row">#}
+{#                    <div class="form-group col-6">#}
+{#                      <label>City</label>#}
+{#                      <input type="text" class="form-control">#}
+{#                    </div>#}
+{#                    <div class="form-group col-6">#}
+{#                      <label>Postal Code</label>#}
+{#                      <input type="text" class="form-control">#}
+{#                    </div>#}
+{#                  </div>#}
+
+                  <div class="form-group">
+                    <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block" >
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+{#<p>Register Page</p>#}
+{##}
+
+
+{#<form method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form }}#}
+{##}
+{#    <input type="submit" value="Submit">#}
+{##}
+{##}
+{#</form>#}
+{##}
+{#<p>To login: <a href="{% url 'login' %}">Click Here</a></p>#}
 
 
 </body>

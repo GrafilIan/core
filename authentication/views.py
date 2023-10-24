@@ -19,7 +19,11 @@ from authentication.forms import UserRegistrationForm
 
 @login_required(login_url='login')
 def homepage(request):
-    return render(request, 'homepage.html')
+    if request.user.is_superuser:
+        return render(request, 'admin_homepage.html')
+    else:
+        return render(request, 'homepage.html')
+
 
 
 def register(request):
