@@ -37,7 +37,7 @@ class InternForm(forms.ModelForm):
         self.fields['suffix'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Suffix',
-            'required' : 'False'
+            'required': False
         })
 
         self.fields['present_address'].widget.attrs.update({
