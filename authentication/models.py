@@ -4,7 +4,7 @@ from django.utils.timezone import now
 
 # Create your models here.
 class Intern(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  # Use OneToOneField
     student_id = models.CharField(max_length=200, verbose_name='Student ID', null=True)
     middle_name = models.CharField(max_length=200, verbose_name='Middle Name', null=True)
     suffix = models.CharField(max_length=200, verbose_name='suffix', null=True)
@@ -13,7 +13,7 @@ class Intern(models.Model):
         ('1st Semester', '1st Semester'),
         ('2nd Semester', '2nd Semester'),
     ]
-    status = models.CharField(max_length=20, choices=SEMESTER_CHOICES, null=True)
+    semester = models.CharField(max_length=20, choices=SEMESTER_CHOICES, null=True)
 
     course = models.CharField(
         max_length=10,
@@ -68,4 +68,4 @@ class Intern(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
 
     def __str__(self):
-        return self.username
+        return self.student_id

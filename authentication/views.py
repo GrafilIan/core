@@ -12,8 +12,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from authentication.forms import UserRegistrationForm
-
+from authentication.forms import UserRegistrationForm, InternForm
+from .models import Intern
 
 # Create your views here.
 
@@ -28,13 +28,20 @@ def homepage(request):
 
 def register(request):
     form = UserRegistrationForm()
+    intern_form = InternForm()
 
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
-        if form.is_valid():
+        intern_form = InternForm(request.POST)
+
+        if form.is_valid() and intern_form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
+
+            intern = intern_form.save(commit=False)
+            intern.user = user
+            intern.save()
 
             # email user with activation link
             current_site = get_current_site(request)
@@ -59,7 +66,8 @@ def register(request):
 
 
     return render(request, 'authentication/register.html',{
-        'form': form
+        'form': form,
+        'intern_form': intern_form
     })
 
 # to activate user from email
