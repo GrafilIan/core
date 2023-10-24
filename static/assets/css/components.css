@@ -854,7 +854,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 .select2-container.select2-container--open .select2-selection--single {
   background-color: #fefeff;
-  border-color: #95a0f4;
+  border-color: #c58787;
 }
 
 .select2-results__option {
@@ -919,7 +919,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 .selectric:focus {
   background-color: #fefeff;
-  border-color: #95a0f4;
+  border-color: #8e0000;
 }
 .selectric .label {
   font-size: 13px;
@@ -934,7 +934,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 
 .selectric-open .selectric {
-  border-color: #6777ef;
+  border-color: #c58787;
 }
 
 .selectric-above .selectric-items, .selectric-below .selectric-items {
@@ -955,7 +955,7 @@ tr:first-child > td > .fc-day-grid-event {
   background-color: #f2f2f2;
 }
 .selectric-items li.selected, .selectric-items li.highlighted {
-  background-color: #6777ef;
+  background-color: #8e0000;
   color: #fff;
 }
 
@@ -1148,7 +1148,7 @@ tr:first-child > td > .fc-day-grid-event {
 }
 .bootstrap-tagsinput:focus {
   background-color: #fefeff;
-  border-color: #95a0f4;
+  border-color: #8e0000;
 }
 
 /* 1.27 Time Picker */
