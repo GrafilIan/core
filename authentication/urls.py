@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from authentication import views
 from authentication.forms import UserLoginForm
+from signup.views import add_intern_records
 
 urlpatterns = [
     # login view from auth_views with custom login template
@@ -34,11 +35,7 @@ urlpatterns = [
     # path for homepage where successfull login will redirect
     path('', views.homepage, name='homepage'),
 
-
-
-
-
-
+    path('add_intern_records/', add_intern_records, name='add_intern_records'),
 
 
 ]

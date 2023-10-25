@@ -1,11 +1,11 @@
-from .models import Intern
+from .models import Intern_Records
 from django.forms.widgets import Select
 from django import forms
 
 
 class InternForm(forms.ModelForm):
     class Meta:
-        model = Intern
+        model = Intern_Records
         fields = [
             'student_id',
             'middle_name',
@@ -37,7 +37,7 @@ class InternForm(forms.ModelForm):
         self.fields['suffix'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Suffix',
-            'required': False
+            'required': 'False'
         })
 
         self.fields['present_address'].widget.attrs.update({
@@ -129,3 +129,5 @@ class InternForm(forms.ModelForm):
             'class': 'form-control',
             'required': 'True'
         })
+        self.fields['status'].choices = STATUS_CHOICES
+

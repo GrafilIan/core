@@ -13,7 +13,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from authentication.forms import UserRegistrationForm
-
+from signup.models import Intern_Records
 
 # Create your views here.
 
@@ -21,27 +21,31 @@ from authentication.forms import UserRegistrationForm
 def homepage(request):
     if request.user.is_superuser:
         return render(request, 'admin_homepage.html')
-    else:
-        return render(request, 'authentication/intern_create.html')
+
+    # Check if the user has already filled out the form
+    try:
+        intern_record = Intern_Records.objects.get(user=request.user)
+        if intern_record.form_filled_out:
+            return render(request, 'homepage.html')  # Redirect to the dashboard if the form is filled out
+    except Intern_Records.DoesNotExist:
+        pass  # Intern record doesn't exist, indicating the form has not been filled out
+
+    # If the user is not a superuser and hasn't filled out the form, redirect to the form page
+    return redirect('add_intern_records')
 
 
 
 def register(request):
     form = UserRegistrationForm()
-#    intern_form = InternForm()
+
 
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
-       # intern_form = InternForm(request.POST)
 
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
-            # intern = intern_form.save(commit=False)
-            # intern.user = user
-            # intern.save()
 
             # email user with activation link
             current_site = get_current_site(request)
@@ -68,7 +72,6 @@ def register(request):
 
     return render(request, 'authentication/register.html',{
         'form': form,
-        #'intern_form': intern_form
     })
 
 # to activate user from email

@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 # Create your models here.
-class Intern(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  # Use OneToOneField
+class Intern_Records(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     student_id = models.CharField(max_length=200, verbose_name='Student ID', null=True)
     middle_name = models.CharField(max_length=200, verbose_name='Middle Name', null=True)
     suffix = models.CharField(max_length=200, verbose_name='suffix', null=True)
     present_address = models.CharField(max_length=200, verbose_name='Present Address', null=True)
-    SEMESTER_CHOICES =[
+    SEMESTER_CHOICES = [
         ('1st Semester', '1st Semester'),
         ('2nd Semester', '2nd Semester'),
     ]
@@ -68,5 +68,7 @@ class Intern(models.Model):
     ]
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
 
+    form_filled_out = models.BooleanField(default=False)
+
     def __str__(self):
-        return self.student_id
+        return str(self.user.username)

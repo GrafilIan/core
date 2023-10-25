@@ -55,12 +55,12 @@
                 {% endif %}
 
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" action="{% url 'add_intern_records' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row">
                             <div class="form-group col-6">
-                                <label>First Name</label>
-                                    {{ user.first_name }}
+                                <label>First Name</label> <br>
+                                {{ user.first_name }}
                             </div>
 
                             <div class="form-group col-6">
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group col-6">
-                                <label>Last Name</label>
+                                <label>Last Name</label><br>
                                 {{ user.last_name }}
                             </div>
 
@@ -90,52 +90,85 @@
                         </div>
                         <div class="row">
 
-                        <div class="form-group col-4">
-                            <label for="{{ form.course.id_for_label }}">Course</label>
-                            {{ form.course }}
-                        </div>
+                            <div class="form-group col-4">
+                                <label for="{{ form.course.id_for_label }}">Course</label>
+                                {{ form.course }}
+                            </div>
 
-                        <div class="form-group col-4">
-                            <label for="year_level">Year Level</label>
-                            {{ form.year_level }}
-                        </div>
+                            <div class="form-group col-4">
+                                <label for="year_level">Year Level</label>
+                                {{ form.year_level }}
+                            </div>
 
-                        <div class="form-group col-4">
-                            <label for="block">block</label>
-                            {{ form.block }}
-                        </div>
+                            <div class="form-group col-4">
+                                <label for="block">block</label>
+                                {{ form.block }}
+                            </div>
 
-                        <div class="form-group col-6">
-                            <label for="ojt_hours">OJT Hours:</label>
-                            <span id="ojt_hours_value">{{ form.get_ojt_hours }} hrs</span>
-                        </div>
+                            <div class="form-group col-6">
+                                <label for="ojt_hours">OJT Hours:</label>
+                                <span id="ojt_hours_value">{{ form.get_ojt_hours }} hrs</span>
+                            </div>
                         </div>
 
                         <div class="row">
-                        <div class="form-group col-6">
-                            <label>Email</label>
-                            {{ user.email }}
-                        </div>
+                            <div class="form-group col-6">
+                                <label>Email</label><br>
+                                {{ user.email }}
+                            </div>
 
-                        <div class="form-group col-6">
-                            <label for="student_id">Student Number</label>
-                            {{ form.student_id }}
-                        </div>
+                            <div class="form-group col-6">
+                                <label for="student_id">Student Number</label>
+                                {{ form.student_id }}
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Username</label>
+                            <label>Username</label><br>
                             {{ user.username }}
                         </div>
 
-                        <div class="form-divider">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="company_name">Company Name</label>
+                                {{ form.company_name }}
+                            </div>
 
-                        <div class="form-group">
-                            <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
-                                Register
-                            </button>
-                            <p>To Logout:
-                                <a href={% url 'logout' %}> Click here</a></p>
+                            <div class="form-group col-6">
+                                <label for="address">Company Address</label>
+                                {{ form.address }}
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="contact_person">Contact Person</label>
+                                {{ form.contact_person }}
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="contact_number">Contact Address</label>
+                                {{ form.contact_number }}
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="profile_image">Profile Image</label>
+                                {{ form.profile_image }}
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="status">Internship Status</label>
+                                {{ form.status }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                        <div class="form-divider">
+                            <div class="form-group">
+                                <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
+                                    Register
+                                </button>
+                                <p>To Logout: <a href={% url 'logout' %}> Click here</a></p>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -143,7 +176,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- General JS Scripts -->
 <script src="{% static 'assets/modules/jquery.min.js' %}"></script>
@@ -166,22 +198,23 @@
 <script src="{% static 'assets/js/custom.js' %}"></script>
 
 <script>
-$(document).ready(function() {
-    $('#id_course').on('change', function() {
-        var selectedCourse = $(this).val();
-        var ojtHours = {
-            'BSIT': 366,
-            'BSIS': 366,
-            'BSCS': 182,
-            'BSA': 300,
-            'BSAIS': 400,
-            'BPA': 300
-        };
+    $(document).ready(function () {
+        $('#id_course').on('change', function () {
+            var selectedCourse = $(this).val();
+            var ojtHours = {
+                'BSIT': 366,
+                'BSIS': 366,
+                'BSCS': 182,
+                'BSA': 300,
+                'BSAIS': 400,
+                'BPA': 300
+            };
 
-        var ojtHoursValue = ojtHours[selectedCourse] || 0;
-        $('#ojt_hours_value').text(ojtHoursValue + ' hrs');
+            var ojtHoursValue = ojtHours[selectedCourse] || 0;
+            $('#ojt_hours_value').text(ojtHoursValue + ' hrs');
+        });
     });
-});
 </script>
+
 </body>
 </html>
