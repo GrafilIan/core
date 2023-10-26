@@ -20,7 +20,7 @@ from signup.models import Intern_Records
 @login_required(login_url='login')
 def homepage(request):
     if request.user.is_superuser:
-        return render(request, 'admin_homepage.html')
+        return render(request, 'adminbase.html')
 
     # Check if the user has already filled out the form
     try:

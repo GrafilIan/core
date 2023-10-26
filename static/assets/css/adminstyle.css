@@ -2,14 +2,14 @@
 /**
  * Stisla
  *
- * Stisla is a clean & modern HTML5 admin template based on Bootstrap 4. 
+ * Stisla is a clean & modern HTML5 admin template based on Bootstrap 4.
  * Stisla will make it easier for you to create your own admin interface.
  *
- * @package	Stisla 
+ * @package	Stisla
  * @version	2.2.0
  * @author 	Muhamad Nauval Azhar
  * @url 	https://getstisla.com
- * 
+ *
  */
 /**
  * TABLE OF CONTENTS
@@ -1303,18 +1303,18 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-primary, .btn-primary.disabled {
-  box-shadow: 0 2px 6px #1e1f22;
-  background-color: #8e0000;
-  border-color: #8e0000; }
+  box-shadow: 0 2px 6px #2e3034;
+  background-color: #313436;
+  border-color: #373a3d; }
   .btn-primary:focus, .btn-primary.disabled:focus {
     background-color: #720000 !important; }
     .btn-primary:focus:active, .btn-primary.disabled:focus:active {
       background-color: #720000 !important; }
   .btn-primary:active, .btn-primary:hover, .btn-primary.disabled:active, .btn-primary.disabled:hover {
-    background-color: #700000 !important; }
+    background-color: #252828 !important; }
 
 .btn-outline-primary, .btn-outline-primary.disabled {
-  border-color: #8e0000;
+  border-color: #313436;
   color: #6777ef; }
   .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.disabled:hover, .btn-outline-primary.disabled:focus, .btn-outline-primary.disabled:active {
     background-color: #6777ef !important;
@@ -1518,7 +1518,7 @@ h6 .badge {
   left: 0;
   width: 100%;
   height: 75px;
-  background-color: #8e0000;
+  background-color: #323436;
   z-index: -1; }
 
 .navbar {
@@ -1816,7 +1816,7 @@ a.dropdown-item {
         .dropdown-list .dropdown-item:focus .dropdown-item-desc b {
           color: #fff !important; }
     .dropdown-list .dropdown-item.dropdown-item-unread:active .dropdown-item-desc {
-      color: #69757d; }
+      color: #6c757d; }
       .dropdown-list .dropdown-item.dropdown-item-unread:active .dropdown-item-desc b {
         color: #6c757d; }
     .dropdown-list .dropdown-item:active .dropdown-item-desc {
@@ -1999,7 +1999,6 @@ a.bb {
 
 .login-brand {
     display: flex;
-    flex-direction: column;
     justify-content: space-between; /* Positions logo on the left and text on the right */
     align-items: center;
     margin: 20px 0;
@@ -2339,7 +2338,7 @@ pre {
   top: 0;
   height: 100%;
   width: 250px;
-  background-color: #36373a;
+  background-color: #830000;
   z-index: 880;
   left: 0; }
 
@@ -2363,7 +2362,7 @@ body.sidebar-mini .main-sidebar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
     content: ' ';
     position: fixed;
-    background-color: #46474b;
+    background-color: #910000;
     width: 65px;
     height: 100%;
     left: 0;
