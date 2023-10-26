@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/fontawesome/css/all.min.css' %}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{% static 'assets/modules/jqvmap/dist/jqvmap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/summernote/summernote-bs4.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/ionicons/css/ionicons.min.css' %}">
+
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-94034622-3');
+    </script>
+
+    {% block head %}
+    {% endblock %}
+
+    {% block style %}
+    {% endblock %}
+
+</head>
+
+<body>
+<div class="navbar-bg"></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+            <h4 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h4>
+        </form>
+
+      </nav>
+<div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <img src="{% static 'assets/img/SSUlogo.png' %}" alt="logo" width="60" style="margin-bottom: -30px;">
+        </div>
+
+        <div class="sidebar-brand sidebar-brand-sm">
+            <img src="{% static 'assets/img/SSUlogo.png' %}" alt="logo" width="40" style="margin-bottom: -30px;">
+        </div>
+
+        <div class="sidebar-brand">
+            <h6 style="color: white; padding-left: 15px; padding-right: 15px;">Sorsogon State University-Bulan Campus</h6>
+        </div>
+
+        <div class="sidebar-brand sidebar-brand-sm">
+            <h6 style="color: white;">SorSU</h6>
+        </div>
+
+
+        <ul class="sidebar-menu">
+
+            <li class="menu-header">Intern UI</li>
+
+            <li><a class="nav-link" ><i class="ion-easel"></i> <span>Dashboard</span></a></li>
+            <li><a class="nav-link" ><i class="ion-calendar"></i> <span>Internship Schedule</span></a></li>
+
+            <li class="menu-header">Intern's Documents</li>
+
+            <li class="dropdown">
+                <a class="nav-link has-dropdown"><i class="ion-calendar"></i> <span>Forms</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="forms-advanced-form.html">Internship Requirements</a></li>
+                    <li><a class="nav-link" href="forms-validation.html">Narrative Report</a></li>
+                    <li><a class="nav-link" href="forms-validation.html">Daily Time Report</a></li>
+                    <li><a class="nav-link" href="forms-validation.html">Records after OJT</a></li>
+                </ul>
+            </li>
+
+
+
+        </ul>
+
+        <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href={% url 'logout' %} class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </aside>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<script src="{% static 'assets/modules/jquery.min.js' %}"></script>
+<script src="{% static 'assets/modules/popper.js' %}"></script>
+<script src="{% static 'assets/modules/tooltip.js' %}"></script>
+<script src="{% static 'assets/modules/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'assets/modules/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/stisla.js' %}"></script>
+
+<!-- JS Libraries -->
+<script src="{% static 'assets/modules/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'assets/modules/chart.min.js' %}"></script>
+<script src="{% static 'assets/modules/owlcarousel2/dist/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/modules/summernote/summernote-bs4.js' %}"></script>
+<script src="{% static 'assets/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{% static 'assets/js/page/index.js' %}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'assets/js/scripts.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
