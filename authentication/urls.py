@@ -4,6 +4,7 @@ from authentication import views
 from authentication.forms import UserLoginForm
 from signup.views import add_intern_records
 
+
 urlpatterns = [
     # login view from auth_views with custom login template
     path('login/', auth_views.LoginView.as_view(template_name='authentication/login.html',

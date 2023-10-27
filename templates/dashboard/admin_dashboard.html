@@ -1,0 +1,181 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'assets/css/announcement_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/create_announcement.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="main-content" style="min-height: 569px;">
+
+        <section class="section" style="margin-top: 12px;">
+            <div class="section-header">
+
+                <h1>Announcement</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active">Dashboard</div>
+                    <div class="breadcrumb-item">Announcement</div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="far fa-user"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Admin</h4>
+                            </div>
+                            <div class="card-body">
+                                10
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-danger">
+                            <i class="far fa-newspaper"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>News</h4>
+                            </div>
+                            <div class="card-body">
+                                42
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-warning">
+                            <i class="far fa-file"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Reports</h4>
+                            </div>
+                            <div class="card-body">
+                                1,201
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Online Users</h4>
+                            </div>
+                            <div class="card-body">
+                                47
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-body" style="margin-top: -5px;">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header col-md-11">
+                                <h4 id="currentDate"></h4>
+                                <div class="col-md-8 text-right">
+                                <button class="btn btn-primary"
+                                        onclick="window.location.href='{% url 'create_announcement' %}' ">Create
+                                    Announcement
+                                </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <ul style="list-style-type: none; padding: 0px;">
+                                    {% for announcement in announcements %}
+                                        {% if announcement.announcement_list %}
+                                            <li class="list-item announcement-item" style="text-align: center;">
+                                                <div class="card card-primary" style="margin-top: 10px;">
+
+
+                                                <span class="announcement-text">
+                                        News Update: {{ announcement.announcement_list|safe }}
+                                    </span>
+                                                {% if announcement.image_announcement %}
+                                                    <img src="{{ announcement.image_announcement.url|safe }}"
+                                                         alt="Announcement Image" class="announcement-image">
+                                                {% endif %}
+                                                {% if announcement.document_announcement %}
+                                                    <a href="{{ announcement.document_announcement.url|safe }}"
+                                                       target="_blank" class="announcement-link">View Document</a>
+                                                {% endif %}
+                                                        <a href="{% url 'delete_item' 'announcement' announcement.id %}"
+                                                   class="btn btn-primary">Delete</a>
+
+                                                </div>
+
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true
+            };
+            const formattedDate = now.toLocaleString('en-US', options);
+            document.getElementById('datetime').innerHTML = `
+                <h1>${formattedDate.split(',')[0]}</h1>
+                <h2>${formattedDate.split(',')[1]}</h2>
+                <h3>${formattedDate.split(',')[2]}</h3>`;
+        }
+
+        // Update the date and time every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Initial call
+    </script>
+
+    <script>
+        // JavaScript code to display the current date
+        var currentDateElement = document.getElementById("currentDate");
+        var currentDate = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        var formattedDate = currentDate.toLocaleDateString(undefined, options);
+
+        currentDateElement.innerHTML = "Date: " + formattedDate;
+    </script>
+
+{% endblock %}

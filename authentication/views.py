@@ -20,7 +20,7 @@ from signup.models import Intern_Records
 @login_required(login_url='login')
 def homepage(request):
     if request.user.is_superuser:
-        return render(request, 'adminbase.html')
+        return render(request, 'dashboard/admin_dashboard.html')
 
     # Check if the user has already filled out the form
     try:
@@ -87,4 +87,5 @@ def activate(request, uidb64, token):
         return render(request, 'authentication/email_activation/activation_successful.html')
     else:
         return render(request, 'authentication/email_activation/activation_unsuccessful.html')
+
 

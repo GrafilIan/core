@@ -1,0 +1,228 @@
+/* announcement_dashboard.css */
+
+/* Reset some default styles and set a background color */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ebebeb;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the dashboard container */
+.dashboard-container {
+    position: relative;
+    top: 80px;
+    width: 75%;
+    left: -70px;
+    margin: 0px auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+/* Style the header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+.create-button {
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the list container */
+.list-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Style each list */
+.list {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+/* Style headings */
+h2 {
+    color: #333;
+    font-size: 20px;
+}
+
+/* Style the "Delete All" buttons */
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #a82d3a;
+}
+
+/* Style the list items */
+.list-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Style the text within the list items */
+.announcement-text,
+.recommendation-text {
+    color: #333;
+}
+
+/* Style the images within the list items */
+img.announcement-image,
+img.recommendation-image {
+    max-width: 300px;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Style the links within the list items */
+a.announcement-link,
+a.recommendation-link {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Style the "Delete" buttons within the list items */
+a.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #a82d3a;
+}
+
+/* Add a max-height to both .announcement-list and .recommendation-list */
+.announcement-list,
+.recommendation-list {
+    max-height: 300px; /* You can adjust the height as needed */
+    overflow-y: auto; /* Add vertical scroll if content exceeds the max height */
+}
+
+/* Optional: Adjust padding and margin for the lists */
+.announcement-list,
+.recommendation-list {
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Add this to your CSS file or <style> block */
+.total-interns-card {
+    position: relative;
+    top: -350px;
+    left: 1100px;
+    background: maroon; /* Background color */
+    border: 1px solid maroon; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+    padding: 15px; /* Spacing inside the card */
+    margin-top: 10px; /* Adjust margin as needed */
+    margib-bottom: 5px;
+    width: 15%;
+    /* Text styles */
+    color: white; /* Text color */
+    font-size: 10px; /* Text size */
+    text-align: center; /* Center-align text */
+
+    /* Optional: Add additional styling as needed */
+}
+
+.count {
+    font-size: 36px; /* Adjust font size as desired */
+}
+
+        .clock {
+            position: relative;
+            top: -445px;
+            left: -150px;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #fff;
+            padding: 2px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            width: 300px;
+        }
+
+        .clock h1 {
+            font-size: 18px; /* Set a consistent font size */
+            margin: 1px 0;
+            color: black; /* Change the color of the month to white */
+        }
+
+        .clock h2 {
+            font-size: 18px; /* Set a consistent font size */
+            margin: -5px 0;
+            color: green; /* Change the color of the month to white */
+        }
+
+        .clock h3 {
+            font-size: 18px; /* Set a consistent font size */
+            margin: -5px 0;
+            color: black;
+        }
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .list-container {
+        flex-direction: column;
+    }
+}

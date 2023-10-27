@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}Default Title{% endblock %}</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/fontawesome/css/all.min.css' %}">
@@ -76,7 +76,7 @@
 
             <li class="menu-header">Intern UI</li>
 
-            <li><a class="nav-link" ><i class="ion-easel"></i> <span>Dashboard</span></a></li>
+            <li><a class="nav-link" href="{% url 'announcement_list' %}"><i class="ion-easel"></i> <span>Dashboard</span></a></li>
             <li><a class="nav-link" ><i class="ion-calendar"></i> <span>Internship Schedule</span></a></li>
 
             <li class="menu-header">Intern's Documents</li>
@@ -113,6 +113,8 @@
 <script src="{% static 'assets/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'assets/modules/moment.min.js' %}"></script>
 <script src="{% static 'assets/js/stisla.js' %}"></script>
+
+
 
 <!-- JS Libraries -->
 <script src="{% static 'assets/modules/jquery.sparkline.min.js' %}"></script>

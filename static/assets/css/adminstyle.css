@@ -146,7 +146,7 @@ p, ul:not(.list-unstyled), ol {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03); }
 
 .text-muted {
-  color: #98a6ad !important; }
+  color: green !important; }
 
 /* 3.2 Form */
 .form-control,
@@ -1303,7 +1303,7 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-primary, .btn-primary.disabled {
-  box-shadow: 0 2px 6px #2e3034;
+  box-shadow: 0 1px 4px #4f5359;
   background-color: #313436;
   border-color: #373a3d; }
   .btn-primary:focus, .btn-primary.disabled:focus {

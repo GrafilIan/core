@@ -1,0 +1,31 @@
+{% extends "adminbase.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'assets/css/delete_item.css' %}">
+
+{% endblock %}
+
+{% block title %}Delete {{ item_type }}{% endblock %}
+
+{% block content %}
+
+
+    <div class="delete-container">
+        <h1 class="delete-title">Delete {{ item_type }}</h1>
+        <p class="delete-description">Are you sure you want to delete the following {{ item_type|lower }}?</p>
+        <p class="item-name">{{ item }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+
+        <div class="button-container">
+            <a href="{% url 'announcement_list' %}" class="custom-button-link">
+                <button class="custom-button">Cancel</button>
+            </a>
+            <a href="{% url 'announcement_list' %}" class="back-link">Back to {{ item_type }} List</a>
+        </div>
+
+    </div>
+{% endblock %}
