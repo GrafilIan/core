@@ -4,6 +4,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+
     <title>{% block title %}Default Title{% endblock %}</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
@@ -41,7 +43,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #e7e7e7;">
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
         <form class="form-inline mr-auto">
@@ -49,7 +51,7 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
-            <h4 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h4>
+            <h4 style="color: white; margin-top: 6px;">{{ user.username }}</h4>
         </form>
 
       </nav>

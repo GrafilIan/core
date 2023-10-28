@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'authentication',
     'signup',
     'dashboard',
+    'internlist',
 ]
 
 MIDDLEWARE = [

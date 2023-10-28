@@ -9,3 +9,4 @@ class Announcement(models.Model):
 
     def __str__(self):
         return f"Announcement {self.id}"
+

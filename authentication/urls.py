@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views
 from authentication import views
 from authentication.forms import UserLoginForm
 from signup.views import add_intern_records
+from dashboard.views import announcement_list
 
 
 urlpatterns = [
@@ -37,6 +38,8 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
 
     path('add_intern_records/', add_intern_records, name='add_intern_records'),
+
+    path('announcement_list', announcement_list, name='announcement_list')
 
 
 ]

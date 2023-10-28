@@ -107,7 +107,7 @@ h2 {
 /* Style the images within the list items */
 img.announcement-image,
 img.recommendation-image {
-    max-width: 300px;
+    max-width: 90%;
     height: auto;
     margin: 10px auto;
     display: block;

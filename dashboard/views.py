@@ -4,6 +4,8 @@ from .models import Announcement
 from signup.models import Intern_Records
 from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
+
 
 def create_announcement(request):
     if request.method == 'POST':
@@ -26,15 +28,17 @@ def create_announcement(request):
 
     return render(request, 'dashboard/create_announcement.html', context)
 
+
+@login_required
 def announcement_list(request):
     announcements = Announcement.objects.all().order_by('-pub_date')
 
     context = {
         'announcements': announcements,
-
     }
 
     return render(request, 'dashboard/admin_dashboard.html', context)
+
 
 def delete_item(request, item_type, item_id):
     if item_type == 'announcement':
@@ -55,6 +59,7 @@ def delete_item(request, item_type, item_id):
     }
 
     return render(request, 'dashboard/delete_item.html', context)
+
 
 def delete_all_announcement(request):
     if request.method == 'POST':
