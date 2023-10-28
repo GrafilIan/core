@@ -1,0 +1,45 @@
+/* Style for the table */
+.internhead{
+    position: relative;
+    top: 90px;
+    left: 550px;
+
+    width: 50%;
+    border-collapse: collapse;
+}
+table {
+    position: relative;
+    top: 90px;
+    left: 120px;
+    border: 1px solid #ddd;
+    width: 90%;
+    border-collapse: collapse;
+}
+
+/* Style for table headers */
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 8px;
+}
+
+/* Style for table data cells */
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Define styles for alternating rows (zebra striping) */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Reduce font size for all text in the table */
+table, th, td {
+    font-size: 14px;
+}
+
+/* Add a slight border-radius for a modern look */
+table, th, td {
+    border-radius: 5px;
+}

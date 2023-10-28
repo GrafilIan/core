@@ -5,7 +5,6 @@ from authentication.forms import UserLoginForm
 from signup.views import add_intern_records
 from dashboard.views import announcement_list
 
-
 urlpatterns = [
     # login view from auth_views with custom login template
     path('login/', auth_views.LoginView.as_view(template_name='authentication/login.html',
@@ -39,7 +38,7 @@ urlpatterns = [
 
     path('add_intern_records/', add_intern_records, name='add_intern_records'),
 
-    path('announcement_list', announcement_list, name='announcement_list')
+    path('announcement_list', announcement_list, name='announcement_list'),
 
 
 ]
