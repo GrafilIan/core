@@ -65,7 +65,9 @@
 
                             <div class="form-group col-6">
                                 <label for="middle_name">Middle Initial</label>
-                                {{ form.middle_name }}
+                                {% if form.middle_name.value != 'n/a' %}
+                                    {{ form.middle_name }}
+                                {% endif %}
                             </div>
 
                             <div class="form-group col-6">
@@ -75,7 +77,9 @@
 
                             <div class="form-group col-6">
                                 <label for="suffix">Suffix</label>
-                                {{ form.suffix }}
+                                {% if form.suffix.value != 'n/a' %}
+                                    {{ form.suffix }}
+                                {% endif %}
                             </div>
                         </div>
 
@@ -160,21 +164,21 @@
                             </div>
                         </div>
 
-                    </div>
-
-                        <div class="form-divider">
-                            <div class="form-group">
-                                <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
-                                    Register
-                                </button>
-                                <p>To Logout: <a href={% url 'logout' %}> Click here</a></p>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+
+                <div class="form-divider">
+                    <div class="form-group">
+                        <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
+                            Register
+                        </button>
+                        <p>To Logout: <a href={% url 'logout' %}> Click here</a></p>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- General JS Scripts -->

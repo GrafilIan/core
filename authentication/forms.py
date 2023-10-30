@@ -1,5 +1,6 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordResetForm
 from django import forms
 
 
@@ -8,6 +9,8 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
 
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
@@ -24,9 +27,6 @@ class UserLoginForm(AuthenticationForm):
 
 
 # Customizing Registration Form from UserCreationForm
-def validate_sorsu_email(value):
-    if not value.endswith('@sorsu.edu.ph'):
-        raise forms.ValidationError("Only email addresses ending with @sorsu.edu.ph are allowed.")
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -57,7 +57,7 @@ class UserRegistrationForm(UserCreationForm):
             'placeholder': 'Email',
             'required': 'True'
         })
-        self.fields['email'].validators = [validate_sorsu_email]
+
 
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
@@ -70,6 +70,30 @@ class UserRegistrationForm(UserCreationForm):
             'required': 'True'
         })
 
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(
+        label="Email",
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your email'}),
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        # Add custom validation logic here if needed
+        return email
 
 
 
+class CustomPasswordResetConfirmForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control'}),
+    )
+
+    new_password2 = forms.CharField(
+        label="Confirm New Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control'}),
+    )

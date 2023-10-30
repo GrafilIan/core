@@ -46,35 +46,47 @@
                     </div>
 
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Login</h4></div>
-                        {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %}
-                        <div class="card-body">
+                        <div class="card-header" style="padding: 20px;"><h4>Login</h4></div>
+
+                        <div class="card-body" style="padding-top: 1px;">
                             <form method="POST" action="#" class="needs-validation" novalidate="">
                                 {% csrf_token %}
+                                {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li{% if message.tags %}
+                                                class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                <div style="font-size: 12px;">
+                                        {% if form.is_bound and form.errors %}
+                                            Invalid Username or Password.
+                                        {% else %}
+                                            Please login with your Username and Password.
+                                        {% endif %}
+                                    </div>
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     {{ form.username }}
+                                    <div>
+                                        {{ form.username.errors }}
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="d-block">
                                         <label for="password" class="control-label">Password</label>
                                         {{ form.password }}
                                         <div class="float-right">
-                                            <a href="auth-forgot-password.html" class="text-small">
+                                            <a href="{% url 'password_reset' %}" class="text-small">
                                                 Forgot Password?
                                             </a>
                                         </div>
+                                        <div>
+                                            {{ form.password.errors }}
+                                        </div>
                                     </div>
 
-                                    <div class="invalid-feedback">
-                                        please fill in your password
-                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -92,9 +104,7 @@
                                 </div>
                             </form>
 
-                            <div class="text-center mt-4 mb-3">
-                                <div class="text-job text-muted">Login With Social</div>
-                            </div>
+
                             <div class="mt-5 text-muted text-center">
                                 Don't have an account? <a href="{% url 'register' %}">Create One</a>
                             </div>

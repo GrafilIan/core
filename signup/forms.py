@@ -4,6 +4,18 @@ from django import forms
 
 
 class InternForm(forms.ModelForm):
+    class MiddleNameWidget(forms.TextInput):
+        def render(self, name, value, attrs=None, renderer=None):
+            if value.lower() == 'n/a':
+                return ''
+            return super().render(name, value, attrs, renderer)
+
+    class SuffixNameWidget(forms.TextInput):
+        def render(self, name, value, attrs=None, renderer=None):
+            if value.lower() == 'n/a':
+                return ''
+            return super().render(name, value, attrs, renderer)
+
     class Meta:
         model = Intern_Records
         fields = [
@@ -30,14 +42,17 @@ class InternForm(forms.ModelForm):
             'placeholder': 'Student No.',
             'required': 'True'
         })
+
         self.fields['middle_name'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Middle Initial'
+            'placeholder': 'Type "n/a" if not applicable',
+            'required': False
         })
+
         self.fields['suffix'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Suffix',
-            'required': 'False'
+            'placeholder': 'Type "n/a" if not applicable',
+            'required': False
         })
 
         self.fields['present_address'].widget.attrs.update({
@@ -80,7 +95,6 @@ class InternForm(forms.ModelForm):
                 'BPA': 300,
             }
             return COURSE_OJT_HOURS.get(self.cleaned_data['course'], 0)
-
 
         self.fields['year_level'].widget.attrs.update({
             'class': 'form-control',
@@ -130,4 +144,3 @@ class InternForm(forms.ModelForm):
             'required': 'True'
         })
         self.fields['status'].choices = STATUS_CHOICES
-

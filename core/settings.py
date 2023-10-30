@@ -133,7 +133,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'iancarlgrafil@sorsu.edu.ph'
-EMAIL_HOST_PASSWORD = 'rgft yeut vysu hltq'
+EMAIL_HOST_PASSWORD = 'ajdz pgym hoei dzkp'
 
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "homepage"

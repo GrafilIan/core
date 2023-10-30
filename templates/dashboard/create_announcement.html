@@ -8,7 +8,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
 
 
-    <link rel="stylesheet" href="{% static 'assets/css/create_announcement.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/jquery-selectric/selectric.css' %}">
@@ -48,8 +47,8 @@
                 </div>
             </div>
 
-            <div class="section-body" style="margin-top: -65px;">
-                <h2 class="section-title">Create New Post</h2>
+            <div class="section-body" style="margin-top: -15px;">
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -69,13 +68,11 @@
 
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"
-                                            for="{{ announcement_form.image_announcement.id_for_label }}">Thumbnail</label>
+                                               for="{{ announcement_form.image_announcement.id_for_label }}">Upload Image</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <div id="image-preview" class="image-preview">
-                                                <label for="image-upload" id="image-label">Choose File</label>
-                                                {{ announcement_form.image_announcement }}
-                                                <img id="image-preview-img" src="#" alt="Image Preview" style="display: none; max-width: 100%">
-                                            </div>
+                                            {{ announcement_form.image_announcement }}
+                                            <img id="image-preview-img" src="#" alt="Image Preview"
+                                                 style="max-width: 90%; display: none;">
                                         </div>
                                     </div>
 
@@ -91,7 +88,9 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                         <div class="col-sm-12 col-md-7">
 
-                                            <button type="button" name="all_submit" class="btn btn-primary" onclick="createPostWithAlert()">Create Post</button>
+                                            <button type="button" name="all_submit" class="btn btn-primary"
+                                                    onclick="createPostWithAlert()">Create Post
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -120,47 +119,25 @@
 
 
 
-<script>
-    function createPostWithAlert() {
-        // Set the value of the hidden input field to "1"
-        document.getElementById('all_submit').value = '1';
-
-        Swal.fire({
-            title: 'Create Post',
-            text: 'Are you sure you want to create this post?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Submit the form when the user confirms
-                document.getElementById('post-form').submit();
-            }
-        });
-    }
-</script>
-
     <script>
-    // Function to update the image preview
-    function previewImage(input) {
-        var imagePreview = document.getElementById('image-preview-img');
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block'; // Display the image
-            };
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            imagePreview.style.display = 'none'; // Hide the image if no file selected
-        }
-    }
+        function createPostWithAlert() {
+            // Set the value of the hidden input field to "1"
+            document.getElementById('all_submit').value = '1';
 
-    // Add an event listener to the file input field
-    document.getElementById('image_announcement').addEventListener('change', function () {
-        previewImage(this);
-    });
-</script>
+            Swal.fire({
+                title: 'Create Post',
+                text: 'Are you sure you want to create this post?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form when the user confirms
+                    document.getElementById('post-form').submit();
+                }
+            });
+        }
+    </script>
 
 {% endblock %}

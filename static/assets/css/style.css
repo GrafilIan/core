@@ -154,7 +154,7 @@ p, ul:not(.list-unstyled), ol {
 .custom-select,
 .custom-file-label {
   background-color: #fdfdff;
-  border-color: #e4e6fc; }
+  border-color: #ccd1ff; }
   .form-control:focus,
   .input-group-text:focus,
   .custom-select:focus,

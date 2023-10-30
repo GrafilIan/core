@@ -63,53 +63,11 @@
                                 {{ form.first_name }}
                             </div>
 
-{#                            <div class="form-group col-6">#}
-{#                                <label for="middle_name">Middle Initial</label>#}
-{#                                {{ intern_form.middle_name }}#}
-{#                            </div>#}
-
                             <div class="form-group col-6">
                                 <label for="last_name">Last Name</label>
                                 {{ form.last_name }}
                             </div>
-
-{#                            <div class="form-group col-6">#}
-{#                                <label for="suffix">Suffix</label>#}
-{#                                {{ intern_form.suffix }}#}
-{#                            </div>#}
                         </div>
-
-{#                        <div class="form-group">#}
-{#                            <label for="present_address">Present Address</label>#}
-{#                            {{ intern_form.present_address }}#}
-{#                        </div>#}
-{##}
-{#                        <div class="form-group">#}
-{#                            <label for="{{ intern_form.semester.id_for_label }}">Semester</label>#}
-{#                            {{ intern_form.semester }}#}
-{#                        </div>#}
-{#                        <div class="row">#}
-{##}
-{#                        <div class="form-group col-4">#}
-{#                            <label for="{{ intern_form.course.id_for_label }}">Course</label>#}
-{#                            {{ intern_form.course }}#}
-{#                        </div>#}
-{##}
-{#                        <div class="form-group col-4">#}
-{#                            <label for="year_level">Year Level</label>#}
-{#                            {{ intern_form.year_level }}#}
-{#                        </div>#}
-{##}
-{#                        <div class="form-group col-4">#}
-{#                            <label for="block">block</label>#}
-{#                            {{ intern_form.block }}#}
-{#                        </div>#}
-{##}
-{#                        <div class="form-group col-6">#}
-{#                            <label for="ojt_hours">OJT Hours:</label>#}
-{#                            <span id="ojt_hours_value">{{ intern_form.get_ojt_hours }} hrs</span>#}
-{#                        </div>#}
-{#                        </div>#}
 
                         <div class="row">
                         <div class="form-group col-6">
@@ -119,10 +77,6 @@
                             </div>
                         </div>
 
-{#                        <div class="form-group col-6">#}
-{#                            <label for="student_id">Student Number</label>#}
-{#                            {{ intern_form.student_id }}#}
-{#                        </div>#}
                         </div>
 
                         <div class="form-group">
@@ -157,6 +111,9 @@
                             </button>
                         </div>
                     </form>
+                    <div class="mt-5 text-muted text-center">
+                                Already have an account? <a href="{% url 'login' %}">Back to Login</a>
+                            </div>
                 </div>
             </div>
         </div>
