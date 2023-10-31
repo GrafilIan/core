@@ -2480,7 +2480,7 @@ h6 .badge {
     font-size: 10px;
     letter-spacing: 1.5px;
     font-weight: 700;
-    color: #191d21 !important;
+    color: #ffffff !important;
     padding: 10px 20px;
     line-height: 20px;
     color: #98a6ad;
@@ -3396,7 +3396,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu > li.active > a {
 
 body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu {
     position: absolute;
-    background-color: #fff;
+    background-color: #860000;
     left: 65px;
     top: 10px;
     width: 200px;
@@ -3414,7 +3414,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li.active > 
 body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li a {
     height: 40px;
     padding: 0 20px;
-    background-color: #fff;
+    background-color: #860000;
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li a.has-dropdown:after {
@@ -3434,7 +3434,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu {
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li:hover > a {
-    background-color: #fcfcfd;
+    background-color: #5b0000;
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li .dropdown-menu {

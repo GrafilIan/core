@@ -1076,6 +1076,11 @@ table tr:hover .table-links {
   letter-spacing: .3px;
   border-radius: 30px;
   font-size: 12px; }
+
+  .badge-not-placed {
+    background-color: #63ed7a;
+}
+
   .badge.badge-warning {
     color: #fff; }
   .badge.badge-primary {
@@ -1096,6 +1101,8 @@ table tr:hover .table-links {
     color: #191d21; }
   .badge.badge-dark {
     background-color: #191d21; }
+
+
 
 h1 .badge {
   font-size: 24px;

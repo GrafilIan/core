@@ -1,55 +1,138 @@
 {% extends 'adminbase.html' %}
-{% load static %}
 
-{% block title %}Interns List{% endblock %}
+{% block title %}Modules &rsaquo; DataTables &mdash; Stisla{% endblock %}
+
+{% load static %}
 
 {% block head %}
 
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'assets/css/internlist.css' %}">
-
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/datatables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
 {% endblock %}
 
 
 {% block content %}
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header" style="margin-top: 20px;">
+                <h1>DataTables</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="#">Modules</a></div>
+                    <div class="breadcrumb-item">DataTables</div>
+                </div>
+            </div>
 
-    <h1 class="internhead">Intern List</h1>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Student ID</th>
-            <th>Name</th>
-            <th>Course</th>
-            <th>Company</th>
-            <th>Contact Person</th>
-            <th>Address</th>
-            <th>Status</th>
-            <th>Join Date</th>
-        </tr>
-        {% for intern in interns %}
-            <tr>
-                <td>{{ intern.user.username }}</td>
-                <td>{{ intern.student_id }}</td>
-                <td>{{ intern.user.first_name }}
-                    {% if intern.middle_name != 'n/a' %}
-                        {{ intern.middle_name }}
-                    {% endif %}
+            <div class="section-body">
 
-                    {{ intern.user.last_name }}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Advanced Table</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-2">
+                                        <thead>
+                                        <tr>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Task Name: activate to sort column ascending"
+                                                style="width: 135.344px;">Name
+                                            </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                aria-label="Progress" style="width: 150px;">Student No.
+                                            </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                aria-label="Members" style="width: 60.5px;">Program
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Due Date: activate to sort column ascending"
+                                                style="width: 200.6719px;">Year & Block
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Action: activate to sort column ascending"
+                                                style="width: 100px;">OJT Hours
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Action: activate to sort column ascending"
+                                                style="width: 64.8906px;">Progress
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Status: activate to sort column ascending"
+                                                style="width: 97.4688px;">Status
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Action: activate to sort column ascending"
+                                                style="width: 64.8906px;">Action
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for intern in interns %}
+                                            <tr role="row" class="odd">
+                                                <td>{{ intern.user.first_name }}
+                                                    {% if intern.middle_name != 'n/a' %}
+                                                        {{ intern.middle_name }}
+                                                    {% endif %}
 
-                     {% if intern.suffix != 'n/a' %}
-                        {{ intern.suffix }}
-                    {% endif %}</td>
-                <td>{{ intern.course }}</td>
-                <td>{{ intern.company_name }}</td>
-                <td>{{ intern.contact_person }}</td>
-                <td>{{ intern.address }}</td>
-                <td>{{ intern.status }}</td>
-                <td>{{ intern.pub_date }}</td>
+                                                    {{ intern.user.last_name }}
 
-            </tr>
-        {% endfor %}
-    </table>
+                                                    {% if intern.suffix != 'n/a' %}
+                                                        {{ intern.suffix }}
+                                                    {% endif %}</td>
+                                                <td>{{ intern.student_id }}</td>
+                                                <td>{{ intern.course }}</td>
+                                                <td>{{ intern.year_level }}-{{ intern.block }}</td>
+                                                <td>{{ intern.get_ojt_hours }}</td>
+                                                <td class="align-middle">
+                                                    <div class="progress" data-height="4"
+                                                         data-toggle="tooltip"
+                                                         title="" data-original-title="100%"
+                                                         style="height: 4px;">
+                                                        <div class="progress-bar bg-success"
+                                                             data-width="100%"
+                                                             style="width: 50%;"></div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        {{ intern.status_badge }}
+                                                    </div>
+                                                </td>
+                                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- JS Libraies -->
+    <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'ssets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{% static 'assets/js/page/modules-datatables.js' %}"></script>
 
 
 {% endblock %}

@@ -21,7 +21,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from signup.models import Intern_Records
 
 
-
 @login_required(login_url='login')
 def homepage(request):
     if request.user.is_superuser:
@@ -83,7 +82,16 @@ def register(request):
             messages.success(request, 'Account created successfully. Please check your email to activate your account.')
             return redirect('login')
         else:
-            messages.error(request, 'Account creation failed. Please try again.')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    if field in ['password1', 'password2']:
+                        # Display password validation errors
+                        messages.error(request, error)
+                    else:
+                        # Display other form field errors
+                        messages.error(request, f"{field}: {error}")
+
+            #messages.error(request, 'Account creation failed. Please try again.')
 
 
     return render(request, 'authentication/register.html',{

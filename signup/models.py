@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.utils.safestring import mark_safe
+
 
 # Create your models here.
 class Intern_Records(models.Model):
@@ -66,6 +68,30 @@ class Intern_Records(models.Model):
         ('Terminated', 'Terminated'),
         ('Completed', 'Completed'),
     ]
+
+    @property
+    def status_badge(self):
+        # Define a dictionary that maps status choices to corresponding background colors
+        status_colors = {
+            'Not Placed': '#3f4148',
+            'On OJT': '#00ff00',  # Change color for 'On OJT' to green
+            'Late OJT': '#ff8000',  # Change color for 'Terminated' to orange
+            'On Leave': '#63ed7a', # Change color for 'On Leave' to green
+            'Suspended': '#ff00ff',  # Change color for 'Resigned' to purple
+            'Resigned': '#0000ff',  # Change color for 'Suspended' to blue
+            'Extended': '#ffff00',  # Change color for 'Extended' to yellow
+            'Terminated': '#ff0000',  # Change color for 'Late OJT' to red
+            'Completed': '#00ffff',  # Change color for 'Completed' to cyan
+        }
+
+        # Get the CSS class based on the status choice
+        background_color = status_colors.get(self.status, '')
+
+        # Return the badge HTML
+
+        return mark_safe(
+            f'<span class="badge" style="background-color: {background_color}; color: white;">{self.status}</span>')
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, null=True)
 
     form_filled_out = models.BooleanField(default=False)
