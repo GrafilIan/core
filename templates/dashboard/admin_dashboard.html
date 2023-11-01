@@ -157,7 +157,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header col-md-11">
-                                <h4 id="currentDate" style="font-size: 13px;"></h4>
+                                <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
                                 <div class="col-md-8 text-right">
                                     <button class="btn btn-primary"
                                             onclick="window.location.href='{% url 'create_announcement' %}' ">Create
@@ -176,7 +176,8 @@
                                                      style="margin-top: 10px; background-color: #f3f3f3;">
 
                                                 <span class="announcement-text">
-                                                    News Update: {{ announcement.announcement_list|safe }}
+                                                    Posted on: {{ announcement.pub_date|date:"F d, Y" }}<br>
+                                                    {{ announcement.announcement_list|safe }}
                                                 </span>
                                                     {% if announcement.image_announcement %}
                                                         <img src="{{ announcement.image_announcement.url|safe }}"
@@ -193,7 +194,8 @@
                                                         <input type="hidden" name="delete_announcement" value="1">
                                                         <input type="hidden" name="announcement_id"
                                                                value="{{ announcement.id }}">
-                                                        <button type="button" class="btn delete-button" style="margin-top: 7px;"
+                                                        <button type="button" class="btn delete-button"
+                                                                style="margin-top: 7px;"
                                                                 data-announcement-id="{{ announcement.id }}">Delete
                                                         </button>
                                                     </form>
@@ -277,3 +279,4 @@
 
 
 {% endblock %}
+

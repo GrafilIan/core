@@ -41,7 +41,12 @@ def homepage(request):
     try:
         intern_record = Intern_Records.objects.get(user=request.user)
         if intern_record.form_filled_out:
-            return render(request, 'studentbase.html')  # Redirect to the dashboard if the form is filled out
+            announcements = Announcement.objects.all().order_by('-pub_date')
+            context = {
+                'announcements': announcements,
+            }
+
+            return render(request, 'dashboard/intern_dashboard.html', context)
     except Intern_Records.DoesNotExist:
         pass  # Intern record doesn't exist, indicating the form has not been filled out
 

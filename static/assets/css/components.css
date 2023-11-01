@@ -1579,9 +1579,11 @@ tr:first-child > td > .fc-day-grid-event {
   font-weight: 500;
 }
 .tickets .ticket-description .ticket-form .note-editable p {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
-
+.note-editable p {
+    margin: 0 0 1px; /* Change the margin values as needed */
+}
 @media (min-width: 576px) and (max-width: 767.98px) {
   .tickets {
     display: inline-block;

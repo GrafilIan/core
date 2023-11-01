@@ -89,12 +89,16 @@ button:hover {
     text-decoration: underline;
 }
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .form-container {
-        flex-direction: column;
-    }
-    .form-column {
-        margin: 10px 0;
-    }
+
+img.announcement-image,
+img.recommendation-image {
+    max-width: 70%;
+    height: auto;
+    margin: 10px auto;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+p{
+    margin: 0 0 2px;
 }

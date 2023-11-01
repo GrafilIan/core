@@ -99,9 +99,9 @@ h2 {
 }
 
 /* Style the text within the list items */
-.announcement-text,
-.recommendation-text {
+.announcement-text {
     color: #333;
+    margin-bottom: 2px;
 }
 
 /* Style the images within the list items */

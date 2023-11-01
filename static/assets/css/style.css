@@ -1756,7 +1756,7 @@ h6 .badge {
     font-size: 10px;
     letter-spacing: 1.5px;
     font-weight: 700;
-    color: #191d21 !important;
+    color: white !important;
     padding: 10px 20px;
     line-height: 20px;
     color: #98a6ad; }
@@ -2428,7 +2428,7 @@ body.sidebar-mini .main-sidebar {
       color: #fff; }
     body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu {
       position: absolute;
-      background-color: #fff;
+      background-color: #46474b;
       left: 65px;
       top: 10px;
       width: 200px;
@@ -2442,7 +2442,7 @@ body.sidebar-mini .main-sidebar {
       body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li a {
         height: 40px;
         padding: 0 20px;
-        background-color: #fff; }
+        background-color: #46474b; }
         body.sidebar-mini .main-sidebar .sidebar-menu > li ul.dropdown-menu li a.has-dropdown:after {
           content: "";
           font-family: 'Font Awesome 5 Free';
@@ -2456,7 +2456,7 @@ body.sidebar-mini .main-sidebar {
   body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu {
     display: block !important; }
     body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li:hover > a {
-      background-color: #fcfcfd; }
+      background-color: #353538; }
     body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li .dropdown-menu {
       left: 200px;
       padding: 0; }
@@ -2710,7 +2710,7 @@ body.layout-3 .main-footer {
         padding-left: 65px;
         font-weight: 400; }
         .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-          color: #ef4848;
+          color: #ffad00;
           background-color: inherit; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
         color: #6777ef;

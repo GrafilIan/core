@@ -4,9 +4,12 @@ from authentication import views
 from authentication.forms import UserLoginForm, CustomPasswordResetForm, CustomPasswordResetConfirmForm
 from signup.views import add_intern_records
 from dashboard.views import announcement_list
+from dashboard.views import intern_announcement_list
 
 urlpatterns = [
     # login view from auth_views with custom login template
+    path('', auth_views.LoginView.as_view(template_name='authentication/login.html',
+                                          redirect_authenticated_user=True, form_class=UserLoginForm), name='root'),
 
     path('login/', auth_views.LoginView.as_view(template_name='authentication/login.html',
                                                 # True means that if user is already logged in, it will redirect to homepage
@@ -41,11 +44,13 @@ urlpatterns = [
 
 
     # path for homepage where successfull login will redirect
-    path('', views.homepage, name='homepage'),
+    path('homepage/', views.homepage, name='homepage'),
 
     path('add_intern_records/', add_intern_records, name='add_intern_records'),
 
-    path('announcement_list', announcement_list, name='announcement_list'),
+    path('announcement_list/', announcement_list, name='announcement_list'),
+
+    path('intern_announcement_list/', intern_announcement_list, name='intern_announcement_list'),
 
 
 ]

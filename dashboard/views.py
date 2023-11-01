@@ -39,6 +39,16 @@ def announcement_list(request):
 
     return render(request, 'dashboard/admin_dashboard.html', context)
 
+@login_required
+def intern_announcement_list(request):
+    announcements = Announcement.objects.all().order_by('-pub_date')
+
+    context = {
+        'announcements': announcements,
+    }
+
+    return render(request, 'dashboard/intern_dashboard.html', context)
+
 
 def delete_item(request, item_type, item_id):
     if item_type == 'announcement':
@@ -66,3 +76,5 @@ def delete_all_announcement(request):
         Announcement.objects.all().delete()
 
     return redirect('announcement_list')
+
+
