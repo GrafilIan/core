@@ -44,6 +44,22 @@ class Intern_Records(models.Model):
         }
         return COURSE_OJT_HOURS.get(self.course, 0)
 
+
+
+    def get_remaining_ojt_hours(self):
+        COURSE_OJT_HOURS = {
+            'BSIT': 366,
+            'BSIS': 366,
+            'BSCS': 182,
+            'BSA': 300,
+            'BSAIS': 400,
+            'BPA': 300,
+        }
+        total_required_hours = COURSE_OJT_HOURS.get(self.course, 0)
+        remaining_hours = total_required_hours - self.weekly_hours
+        return remaining_hours
+
+    weekly_hours = models.PositiveIntegerField(default=0, verbose_name='Weekly Hours')
     year_level = models.CharField(max_length=200, verbose_name='Year Level', null=True)
     block = models.CharField(max_length=200, verbose_name='Block', null=True)
 

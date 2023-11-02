@@ -1,0 +1,15 @@
+
+{% extends 'studentbase.html' %}
+
+{% block content %}
+    <div class="main-content" style="min-height: 569px;">
+        <section class="section" style="margin-top: 12px;">
+            <h1>Add Weekly Bin</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+{% endblock %}

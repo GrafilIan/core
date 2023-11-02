@@ -1,0 +1,76 @@
+{% extends 'studentbase.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="main-content" style="min-height: 569px;">
+        <section class="section" style="margin-top: 12px;">
+            <h1>Internship Information</h1>
+            <p>Starting Month of OJT: {{ internship.starting_month }}</p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addWeeklyBinModal">
+                Add Weekly Bin
+            </button>
+
+            <h2>Weekly Bins</h2>
+            <ul id="weekly-bins-list">
+                {% for weekly_bin in weekly_bins %}
+                    <li>
+                        Week {{ weekly_bin.week_number }}:
+                        <pre>{{ weekly_bin.document_submission }}</pre>
+                        Rendered Hours: {{ weekly_bin.rendered_hours }} hours
+                        <a href="{% url 'add_to_weekly_bin' week_number=weekly_bin.week_number %}">Add to Weekly Bin</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <p>Total Hours to be Completed: {{ max_hours }} hours</p>
+            <p>Total Hours Rendered: {{ total_hours_rendered }} hours</p>
+
+            <!-- Include the progress bar template -->
+            <!-- progress_bar.html -->
+            <div class="card-body">
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ remaining_hours }}"
+                         aria-valuemin="0" aria-valuemax="366" style="width: {{ remaining_percentage }}%;"></div>
+                </div>
+            </div>
+
+        </section>
+        <!-- Modal for Adding Weekly Bin -->
+        <div class="modal fade" id="addWeeklyBinModal" tabindex="-1" role="dialog"
+             aria-labelledby="addWeeklyBinModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addWeeklyBinModalLabel">Add Weekly Bin</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{% url 'add_weekly_bin' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="weekNumberInput">Week Number:</label>
+                                <input type="text" class="form-control" id="weekNumberInput" name="week_number">
+                            </div>
+                            <!-- You can include other form fields here if needed -->
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

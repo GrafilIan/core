@@ -1,0 +1,17 @@
+<!-- add_to_weekly_bin.html -->
+
+{% extends 'studentbase.html' %}
+
+{% block content %}
+<div class="main-content" style="min-height: 569px;">
+    <section class="section" style="margin-top: 12px;">
+        <h1>Add to Weekly Bin - Week {{ week_number }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+        <a href="{% url 'view_internship_info' %}">Back to Internship Information</a>
+    </section>
+</div>
+{% endblock %}
