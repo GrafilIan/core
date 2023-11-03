@@ -1,17 +1,70 @@
-<!-- add_to_weekly_bin.html -->
-
 {% extends 'studentbase.html' %}
+
+{% load static %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
+{% endblock %}
+
 
 {% block content %}
 <div class="main-content" style="min-height: 569px;">
     <section class="section" style="margin-top: 12px;">
-        <h1>Add to Weekly Bin - Week {{ week_number }}</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-        </form>
-        <a href="{% url 'view_internship_info' %}">Back to Internship Information</a>
+        <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Create Weekly Bin</h2>
+            </div>
+            <form method="post" enctype="multipart/form-data" id="weekly-bin-form">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Week Number</label>
+                        <div class="col-sm-12 col-md-7">
+                            {{ form.week_number }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Weekly Text</label>
+                        <div class="col-sm-12 col-md-7">
+                            {{ form.Weekly_text }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Document Submission</label>
+                        <div class="col-sm-12 col-md-7">
+                            {{ form.document_submission }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Rendered Hours</label>
+                        <div class="col-sm-12 col-md-7">
+                            {{ form.rendered_hours }}
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="all_submit" id="all_submit" value="0">
+                <div class="form-group row mb-4">
+                    <div class="col-sm-12 col-md-7 offset-md-3">
+                        <button type="submit" name="all_submit" class="btn btn-primary">Create Weekly Bin</button>
+                        <a href="{% url 'view_internship_info' %}">Back to Internship Information</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
     </section>
 </div>
 {% endblock %}

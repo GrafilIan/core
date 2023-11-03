@@ -6,7 +6,11 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/create_announcement.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
 {% endblock %}
 
 
@@ -14,61 +18,75 @@
     <div class="main-content" style="min-height: 569px;">
 
         <section class="section" style="margin-top: 12px;">
-            <div class="section-header">
 
-                <h1>Announcement</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active">Dashboard</div>
-                    <div class="breadcrumb-item">Announcement</div>
+            <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
+                 style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); width: 100%;">
 
+                <div class="hero-inner" style="height: 170px;">
+                    <h1>Dashboard</h1>
+                    <h6> See the latest announcement from your OJT Coordinator below </h6>
+                    <div id="clock" style="font-size: 30px;"></div>
+                    <h5>Internship Started on {{ internship.starting_month }}</h5>
+
+                    <div class="row">
+                        <div class="col-lg-6" style="text-align: left">
+                            <p>Rendered Hours:
+                            <h2>{{ total_hours_rendered }} hrs</h2></p>
+                        </div>
+
+                        <div class="col-lg-6" style="text-align: right">
+                            <p>OJT Hours:
+                            <h2>{{ max_hours }} hrs</h2></p>
+                        </div>
+                    </div>
+
+                    <div class="progress mb-1">
+                        <div class="progress-bar bg-warning" role="progressbar"
+                             aria-valuenow="{{ remaining_hours }}"
+                             aria-valuemin="0" aria-valuemax="366"
+                             style="width: {{ remaining_percentage }}%;">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-
-            <div class="card">
-                  <div class="card-header">
-                    <h4>Internship Progress</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="progress mb-3">
-                      <div class="progress-bar bg-warning" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
-                    </div>
-                                      </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
+                        <div class="article-header">
+                            <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}"
+                                 style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="#">Internship Requirement</a></h2>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-            <div class="row">
-              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                  <div class="article-header" >
-                    <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}" style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Internship Requirement</a></h2>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                  <div class="article-header">
-                    <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}" style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="{% url 'create_announcement' %}">Narrative Report</a></h2>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                  <div class="article-header">
-                    <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}" style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Post Requirements</a></h2>
-                    </div>
-                  </div>
-                </article>
-              </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
+                        <div class="article-header">
+                            <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}"
+                                 style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="{% url 'create_announcement' %}">Narrative Report</a></h2>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
+                        <div class="article-header">
+                            <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
+                                 style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="#">Post Requirements</a></h2>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
             <div class="section-body" style="margin-top: -5px; margin-left: -14px; padding-top: 0;">
 
@@ -94,7 +112,9 @@
                                                 </span>
                                                     {% if announcement.image_announcement %}
                                                         <img src="{{ announcement.image_announcement.url|safe }}"
-                                                             alt="Announcement Image" class="announcement-image">
+                                                             width="50%"
+                                                             alt="Announcement Image" class="announcement-image"
+                                                             style="display: block; margin: 0 auto;">
                                                     {% endif %}
                                                     {% if announcement.document_announcement %}
                                                         <a href="{{ announcement.document_announcement.url|safe }}"

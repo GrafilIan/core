@@ -1,76 +1,153 @@
 {% extends 'studentbase.html' %}
 {% load static %}
 
+{% block title %}Create Weekly Report{% endblock %}
+
+
 {% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+
 {% endblock %}
 
 {% block content %}
-    <div class="main-content" style="min-height: 569px;">
-        <section class="section" style="margin-top: 12px;">
-            <h1>Internship Information</h1>
-            <p>Starting Month of OJT: {{ internship.starting_month }}</p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addWeeklyBinModal">
-                Add Weekly Bin
-            </button>
 
-            <h2>Weekly Bins</h2>
-            <ul id="weekly-bins-list">
+    <div class="main-content" style="min-height: 569px;">
+
+        <section class="section" style="margin-top: 2px;">
+            <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
+                 style="background-image: url('{% static 'assets/img/unsplash/andre-benz-1214056-unsplash.jpg' %}'); width: 100%;">
+
+                <div class="hero-inner" style="height: 200px;">
+                    <h1>Internship Weekly Report View</h1>
+                    <div id="clock" style="font-size: 30px;"></div>
+                    <h5>Internship Started on {{ internship.starting_month }}</h5>
+
+                    <div class="row">
+                        <div class="col-lg-4" style="text-align: left">
+                            <p>Rendered Hours:
+                            <h2>{{ total_hours_rendered }} hrs</h2></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                               data-target="#addWeeklyBinModal">
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>Add Weekly Bin
+                            </a>
+                        </div>
+                        <div class="col-lg-4" style="text-align: right">
+                            <p>OJT Hours:
+                            <h2>{{ max_hours }} hrs</h2></p>
+                        </div>
+                    </div>
+
+                    <div class="progress mb-1">
+                        <div class="progress-bar bg-warning" role="progressbar"
+                             aria-valuenow="{{ remaining_hours }}"
+                             aria-valuemin="0" aria-valuemax="366"
+                             style="width: {{ remaining_percentage }}%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <ul id="weekly-bins-list" class="list-unstyled row" style="margin-top: 15px;">
                 {% for weekly_bin in weekly_bins %}
-                    <li>
-                        Week {{ weekly_bin.week_number }}:
-                        <pre>{{ weekly_bin.document_submission }}</pre>
-                        Rendered Hours: {{ weekly_bin.rendered_hours }} hours
-                        <a href="{% url 'add_to_weekly_bin' week_number=weekly_bin.week_number %}">Add to Weekly Bin</a>
+                    <li class="col-12 col-md-6 col-lg-6">
+                        <div class="card card-dark">
+                            <div class="card-header">
+                                <h4>Week {{ weekly_bin.week_number }}</h4>
+                                <div class="card-header-action">
+                                    <button class="btn btn-warning"
+                                       style="color: #131313;
+                                       border-color: #0f0f0f;">
+                                       {{ weekly_bin.rendered_hours }} hrs
+                                    </button>
+                                    <a href="{% url 'add_to_weekly_bin' week_number=weekly_bin.week_number %}"
+                                       class="btn btn-dark">
+                                        Add Weekly Report
+                                    </a>
+                                    <a data-collapse="#mycard-collapse-{{ forloop.counter }}"
+                                       class="btn btn-icon btn-info" href="#"><i class="fas fa-minus"></i></a>
+                                </div>
+                            </div>
+                            <div class="collapse" id="mycard-collapse-{{ forloop.counter }}" style="">
+                                <div class="card-body">
+                                    {{ weekly_bin.Weekly_text|safe }}
+                                </div>
+                                <div class="card-footer">
+                                    Weekly Hours Rendered: <H6>{{ weekly_bin.rendered_hours }} hours</H6>
+                                    Posted on: {{ weekly_bin.pub_date|date:"F d, Y" }}<br>
+                                </div>
+                            </div>
+                        </div>
+
                     </li>
+
                 {% endfor %}
             </ul>
 
-            <p>Total Hours to be Completed: {{ max_hours }} hours</p>
-            <p>Total Hours Rendered: {{ total_hours_rendered }} hours</p>
-
-            <!-- Include the progress bar template -->
-            <!-- progress_bar.html -->
-            <div class="card-body">
-                <div class="progress mb-3">
-                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ remaining_hours }}"
-                         aria-valuemin="0" aria-valuemax="366" style="width: {{ remaining_percentage }}%;"></div>
-                </div>
-            </div>
-
         </section>
-        <!-- Modal for Adding Weekly Bin -->
-        <div class="modal fade" id="addWeeklyBinModal" tabindex="-1" role="dialog"
-             aria-labelledby="addWeeklyBinModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addWeeklyBinModalLabel">Add Weekly Bin</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="{% url 'add_weekly_bin' %}">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="weekNumberInput">Week Number:</label>
-                                <input type="text" class="form-control" id="weekNumberInput" name="week_number">
-                            </div>
-                            <!-- You can include other form fields here if needed -->
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+    </div>
+
+    <!-- Modal for Adding Weekly Bin -->
+    <div class="modal fade" id="addWeeklyBinModal" tabindex="-1" role="dialog"
+         aria-labelledby="addWeeklyBinModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addWeeklyBinModalLabel">Add Weekly Bin</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="weekNumberInput">Week Number:</label>
+                            <input type="text" class="form-control" id="weekNumberInput" name="week_number">
+                        </div>
+                        <!-- You can include other form fields here if needed -->
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+{% endblock %}
+{% block scripts %}
+
+    <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const now = new Date();
+            const hours = now.getHours();
+            const amPm = hours >= 12 ? 'PM' : 'AM';
+            const twelveHourFormat = (hours % 12 || 12).toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${twelveHourFormat}:${minutes}:${seconds} ${amPm}`;
+            clockElement.textContent = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to set the clock
+        updateClock();
+    </script>
+
+
 
 {% endblock %}

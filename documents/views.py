@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.db.models import Sum, Max
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -34,6 +35,7 @@ def view_internship_info(request):
         return redirect('enter_internship_info')
 
     intern_records = Intern_Records.objects.get(user=user)
+    interns = Intern_Records.objects.all()
 
     # Check if the user has created the first 4 weekly bins, and if not, create them
     for week_number in range(1, 5):
@@ -61,9 +63,17 @@ def view_internship_info(request):
             week_number = form.cleaned_data.get('week_number')
 
             # Set the week_number for the new bin
-            weekly_bin.week_number = week_number
-
-            weekly_bin.save()
+            existing_bin = WeeklyBin.objects.filter(internship=internship, week_number=week_number).first()
+            if existing_bin:
+                # Bin already exists, you can show an error message here
+                messages.error(request, f"A weekly bin for week {week_number} already exists.")
+            else:
+                weekly_bin.week_number = week_number
+                weekly_bin.save()
+                # You can add a success message here if needed
+                messages.success(request, "Weekly bin added successfully.")
+                # Redirect to avoid resubmission
+            return redirect('view_internship_info')
             # You can add a success message here if needed
         else:
             # Handle form errors, you can add error messages if needed
@@ -78,7 +88,8 @@ def view_internship_info(request):
         'remaining_hours': remaining_hours,
         'remaining_percentage': remaining_percentage,
         'total_hours_rendered': total_hours_rendered,
-        'form': form
+        'form': form,
+        'interns': interns
     })
 
 

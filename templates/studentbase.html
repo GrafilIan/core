@@ -6,7 +6,7 @@
 <head>
     <title>{% block title %}Default Title{% endblock %}</title>
     <meta charset="UTF-8">
-
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/fontawesome/css/all.min.css' %}">
@@ -51,7 +51,7 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
-            <h4 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h4>
+            <h5 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h5>
         </form>
 
       </nav>

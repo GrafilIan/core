@@ -1,12 +1,6 @@
 /* CSS for the provided HTML structure */
 
 /* Reset default styles and set a background color */
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-}
 
 /* Section title style */
 .section-title {

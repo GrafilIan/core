@@ -1258,7 +1258,7 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-dark, .btn-dark.disabled {
-  box-shadow: 0 2px 6px #728394;
+  box-shadow: 0 2px 4px #728394;
   background-color: #191d21;
   border-color: #191d21;
   color: #fff; }
@@ -1298,12 +1298,12 @@ h6 .badge {
   color: #fff !important; }
 
 .btn-info, .btn-info.disabled {
-  box-shadow: 0 2px 6px #82d3f8;
-  background-color: #3abaf4;
-  border-color: #8e0000;
+  box-shadow: 0 2px 6px #728394;
+  background-color: #5d5959;
+  border-color: #333232;
   color: #fff; }
   .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active {
-    background-color: #0da8ee !important; }
+    background-color: #9f0000 !important; }
 
 .btn-outline-info:hover, .btn-outline-info:focus, .btn-outline-info:active, .btn-outline-info.disabled:hover, .btn-outline-info.disabled:focus, .btn-outline-info.disabled:active {
   background-color: #0da8ee !important;
@@ -1963,7 +1963,7 @@ body {
   font-size: 14px;
   font-weight: 400;
   font-family: 'Nunito', 'Segoe UI', arial;
-  color: #6c757d; }
+  color: #363636; }
 
 a.bb {
   text-decoration: none;
