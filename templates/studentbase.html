@@ -86,10 +86,10 @@
             <li class="dropdown">
                 <a class="nav-link has-dropdown"><i class="fa fa-folder" aria-hidden="true"></i><span>Forms</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="forms-advanced-form.html">Internship Requirements</a></li>
-                    <li><a class="nav-link" href="forms-validation.html">Daily Time Record</a></li>
-                    <li><a class="nav-link" href="forms-validation.html">Narrative Report</a></li>
-                    <li><a class="nav-link" href="forms-validation.html" style="white-space: nowrap;">Post OJT Requirements</a></li>
+                    <li><a class="nav-link" href="{% url 'upload_requirements' %}">Internship Requirements</a></li>
+                    <li><a class="nav-link" href="{% url 'upload_dtr' %}">DTR Repository</a></li>
+                    <li><a class="nav-link" href="{% url 'upload_narrative' %}">Narrative Report</a></li>
+                    <li><a class="nav-link" href="{% url 'upload_post_requirements' %}" style="white-space: nowrap;">Post OJT Requirements</a></li>
                 </ul>
             </li>
 

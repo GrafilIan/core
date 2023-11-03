@@ -4,10 +4,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from signup.models import Intern_Records
-from .forms import InternshipForm, WeeklyBinForm, AddBinForm
-from .models import Internship, WeeklyBin
+from .forms import InternshipForm, WeeklyBinForm, AddBinForm, RequirementsForm, DTRForm, NarrativeForm, \
+    PostRequirementsForm
+from .models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
 from django.http import Http404
-# Create your views here.
+
 @login_required
 def intern_schedule(request):
 
@@ -153,4 +154,67 @@ def add_weekly_bin(request):
 
     return render(request, 'documents/view_internship_info.html', {'form': form})
 
+@login_required
+def upload_requirements(request):
+
+    if request.method == 'POST':
+        form = RequirementsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect('upload_requirements')
+    else:
+        form = RequirementsForm()
+
+    requirements = Requirements.objects.filter(user=request.user)
+
+    return render(request, 'documents/forms/upload_requirements.html', {'form': form, 'requirements': requirements})
+
+
+def upload_dtr(request):
+
+    if request.method == 'POST':
+        form = DTRForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect('upload_dtr')
+    else:
+        form = DTRForm()
+
+    dtr = DailyTimeRecord.objects.filter(user=request.user)
+
+    return render(request, 'documents/forms/upload_dtr.html', {'form': form, 'dtr': dtr})
+
+def upload_narrative(request):
+
+    if request.method == 'POST':
+        form = NarrativeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect('upload_narrative')
+    else:
+        form = NarrativeForm()
+
+    narrative = NarrativeReport.objects.filter(user=request.user)
+
+    return render(request, 'documents/forms/upload_narrative.html', {'form': form, 'narrative': narrative})
+
+
+@login_required
+def upload_post_requirements(request):
+
+    if request.method == 'POST':
+        form = PostRequirementsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect('upload_post_requirements')
+    else:
+        form = Post_Requirements()
+
+    post_requirements = Post_Requirements.objects.filter(user=request.user)
+
+    return render(request, 'documents/forms/upload_post_requirements.html', {'form': form, 'post_requirements': post_requirements})
 

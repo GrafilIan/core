@@ -75,5 +75,6 @@ class Post_Requirements(models.Model):
     post_requirement = models.CharField(max_length=300, choices=POST_REQUIREMENT_CHOICES)
     document_image = models.ImageField(upload_to='documents/')
 
+
     def __str__(self):
         return f"{self.post_requirement} - {self.id}"
