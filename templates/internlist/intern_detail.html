@@ -1,0 +1,56 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Modules &rsaquo; DataTables &mdash; Stisla{% endblock %}
+
+{% load static %}
+
+{% block head %}
+
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/datatables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header" style="margin-top: 20px;">
+
+                <h1>{{ intern.user.first_name }}
+                    {% if intern.middle_name != 'n/a' %}
+                        {{ intern.middle_name }}
+                    {% endif %}
+
+                    {{ intern.user.last_name }}
+
+                    {% if intern.suffix != 'n/a' %}
+                        {{ intern.suffix }}
+                    {% endif %}</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="#">Modules</a></div>
+                    <div class="breadcrumb-item">DataTables</div>
+                </div>
+            </div>
+
+            <div class="section-body">
+
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- JS Libraies -->
+    <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'ssets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{% static 'assets/js/page/modules-datatables.js' %}"></script>
+
+
+{% endblock %}

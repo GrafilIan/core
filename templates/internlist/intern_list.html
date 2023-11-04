@@ -109,7 +109,7 @@
                                                         {{ intern.status_badge }}
                                                     </div>
                                                 </td>
-                                                <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                                                <td><a href="{% url 'intern_detail' intern.id %}" class="btn btn-secondary">Detail</a></td>
                                             </tr>
                                         {% endfor %}
 
