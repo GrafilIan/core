@@ -23,6 +23,7 @@ class InternForm(forms.ModelForm):
             'middle_name',
             'suffix',
             'present_address',
+            'academic_year',
             'semester',
             'course',
             'year_level',
@@ -58,6 +59,12 @@ class InternForm(forms.ModelForm):
         self.fields['present_address'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Present Address',
+            'required': 'True'
+        })
+
+        self.fields['academic_year'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Academic Year (e.g 2023-2024)',
             'required': 'True'
         })
 
@@ -144,3 +151,8 @@ class InternForm(forms.ModelForm):
             'required': 'True'
         })
         self.fields['status'].choices = STATUS_CHOICES
+
+class InternStatusEditForm(forms.ModelForm):
+    class Meta:
+        model = Intern_Records
+        fields = ['status']

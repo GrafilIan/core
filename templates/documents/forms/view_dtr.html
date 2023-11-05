@@ -1,0 +1,120 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+
+{% block title %}Upload Narrative Report{% endblock %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="main-content" style="min-height: 569px;">
+        <section class="section" style="margin-top: 2px;">
+            <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
+                 style="background-image: url('{% static 'assets/img/unsplash/lap2.jpg' %}'); height: 200px; margin-left: -35px;  margin-right: -46px;">
+
+                <div class="hero-inner" style="height: 220px;">
+                    <div style="font-size: 35px; font-weight: 700;">
+                    <strong>{{ intern.user.first_name }}
+                        {% if intern.middle_name != 'n/a' %}
+                            {{ intern.middle_name }}
+                        {% endif %}
+
+                        {{ intern.user.last_name }}
+
+                        {% if intern.suffix != 'n/a' %}
+                            {{ intern.suffix }}
+                        {% endif %}</strong><br>
+                    Record of Requirements
+                    </div>
+                </div>
+            </div>
+            <div class="document-container" style="margin-top: -40px;">
+                <ul class="document-list" style="list-style-type: none; padding: 0px;">
+                    {% for dtr in dtr %}
+                        <li class="document-item" data-requirement="{{ dtr.DTR_Number }}">
+                            <div class="row">
+                                <div class="col-12 col-md-12 display: block;" style="margin-top: 15px;">
+                                    <div class="card card-primary">
+                                        <div class="card-header">
+                                            <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6>DTR Submission:</h6>
+                                            <a href="{{ dtr.DTR_submission.url }}"
+                                               target="_blank">{{ dtr.DTR_submission.name }}</a><br>
+                                            <!-- Add a button for preview or download if needed -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li>No DTRs have been uploaded yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- Modal for Adding Weekly Bin -->
+    <div class="modal fade" id="addWeeklyBinModal" tabindex="-1" role="dialog"
+         aria-labelledby="addWeeklyBinModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addWeeklyBinModalLabel">Upload File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const now = new Date();
+            const hours = now.getHours();
+            const amPm = hours >= 12 ? 'PM' : 'AM';
+            const twelveHourFormat = (hours % 12 || 12).toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${twelveHourFormat}:${minutes}:${seconds} ${amPm}`;
+            clockElement.textContent = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to set the clock
+        updateClock();
+    </script>
+
+    <script>
+        $('#addWeeklyBinModal').on('hidden.bs.modal', function (e) {
+            $('.modal-backdrop').remove();
+        });
+    </script>
+    </div>
+{% endblock %}

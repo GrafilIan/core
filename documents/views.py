@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.db.models import Sum, Max
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from signup.models import Intern_Records
 from .forms import InternshipForm, WeeklyBinForm, AddBinForm, RequirementsForm, DTRForm, NarrativeForm, \
@@ -185,6 +185,7 @@ def upload_dtr(request):
     dtr = DailyTimeRecord.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_dtr.html', {'form': form, 'dtr': dtr})
+
 
 def upload_narrative(request):
 

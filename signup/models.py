@@ -12,6 +12,7 @@ class Intern_Records(models.Model):
     middle_name = models.CharField(max_length=200, verbose_name='Middle Name', null=True)
     suffix = models.CharField(max_length=200, verbose_name='suffix', null=True)
     present_address = models.CharField(max_length=200, verbose_name='Present Address', null=True)
+    academic_year = models.CharField(max_length=200, verbose_name='Academic Year', null=True)
     SEMESTER_CHOICES = [
         ('1st Semester', '1st Semester'),
         ('2nd Semester', '2nd Semester'),

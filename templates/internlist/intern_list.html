@@ -44,32 +44,28 @@
                                                 style="width: 135.344px;">Name
                                             </th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
-                                                aria-label="Progress" style="width: 150px;">Student No.
+                                                aria-label="Progress" style="width: 85px;">Student No.
                                             </th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1"
                                                 aria-label="Members" style="width: 60.5px;">Program
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="table-2"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Due Date: activate to sort column ascending"
-                                                style="width: 200.6719px;">Year & Block
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                aria-label="Members" style="width: 100px;">Year & Block
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="table-2"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Action: activate to sort column ascending"
                                                 style="width: 100px;">OJT Hours
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="table-2"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Action: activate to sort column ascending"
-                                                style="width: 64.8906px;">Progress
+                                            <th class="sorting_disabled" rowspan="1" colspan="1"
+                                                aria-label="Members" style="width: 100px;">Progress
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="table-2"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Status: activate to sort column ascending"
                                                 style="width: 97.4688px;">Status
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="table-2"
+                                            <th class="sorting_disabled" tabindex="0" aria-controls="table-2"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Action: activate to sort column ascending"
                                                 style="width: 64.8906px;">Action
@@ -94,22 +90,22 @@
                                                 <td>{{ intern.year_level }}-{{ intern.block }}</td>
                                                 <td>{{ intern.get_ojt_hours }}</td>
                                                 <td class="align-middle">
-                                                    <div class="progress" data-height="4"
-                                                         data-toggle="tooltip"
-                                                         title="" data-original-title="100%"
-                                                         style="height: 4px;">
-                                                        <div class="progress-bar bg-success"
-                                                             data-width="100%"
-                                                             style="width: 50%;"></div>
+                                                    <div class="progress" data-height="4" style="height: 4px;">
+                                                        <div class="progress-bar bg-warning"
+                                                             style="width: {{ intern.remaining_percentage }}%;"></div>
                                                     </div>
-
                                                 </td>
                                                 <td>
                                                     <div>
                                                         {{ intern.status_badge }}
                                                     </div>
                                                 </td>
-                                                <td><a href="{% url 'intern_detail' intern.id %}" class="btn btn-secondary">Detail</a></td>
+                                                <td><a href="{% url 'intern_detail' intern.id %}"
+                                                       class="btn btn-secondary">Detail (ID: {{ intern.id }})</a>
+                                                    {% if user.is_superuser %}
+    <a href="{% url 'edit_intern_status' intern.id %}" class="btn btn-primary">Edit Status</a>
+{% endif %}
+                                                </td>
                                             </tr>
                                         {% endfor %}
 
@@ -128,7 +124,7 @@
 {% block scripts %}
     <!-- JS Libraies -->
     <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
-    <script src="{% static 'ssets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
     <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
 

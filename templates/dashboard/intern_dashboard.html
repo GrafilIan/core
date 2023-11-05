@@ -15,12 +15,13 @@
 
 
 {% block content %}
+
     <div class="main-content" style="min-height: 569px;">
 
         <section class="section" style="margin-top: 12px;">
 
             <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-                 style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); width: 100%;">
+                 style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); margin-top: -20px; margin-left: -35px;  margin-right: -30px;">
 
                 <div class="hero-inner" style="height: 170px;">
                     <h1>Dashboard</h1>
@@ -51,38 +52,51 @@
             </div>
 
             <div class="row" style="margin-top: 15px;">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
                             <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
                             </div>
                             <div class="article-title">
-                                <h2><a href="#">Internship Requirement</a></h2>
+                                <h2><a href="{% url 'upload_requirements' %}">Internship Requirement</a></h2>
                             </div>
                         </div>
                     </article>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
+
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
                             <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
                             </div>
                             <div class="article-title">
-                                <h2><a href="{% url 'create_announcement' %}">Narrative Report</a></h2>
+                                <h2><a href="{% url 'upload_narrative' %}">Narrative Report</a></h2>
                             </div>
                         </div>
                     </article>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
+                    <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
+                        <div class="article-header">
+                            <div class="article-image" data-background="{% static 'assets/img/news/dash3.png' %}"
+                                 style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
+                            </div>
+                            <div class="article-title">
+                                <h2><a href="{% url 'upload_dtr' %}">DTR Upload</a></h2>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
                             <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
                             </div>
                             <div class="article-title">
-                                <h2><a href="#">Post Requirements</a></h2>
+                                <h2><a href="{% url 'upload_post_requirements' %}">Post Requirements</a></h2>
                             </div>
                         </div>
                     </article>
