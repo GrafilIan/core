@@ -156,3 +156,23 @@ class InternStatusEditForm(forms.ModelForm):
     class Meta:
         model = Intern_Records
         fields = ['status']
+
+    def __init__(self, *args, **kwargs):
+       super(InternStatusEditForm, self).__init__(*args, **kwargs)
+
+       STATUS_CHOICES = [
+            ('Not Placed', 'Not Placed'),
+            ('On OJT', 'On OJT'),
+            ('Late OJT', 'Late OJT'),
+            ('On Leave', 'On Leave'),
+            ('Suspended', 'Suspended'),
+            ('Resigned', 'Resigned'),
+            ('Extended', 'Extended'),
+            ('Terminated', 'Terminated'),
+            ('Completed', 'Completed'),
+        ]
+       self.fields['status'].widget = Select(attrs={
+            'class': 'custom-select',
+            'required': 'True'
+        })
+       self.fields['status'].choices = STATUS_CHOICES

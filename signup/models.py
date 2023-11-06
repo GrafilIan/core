@@ -91,12 +91,12 @@ class Intern_Records(models.Model):
         # Define a dictionary that maps status choices to corresponding background colors
         status_colors = {
             'Not Placed': '#4d5059',
-            'On OJT': '#00ff00',  # Change color for 'On OJT' to green
+            'On OJT': '#00e738',  # Change color for 'On OJT' to green
             'Late OJT': '#ff8000',  # Change color for 'Terminated' to orange
             'On Leave': '#edbc62', # Change color for 'On Leave' to apricot
             'Suspended': '#1e1f22',  # Change color for 'Resigned' to black
             'Resigned': '#0000ff',  # Change color for 'Suspended' to blue
-            'Extended': '#ffff00',  # Change color for 'Extended' to yellow
+            'Extended': '#f2c115',  # Change color for 'Extended' to yellow
             'Terminated': '#ff0000',  # Change color for 'Late OJT' to red
             'Completed': '#00ffff',  # Change color for 'Completed' to cyan
         }

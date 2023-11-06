@@ -50,6 +50,64 @@
                     </div>
                 </div>
             </div>
+            <div class="card card-dark profile-widget" style="margin-top: 50px;">
+                <div class="profile-widget-header">
+                    <img alt="image"
+                         src="{% static 'assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg' %}"
+                         class="rounded-circle profile-widget-picture" style="width: 140px; height: 140px;">
+                    <div class="profile-widget-items">
+                        <div class="profile-widget-item" style="background-color: #efb100; margin-left: -10px;">
+                            <div class="profile-widget-item-label">Student Number</div>
+                            <div class="profile-widget-item-value">{{ intern.student_id }}</div>
+                        </div>
+                        <div class="profile-widget-item" style="background-color: #efb100">
+                            <div class="profile-widget-item-label">{{ intern.course }}</div>
+                            <div class="profile-widget-item-value">{{ intern.year_level }}-{{ intern.block }}</div>
+                        </div>
+                        <div class="profile-widget-item" style="background-color: #efb100">
+                            <div class="profile-widget-item-label">{{ intern.academic_year }}</div>
+                            <div class="profile-widget-item-value">{{ intern.semester }}</div>
+                        </div>
+                        <div class="profile-widget-item" style="background-color: #efb100">
+                            <div class="profile-widget-item-label">{{ intern.address }}</div>
+                            <div class="profile-widget-item-value">{{ intern.company_name }}</div>
+                        </div>
+                        <div class="profile-widget-item" style="background-color: #efb100">
+                            <div class="profile-widget-item-label">{{ intern.contact_person }}</div>
+                            <div class="profile-widget-item-value">{{ intern.contact_number }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-column col-4" style="text-align: left;">
+                            <div style="font-size: 25px; font-weight: 700;"
+                            <strong>{{ intern.user.first_name }}
+                                {% if intern.middle_name != 'n/a' %}
+                                    {{ intern.middle_name }}
+                                {% endif %}
+
+                                {{ intern.user.last_name }}
+
+                                {% if intern.suffix != 'n/a' %}
+                                    {{ intern.suffix }}
+                                {% endif %}</strong>
+                        </div>
+                        {{ intern.user.username }}
+                        <div class="text-muted d-inline font-weight-normal">
+                            <div class="slash"></div>
+                            {{ intern.status }}
+                        </div>
+                        <div class="profile-widget-item-value"><strong>{{ intern.user.email }}</strong>
+                            <div class="profile-widget-item-label">{{ intern.present_address }}</div>
+                            <a href="{% url 'add_intern_records' %}" class="btn btn-primary"
+                               style="display: block; margin-top: 7px;">Edit</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
             <div class="row" style="margin-top: 15px;">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
@@ -102,17 +160,13 @@
                     </article>
                 </div>
             </div>
-            <div class="section-body" style="margin-top: -5px; margin-left: -14px; padding-top: 0;">
+            <div class="section-body" style="margin-top: -5px; padding-top: 0;">
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header col-md-11">
-                                <h4 id="currentDate" style="font-size: 13px;"></h4>
-                            </div>
-
+                            <h3 id="currentDate" style="margin-left: 24px;"></h3>
                             <div class="card-body">
-
                                 <ul style="list-style-type: none; padding: 0px;">
                                     {% for announcement in announcements %}
                                         {% if announcement.announcement_list %}
@@ -135,7 +189,6 @@
                                                            target="_blank" class="announcement-link">View Document</a>
                                                     {% endif %}
                                                 </div>
-
                                             </li>
                                         {% endif %}
                                     {% endfor %}
@@ -145,7 +198,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
     </div>
 

@@ -1803,14 +1803,14 @@ h6 .badge {
 }
 
 .btn-info, .btn-info.disabled {
-    box-shadow: 0 2px 6px #82d3f8;
-    background-color: #3abaf4;
-    border-color: #8e0000;
+    box-shadow: 0 2px 6px #424242;
+    background-color: #242426;
+    border-color: #373a3d;
     color: #fff;
 }
 
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active {
-    background-color: #0da8ee !important;
+    background-color: #830000 !important;
 }
 
 .btn-outline-info:hover, .btn-outline-info:focus, .btn-outline-info:active, .btn-outline-info.disabled:hover, .btn-outline-info.disabled:focus, .btn-outline-info.disabled:active {

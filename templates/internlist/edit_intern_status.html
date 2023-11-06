@@ -26,158 +26,52 @@
                          src="{% static 'assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg' %}"
                          class="rounded-circle profile-widget-picture" style="width: 140px; height: 140px;">
                     <div class="profile-widget-items">
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">Student Number</div>
+                        <div class="profile-widget-item" style="text-align: left; margin-left: 30px;">
+                            <div class="profile-widget-item-value" style="font-size: 28px;">
+                                <strong>
+                                    {{ intern.user.first_name }}
+                                    {% if intern.middle_name != 'n/a' %}
+                                        {{ intern.middle_name }}
+                                    {% endif %}
+
+                                    {{ intern.user.last_name }}
+
+                                    {% if intern.suffix != 'n/a' %}
+                                        {{ intern.suffix }}
+                                    {% endif %}
+                                </strong>
+                            </div>
+                            <div class="profile-widget-item-value">{{ intern.user.email }}</div>
+                            <div class="profile-widget-item-value">{{ intern.user.username }}</div>
                             <div class="profile-widget-item-value">{{ intern.student_id }}</div>
                         </div>
-                        <div class="profile-widget-item" style="background-color: #0da8ee">
-                            <div class="profile-widget-item-label">{{ intern.course }}</div>
-                            <div class="profile-widget-item-value">{{ intern.year_level }}-{{ intern.block }}</div>
-                        </div>
-                        <div class="profile-widget-item" style="background-color: #0da8ee">
-                            <div class="profile-widget-item-label">{{ intern.academic_year }}</div>
-                            <div class="profile-widget-item-value">{{ intern.semester }}</div>
-                        </div>
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">{{ intern.address }}</div>
-                            <div class="profile-widget-item-value">{{ intern.company_name }}</div>
-                        </div>
-                        <div class="profile-widget-item">
-                            <div class="profile-widget-item-label">{{ intern.contact_person }}</div>
-                            <div class="profile-widget-item-value">{{ intern.contact_number }}</div>
-                        </div>
 
+                        <div class="profile-widget-item" style="margin-right: 100px;">
 
-                    </div>
-                </div>
+                            <form method="post">
+                                {% csrf_token %}
 
-
-                <div class="card-body">
-                    <div class="row">
-                        <div class="form-column col-4" style="text-align: left;">
-                            <div style="font-size: 25px; font-weight: 700;"
-                            <strong>{{ intern.user.first_name }}
-                                {% if intern.middle_name != 'n/a' %}
-                                    {{ intern.middle_name }}
-                                {% endif %}
-
-                                {{ intern.user.last_name }}
-
-                                {% if intern.suffix != 'n/a' %}
-                                    {{ intern.suffix }}
-                                {% endif %}</strong>
-                        </div>
-                        {{ intern.user.username }}
-                        <div class="text-muted d-inline font-weight-normal">
-                            <div class="slash"></div>
-                            {{ intern.status }}
-                        </div>
-                        <div class="profile-widget-item-value"><strong>{{ intern.user.email }}</strong>
-                            <div class="profile-widget-item-label">{{ intern.present_address }}</div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-column col-8">
-                        <div class="row">
-
-                            <div class="col-lg-6" style="text-align: left">
-                                <p>Rendered Hours:
-                                <h2>{{ total_hours_rendered }} hrs</h2></p>
-                            </div>
-
-                            <div class="col-lg-6" style="text-align: right">
-                                <p>OJT Hours:
-                                <h2>{{ intern.max_hours }} hrs</h2></p>
-                            </div>
-                        </div>
-                        <div class="progress" data-height="4" style="height: 8px;">
-                            <div class="progress-bar bg-warning"
-                                 style="width: {{ intern.remaining_percentage }}%;"></div>
+                                <div class="form-group">
+                                    <label for="{{ form.status.id_for_label }}">Status:</label>
+                                    <select name="{{ form.status.name }}" class="custom-select" required>
+                                        {% for value, label in form.status.field.choices %}
+                                            <option value="{{ value }}"
+                                                    {% if value == form.status.value %}selected{% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Save Status</button>
+                                    <a href="{% url 'intern_list' %}" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_requirements' intern.id %}">Internship Requirement</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'admin_intern_detail' intern.id %}">Narrative Report</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/dash3.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_dtr' intern.id %}">DTR Upload</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_post_requirements' intern.id %}">Post Requirements</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_weekly_report' intern.id %}">Weekly Report</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
 
 
-
-<div class="card">
-  <h1>Edit Intern Status</h1>
-
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <button type="submit" class="btn btn-primary">Save Status</button>
-  </form>
-
-  <a href="{% url 'intern_announcement_list' %}" class="btn btn-secondary">Cancel</a>
-</div>
-
-        </div>
     </div>
 
 {% endblock %}

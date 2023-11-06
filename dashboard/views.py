@@ -46,6 +46,7 @@ def announcement_list(request):
 @login_required
 def intern_announcement_list(request):
     user = request.user
+    intern = get_object_or_404(Intern_Records, user=user)
 
     try:
         internship = Internship.objects.get(user=user)
@@ -64,6 +65,7 @@ def intern_announcement_list(request):
             'remaining_hours': remaining_hours,
             'remaining_percentage': remaining_percentage,
             'interns': interns,
+            'intern': intern,
         }
     except Internship.DoesNotExist:
         context = {}

@@ -34,20 +34,6 @@ def add_intern_records(request):
 
     return render(request, 'authentication/intern_create.html', {'form': form})
 
-@login_required
-def edit_intern_records(request):
-    existing_record = Intern_Records.objects.filter(user=request.user).first()
-
-    if request.method == 'POST':
-        form = InternForm(request.POST, request.FILES, instance=existing_record)
-
-        if form.is_valid():
-            form.save()
-            return redirect('intern_announcement_list')
-    else:
-        form = InternForm(instance=existing_record)
-
-    return render(request, 'authentication/intern_edit.html', {'form': form})
 
 @user_passes_test(lambda user: user.is_superuser)
 def edit_intern_status(request, intern_id):

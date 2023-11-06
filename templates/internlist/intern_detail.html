@@ -1,6 +1,6 @@
 {% extends 'adminbase.html' %}
 
-{% block title %}Modules &rsaquo; DataTables &mdash; Stisla{% endblock %}
+{% block title %}Intern's Data{% endblock %}
 
 {% load static %}
 
@@ -26,23 +26,23 @@
                          src="{% static 'assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg' %}"
                          class="rounded-circle profile-widget-picture" style="width: 140px; height: 140px;">
                     <div class="profile-widget-items">
-                        <div class="profile-widget-item">
+                        <div class="profile-widget-item" style="background-color: #efb100; margin-left: -10px;">
                             <div class="profile-widget-item-label">Student Number</div>
                             <div class="profile-widget-item-value">{{ intern.student_id }}</div>
                         </div>
-                        <div class="profile-widget-item" style="background-color: #0da8ee">
+                        <div class="profile-widget-item" style="background-color: #efb100">
                             <div class="profile-widget-item-label">{{ intern.course }}</div>
                             <div class="profile-widget-item-value">{{ intern.year_level }}-{{ intern.block }}</div>
                         </div>
-                        <div class="profile-widget-item" style="background-color: #0da8ee">
+                        <div class="profile-widget-item" style="background-color: #efb100">
                             <div class="profile-widget-item-label">{{ intern.academic_year }}</div>
                             <div class="profile-widget-item-value">{{ intern.semester }}</div>
                         </div>
-                        <div class="profile-widget-item">
+                        <div class="profile-widget-item" style="background-color: #efb100">
                             <div class="profile-widget-item-label">{{ intern.address }}</div>
                             <div class="profile-widget-item-value">{{ intern.company_name }}</div>
                         </div>
-                        <div class="profile-widget-item">
+                        <div class="profile-widget-item" style="background-color: #efb100">
                             <div class="profile-widget-item-label">{{ intern.contact_person }}</div>
                             <div class="profile-widget-item-value">{{ intern.contact_number }}</div>
                         </div>
@@ -99,67 +99,64 @@
                 </div>
             </div>
         </section>
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_requirements' intern.id %}">Internship Requirement</a></h2>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
 
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'admin_intern_detail' intern.id %}">Narrative Report</a></h2>
-                        </div>
-                    </div>
-                </article>
+        <div class="hero text-white hero-bg-image"
+             style="background-image: url('{% static 'assets/img/unsplash/detail4.jpg' %}');">
+            <div class="hero-inner">
+                <h2>Internship Requirements</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="mt-4">
+                    <a href="{% url 'view_requirements' intern.id %}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
+                        View Files</a>
+                </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/dash3.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_dtr' intern.id %}">DTR Upload</a></h2>
-                        </div>
-                    </div>
-                </article>
+        </div>
+
+        <div class="hero text-white hero-bg-image"
+             style="background-image: url('{% static 'assets/img/unsplash/detail8.jpg' %}'); margin-top: 10px;">
+            <div class="hero-inner">
+                <h2>Weekly Reports</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="mt-4">
+                    <a href="{% url 'view_weekly_report' intern.id %}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
+                        View Files</a>
+                </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_post_requirements' intern.id %}">Post Requirements</a></h2>
-                        </div>
-                    </div>
-                </article>
+        </div>
+
+        <div class="hero text-white hero-bg-image"
+             style="background-image: url('{% static 'assets/img/unsplash/detail2.jpg' %}'); margin-top: 10px;">
+            <div class="hero-inner">
+                <h2>Narrative Reports</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="mt-4">
+                    <a href="{% url 'admin_intern_detail' intern.id %}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
+                        View Files</a>
+                </div>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
-                <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
-                    <div class="article-header">
-                        <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
-                             style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
-                        </div>
-                        <div class="article-title">
-                            <h2><a href="{% url 'view_weekly_report' intern.id %}">Weekly Report</a></h2>
-                        </div>
-                    </div>
-                </article>
+        </div>
+
+        <div class="hero text-white hero-bg-image"
+             style="background-image: url('{% static 'assets/img/unsplash/detail6.jpg' %}'); margin-top: 10px;">
+            <div class="hero-inner">
+                <h2>Daily Time Record Reports</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="mt-4">
+                    <a href="{% url 'view_dtr' intern.id %}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
+                        View Files</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero text-white hero-bg-image"
+             style="background-image: url('{% static 'assets/img/unsplash/detail7.jpg' %}'); margin-top: 10px;">
+            <div class="hero-inner">
+                <h2>Post Requirements</h2>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="mt-4">
+                    <a href="{% url 'view_post_requirements' intern.id %}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
+                        View Files</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 {% extends 'adminbase.html' %}
 
-{% block title %}Modules &rsaquo; DataTables &mdash; Stisla{% endblock %}
+{% block title %}Intern List{% endblock %}
 
 {% load static %}
 
@@ -16,22 +16,14 @@
 {% block content %}
     <div class="main-content">
         <section class="section">
-            <div class="section-header" style="margin-top: 20px;">
-                <h1>DataTables</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Modules</a></div>
-                    <div class="breadcrumb-item">DataTables</div>
-                </div>
-            </div>
 
             <div class="section-body">
 
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" style="margin-top: 20px;">
                             <div class="card-header">
-                                <h4>Advanced Table</h4>
+                                <h4>Intern List</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -100,11 +92,32 @@
                                                         {{ intern.status_badge }}
                                                     </div>
                                                 </td>
-                                                <td><a href="{% url 'intern_detail' intern.id %}"
-                                                       class="btn btn-secondary">Detail (ID: {{ intern.id }})</a>
-                                                    {% if user.is_superuser %}
-    <a href="{% url 'edit_intern_status' intern.id %}" class="btn btn-primary">Edit Status</a>
-{% endif %}
+                                                <td>
+                                                    <div class="btn-group mb-2">
+                                                        <button class="btn btn-info btn-sm dropdown-toggle"
+                                                                type="button" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            See More
+                                                        </button>
+                                                        <div class="dropdown-menu">
+
+                                                            <a href="{% url 'intern_detail' intern.id %}"
+                                                               class="dropdown-item">Detail (ID: {{ intern.id }})</a>
+                                                            {% if user.is_superuser %}
+                                                                <a href="{% url 'edit_intern_status' intern.id %}"
+                                                                   class="dropdown-item">Edit Status</a>
+                                                                <form method="post">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="user_id"
+                                                                           value="{{ intern.user.id }}">
+                                                                    <button type="submit" class="dropdown-item">Delete
+                                                                        User
+                                                                    </button>
+                                                                </form>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+
                                                 </td>
                                             </tr>
                                         {% endfor %}

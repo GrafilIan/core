@@ -213,9 +213,8 @@ def upload_post_requirements(request):
             form.save()
             return redirect('upload_post_requirements')
     else:
-        form = Post_Requirements()
+        form = PostRequirementsForm()
 
     post_requirements = Post_Requirements.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_post_requirements.html', {'form': form, 'post_requirements': post_requirements})
-

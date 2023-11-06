@@ -1,19 +1,38 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404
 from documents.models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
 from signup.models import Intern_Records
+from .forms import UserDeleteForm
 
 # Create your views here.
 def intern_list(request):
     interns = Intern_Records.objects.all()
+
+    if request.method == 'POST':
+        # Handle form submission
+        form = UserDeleteForm(request.POST)
+        if form.is_valid():
+            user_id = form.cleaned_data.get('user_id')
+            # Perform the delete action here
+            try:
+                user_to_delete = User.objects.get(id=user_id)
+                user_to_delete.delete()
+            except User.DoesNotExist:
+                # If the user doesn't exist, you can log or display a message
+                pass
+
+    else:
+        form = UserDeleteForm()
 
     for intern in interns:
         intern.max_hours = intern.get_ojt_hours()
         intern.remaining_hours = intern.get_remaining_ojt_hours()
         intern.remaining_percentage = 100 - ((intern.remaining_hours / intern.max_hours) * 100)
 
-    return render(request, 'internlist/intern_list.html', {'interns': interns})
+    return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form})
+
 
 def intern_detail(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
