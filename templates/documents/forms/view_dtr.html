@@ -34,30 +34,30 @@
                 </div>
             </div>
             <div class="document-container" style="margin-top: -40px;">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
-                    {% for dtr in dtr %}
-                        <li class="document-item" data-requirement="{{ dtr.DTR_Number }}">
-                            <div class="row">
-                                <div class="col-12 col-md-12 display: block;" style="margin-top: 15px;">
-                                    <div class="card card-primary">
-                                        <div class="card-header">
-                                            <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
-                                        </div>
-                                        <div class="card-body">
-                                            <h6>DTR Submission:</h6>
-                                            <a href="{{ dtr.DTR_submission.url }}"
-                                               target="_blank">{{ dtr.DTR_submission.name }}</a><br>
-                                            <!-- Add a button for preview or download if needed -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    {% empty %}
-                        <li>No DTRs have been uploaded yet.</li>
-                    {% endfor %}
-                </ul>
-            </div>
+    <ul class="document-list" style="list-style-type: none; padding: 0px;">
+        <div class="row">
+            {% for dtr in dtr %}
+                <div class="col-12 col-md-6" style="margin-top: 15px;">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
+                        </div>
+                        <div class="card-body">
+                            <h6>DTR Submission:</h6>
+                            <a href="{{ dtr.DTR_submission.url }}" target="_blank">{{ dtr.DTR_submission.name }}</a><br>
+                            <!-- Add a button for preview or download if needed -->
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:2 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+
+
 
         </section>
     </div>

@@ -15,41 +15,45 @@
     <div class="main-content" style="min-height: 569px;">
         <section class="section" style="margin-top: 2px;">
             <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-                 style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}');  margin-left: -35px;  margin-right: -46px;">
+     style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); margin-left: -35px; margin-right: -46px;">
 
-                <div class="hero-inner" style="height: 220px;">
-                    <h1>Internship Requirement</h1>
-                    <div id="clock" style="font-size:40px; font-weight: bold;"></div>
+    <div class="hero-inner" style="padding: 20px; text-align: center;">
+        <h1>Internship Requirement</h1>
+        <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
-                               data-target="#addWeeklyBinModal">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File</a><br>
-
-
-                            <label for="requirement-filter" style="margin-top: 15px;">
-                                <p>Click the dropdown to filter options in accordance to your needs.</p>
-                            </label>
-
-                            <select id="requirement-filter" class="form-control">
-                                <option value="">All</option>
-                                <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
-                                <option value="Barangay Clearance">Barangay Clearance</option>
-                                <option value="Cedula">Cedula</option>
-                                <option value="Internship Agreement">Internship Agreement</option>
-                                <option value="Medical Certificate">Medical Certificate</option>
-                                <option value="Parent Consent">Parent Consent</option>
-                                <option value="Parent ID">Parent ID</option>
-                                <option value="Police Clearance">Police Clearance</option>
-                                <option value="Student INFO Sheet">Student Information Sheet</option>
-                                <!-- Add more options as needed -->
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                   data-target="#addWeeklyBinModal">
+                    <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
+                </a>
             </div>
+        </div>
+
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-lg-12">
+                <label for="requirement-filter">
+                    <p>Click the dropdown to filter options in accordance to your needs.</p>
+                </label>
+
+                <select id="requirement-filter" class="form-control">
+                    <option value="">All</option>
+                    <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
+                    <option value="Barangay Clearance">Barangay Clearance</option>
+                    <option value="Cedula">Cedula</option>
+                    <option value="Internship Agreement">Internship Agreement</option>
+                    <option value="Medical Certificate">Medical Certificate</option>
+                    <option value="Parent Consent">Parent Consent</option>
+                    <option value="Parent ID">Parent ID</option>
+                    <option value="Police Clearance">Police Clearance</option>
+                    <option value="Student INFO Sheet">Student Information Sheet</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
             <!-------------------------------REQUIREMENTS-------------------------------->
@@ -60,21 +64,21 @@
                     {% for requirement in requirements %}
                         <li class="document-item" data-requirement="{{ requirement.requirement }}">
                             <div class="row">
-                                <div class="col-12 col-md-12 display: block;" style="margin-top: 15px;">
-                                    <div class="card card-secondary">
+                                <div class="col-12 col-md-8 offset-md-2" style="margin-top: 15px;">
+                                    <div class="card card-secondary" style="width: 100%;">
                                         <div class="card-header">
                                             <h4>Requirement:</h4> <u>{{ requirement.requirement }}</u><br>
                                         </div>
                                         <div class="card-body">
                                             <h6>Document:</h6>
                                             <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
-                                            <button class="preview-button btn btn-dark btn-block"
+                                            <button class="preview-button btn btn-dark"
                                                     data-image="{{ requirement.document_image.url }}">
                                                 Toggle Image Preview
                                             </button>
                                             <div class="card-body" style="text-align: center;">
                                                 <img src="{{ requirement.document_image.url }}" alt="Image Preview"
-                                                     style="max-width: 60%; height: auto; margin: 0 auto;">
+                                                     style="max-width: 100%; height: auto; margin: 0 auto;">
                                             </div>
                                         </div>
                                     </div>
@@ -86,6 +90,7 @@
                     {% endfor %}
                 </ul>
             </div>
+
 
             <!-------------------------------REQUIREMENTS-------------------------------->
 

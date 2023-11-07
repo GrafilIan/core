@@ -15,28 +15,30 @@
     <div class="main-content" style="min-height: 569px;">
         <section class="section" style="margin-top: 2px;">
             <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-                 style="background-image: url('{% static 'assets/img/unsplash/lap2.jpg' %}');  margin-left: -35px;  margin-right: -46px;">
+     style="background-image: url('{% static 'assets/img/unsplash/lap2.jpg' %}'); margin-left: -35px; margin-right: -46px;">
 
-                <div class="hero-inner" style="height: 220px;">
-                    <h1>Daily Time Record Repository</h1>
-                    <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
-                    <p>Please upload an image of your DTR Slip below.</p>
+    <div class="hero-inner" style="padding: 20px; text-align: center;">
+        <h1>Daily Time Record Repository</h1>
+        <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
+        <p>Please upload an image of your DTR Slip below.</p>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
-                               data-target="#addWeeklyBinModal">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File</a><br>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                   data-target="#addWeeklyBinModal">
+                    <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
+                </a>
             </div>
-            <div class="document-container">
-                <div class="row">
-                    {% for dtr in dtr %}
-                        <div class="col-md-4">
-                            <div class="document-item" data-requirement="{{ dtr.DTR_Number }}">
-                                <div class="card card-primary" style="margin-top: 15px;">
+        </div>
+    </div>
+</div>
+
+            <div class="document-container" style="margin-top: -40px;">
+                <ul class="document-list" style="list-style-type: none; padding: 0px;">
+                    <div class="row">
+                        {% for dtr in dtr %}
+                            <div class="col-12 col-md-6" style="margin-top: 15px;">
+                                <div class="card card-primary">
                                     <div class="card-header">
                                         <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
                                     </div>
@@ -48,13 +50,13 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if forloop.counter|divisibleby:2 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+                        {% endfor %}
                         </div>
-                    {% empty %}
-                        <div class="col-md-4">
-                            No DTRs have been uploaded yet.
-                        </div>
-                    {% endfor %}
-                </div>
+                </ul>
             </div>
 
 

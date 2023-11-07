@@ -19,88 +19,88 @@
 
                 <div class="hero-inner" style="height: 220px;">
                     <div style="font-size: 35px; font-weight: 700;">
-                    <strong>{{ intern.user.first_name }}
-                        {% if intern.middle_name != 'n/a' %}
-                            {{ intern.middle_name }}
-                        {% endif %}
+                        <strong>{{ intern.user.first_name }}
+                            {% if intern.middle_name != 'n/a' %}
+                                {{ intern.middle_name }}
+                            {% endif %}
 
-                        {{ intern.user.last_name }}
+                            {{ intern.user.last_name }}
 
-                        {% if intern.suffix != 'n/a' %}
-                            {{ intern.suffix }}
-                        {% endif %}</strong><br>
-                    Record of Requirements
+                            {% if intern.suffix != 'n/a' %}
+                                {{ intern.suffix }}
+                            {% endif %}</strong><br>
+                        Record of Requirements
                     </div>
 
 
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <label for="requirement-filter" style="margin-top: 15px;">
-                            <p>Click the dropdown to filter options in accordance to your needs.</p>
-                        </label>
-
-                        <select id="requirement-filter" class="form-control">
-                            <option value="">All</option>
-                            <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
-                            <option value="Barangay Clearance">Barangay Clearance</option>
-                            <option value="Cedula">Cedula</option>
-                            <option value="Internship Agreement">Internship Agreement</option>
-                            <option value="Medical Certificate">Medical Certificate</option>
-                            <option value="Merit of Rating">Merit of Rating</option>
-                            <option value="Parent Consent">Parent Consent</option>
-                            <option value="Parent ID">Parent ID</option>
-                            <option value="Police Clearance">Police Clearance</option>
-                            <option value="Student Feedback Form">Student Feedback Form</option>
-                            <option value="Student INFO Sheet">Student Information Sheet</option>
-                            <option value="Supervisor Feedback Form">Supervisor Feedback Form</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-    </div>
-
-
-    <!-------------------------------REQUIREMENTS-------------------------------->
-
-
-    <div class="document-container">
-        <ul class="document-list" style="list-style-type: none; padding: 0px;">
-            {% for requirement in requirements %}
-                <li class="document-item" data-requirement="{{ requirement.requirement }}">
                     <div class="row">
-                        <div class="col-12 col-md-12 display: block;" style="margin-top: 15px;">
-                            <div class="card card-secondary">
-                                <div class="card-header">
-                                    <h4>Requirement:</h4> <u>{{ requirement.requirement }}</u><br>
-                                </div>
-                                <div class="card-body">
-                                    <h6>Document:</h6>
-                                    <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
-                                    <button class="preview-button btn btn-dark btn-block"
-                                            data-image="{{ requirement.document_image.url }}">
-                                        Toggle Image Preview
-                                    </button>
-                                    <div class="card-body" style="text-align: center;">
-                                        <img src="{{ requirement.document_image.url }}" alt="Image Preview"
-                                             style="max-width: 60%; height: auto; margin: 0 auto;">
+                        <div class="col-lg-12">
+
+                            <label for="requirement-filter" style="margin-top: 15px;">
+                                <p>Click the dropdown to filter options in accordance to your needs.</p>
+                            </label>
+
+                            <select id="requirement-filter" class="form-control">
+                                <option value="">All</option>
+                                <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
+                                <option value="Barangay Clearance">Barangay Clearance</option>
+                                <option value="Cedula">Cedula</option>
+                                <option value="Internship Agreement">Internship Agreement</option>
+                                <option value="Medical Certificate">Medical Certificate</option>
+                                <option value="Merit of Rating">Merit of Rating</option>
+                                <option value="Parent Consent">Parent Consent</option>
+                                <option value="Parent ID">Parent ID</option>
+                                <option value="Police Clearance">Police Clearance</option>
+                                <option value="Student Feedback Form">Student Feedback Form</option>
+                                <option value="Student INFO Sheet">Student Information Sheet</option>
+                                <option value="Supervisor Feedback Form">Supervisor Feedback Form</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-------------------------------REQUIREMENTS-------------------------------->
+
+
+            <div class="document-container">
+                <ul class="document-list" style="list-style-type: none; padding: 0px;">
+                    {% for requirement in requirements %}
+                        <li class="document-item" data-requirement="{{ requirement.requirement }}">
+                            <div class="row">
+                                <div class="col-12 col-md-7 offset-md-3" style="margin-top: 15px;">
+                                    <div class="card card-secondary">
+                                        <div class="card-header">
+                                            <h4>Requirement:</h4> <u>{{ requirement.requirement }}</u><br>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6>Document:</h6>
+                                            <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
+                                            <button class="preview-button btn btn-dark btn-block"
+                                                    data-image="{{ requirement.document_image.url }}">
+                                                Toggle Image Preview
+                                            </button>
+                                            <div class="card-body" style="text-align: center;">
+                                                <img src="{{ requirement.document_image.url }}" alt="Image Preview"
+                                                     style="max-width: 60%; height: auto; margin: 0 auto;">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-            {% empty %}
-                <li>No documents have been uploaded yet.</li>
-            {% endfor %}
-        </ul>
-    </div>
+                        </li>
+                    {% empty %}
+                        <li>No documents have been uploaded yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-    <!-------------------------------REQUIREMENTS-------------------------------->
+            <!-------------------------------REQUIREMENTS-------------------------------->
 
-    </section>
+        </section>
     </div>
 
     <!-- Modal for Adding Weekly Bin -->
