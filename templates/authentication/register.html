@@ -16,6 +16,7 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <!-- Start GA -->
 
@@ -33,8 +34,23 @@
     </script>
 
 </head>
-<body style="background-color: #e7e7e7;">
-
+<body style="background-color: #e7e7e7;
+        background-image: url('{% static 'assets/img/SorSu_cover.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Optional: Fixed background image */
+        /* Additional styling properties like background-position, background-color, etc. */
+        ">
+<div class="wrapper" id="loader">
+    <div class="box-wrap">
+        <div class="box one"></div>
+        <div class="box two"></div>
+        <div class="box three"></div>
+        <div class="box four"></div>
+        <div class="box five"></div>
+        <div class="box six"></div>
+    </div>
+</div>
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
@@ -43,7 +59,7 @@
                      class="shadow-light rounded-circle">
             </div>
 
-            <div class="card card-primary">
+            <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.8);">
                 <div class="card-header"><h4>Register</h4></div>
 
                 {% if messages %}
@@ -70,12 +86,12 @@
                         </div>
 
                         <div class="row">
-                        <div class="form-group col-6">
-                            <label for="email">Email</label>
-                            {{ form.email }}
-                            <div class="invalid-feedback">
+                            <div class="form-group col-6">
+                                <label for="email">Email</label>
+                                {{ form.email }}
+                                <div class="invalid-feedback">
+                                </div>
                             </div>
-                        </div>
 
                         </div>
 
@@ -105,21 +121,33 @@
 
                         <div class="form-divider">
 
-                        <div class="form-group">
-                            <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
-                                Register
-                            </button>
-                        </div>
+                            <div class="form-group">
+                                <button type="submit" value="submit" class="btn btn-primary btn-lg btn-block">
+                                    Register
+                                </button>
+                            </div>
                     </form>
                     <div class="mt-5 text-muted text-center">
-                                Already have an account? <a href="{% url 'login' %}">Back to Login</a>
-                            </div>
+                        Already have an account? <a href="{% url 'login' %}">Back to Login</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        setTimeout(function () {
+            loader.style.opacity = '0';
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 1000); // Hide the loader 1 second after fading out
+        }, 2000); // Start fading out after 2 seconds
+    });
+
+</script>
 
 <!-- General JS Scripts -->
 <script src="{% static 'assets/modules/jquery.min.js' %}"></script>
@@ -142,22 +170,22 @@
 <script src="{% static 'assets/js/custom.js' %}"></script>
 
 <script>
-$(document).ready(function() {
-    $('#id_course').on('change', function() {
-        var selectedCourse = $(this).val();
-        var ojtHours = {
-            'BSIT': 366,
-            'BSIS': 366,
-            'BSCS': 182,
-            'BSA': 300,
-            'BSAIS': 400,
-            'BPA': 300
-        };
+    $(document).ready(function () {
+        $('#id_course').on('change', function () {
+            var selectedCourse = $(this).val();
+            var ojtHours = {
+                'BSIT': 366,
+                'BSIS': 366,
+                'BSCS': 182,
+                'BSA': 300,
+                'BSAIS': 400,
+                'BPA': 300
+            };
 
-        var ojtHoursValue = ojtHours[selectedCourse] || 0;
-        $('#ojt_hours_value').text(ojtHoursValue + ' hrs');
+            var ojtHoursValue = ojtHours[selectedCourse] || 0;
+            $('#ojt_hours_value').text(ojtHoursValue + ' hrs');
+        });
     });
-});
 </script>
 </body>
 </html>

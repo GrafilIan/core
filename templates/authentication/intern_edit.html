@@ -17,6 +17,7 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <!-- Start GA -->
 
@@ -34,7 +35,23 @@
     </script>
 
 </head>
-<body style="background-color: #e7e7e7;">
+<body style="background-color: #e7e7e7;
+        background-image: url('{% static 'assets/img/SorSu_cover.jpg' %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Optional: Fixed background image */
+        /* Additional styling properties like background-position, background-color, etc. */
+        ">
+<div class="wrapper" id="loader">
+    <div class="box-wrap">
+        <div class="box one"></div>
+        <div class="box two"></div>
+        <div class="box three"></div>
+        <div class="box four"></div>
+        <div class="box five"></div>
+        <div class="box six"></div>
+    </div>
+</div>
 
 <div class="container mt-5">
     <div class="row">
@@ -44,7 +61,7 @@
                      class="shadow-light rounded-circle">
             </div>
 
-            <div class="card card-primary">
+            <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.9);">
                 <div class="card-header"><h4>Register</h4></div>
 
                 {% if messages %}
@@ -187,7 +204,18 @@
     </div>
 </div>
 </div>
+<script>
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        setTimeout(function () {
+            loader.style.opacity = '0';
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 1000); // Hide the loader 1 second after fading out
+        }, 2000); // Start fading out after 2 seconds
+    });
 
+</script>
 <!-- General JS Scripts -->
 <script src="{% static 'assets/modules/jquery.min.js' %}"></script>
 <script src="{% static 'assets/modules/popper.js' %}"></script>
