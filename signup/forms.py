@@ -16,6 +16,18 @@ class InternForm(forms.ModelForm):
                 return ''
             return super().render(name, value, attrs, renderer)
 
+    class CompanyNameWidget(forms.TextInput):
+        def render(self, name, value, attrs=None, renderer=None):
+            if value.lower() == 'n/a':
+                return ''
+            return super().render(name, value, attrs, renderer)
+
+    class AddressWidget(forms.TextInput):
+        def render(self, name, value, attrs=None, renderer=None):
+            if value.lower() == 'n/a':
+                return ''
+            return super().render(name, value, attrs, renderer)
+
     class Meta:
         model = Intern_Records
         fields = [
@@ -139,6 +151,7 @@ class InternForm(forms.ModelForm):
             ('Not Placed', 'Not Placed'),
             ('On OJT', 'On OJT'),
             ('Late OJT', 'Late OJT'),
+
         ]
         self.fields['status'].widget = Select(attrs={
             'class': 'form-control',
