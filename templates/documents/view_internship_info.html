@@ -129,6 +129,13 @@
 {% block scripts %}
 
     <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+
+    <script>
+        $('#addWeeklyBinModal').on('hidden.bs.modal', function (e) {
+            $('.modal-backdrop').remove();
+        });
+    </script>
+
     <script>
         function updateClock() {
             const clockElement = document.getElementById('clock');

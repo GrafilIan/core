@@ -139,12 +139,6 @@ class InternForm(forms.ModelForm):
             ('Not Placed', 'Not Placed'),
             ('On OJT', 'On OJT'),
             ('Late OJT', 'Late OJT'),
-            ('On Leave', 'On Leave'),
-            ('Suspended', 'Suspended'),
-            ('Resigned', 'Resigned'),
-            ('Extended', 'Extended'),
-            ('Terminated', 'Terminated'),
-            ('Completed', 'Completed'),
         ]
         self.fields['status'].widget = Select(attrs={
             'class': 'form-control',
