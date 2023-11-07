@@ -10,6 +10,8 @@
     <link rel="stylesheet"
           href="{% static 'assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
+
+
 {% endblock %}
 
 
@@ -106,12 +108,13 @@
                                                             {% if user.is_superuser %}
                                                                 <a href="{% url 'edit_intern_status' intern.id %}"
                                                                    class="dropdown-item">Edit Status</a>
-                                                                <form method="post">
+                                                                <form method="post" enctype="multipart/form-data"
+                                                                      id="post-form">
                                                                     {% csrf_token %}
                                                                     <input type="hidden" name="user_id"
                                                                            value="{{ intern.user.id }}">
-                                                                    <button type="submit" class="dropdown-item">Delete
-                                                                        User
+                                                                    <button type="button" class="dropdown-item"
+                                                                            onclick="createPostWithAlert()">Delete User
                                                                     </button>
                                                                 </form>
                                                             {% endif %}
@@ -135,6 +138,28 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function createPostWithAlert() {
+            // Use the correct id attribute
+            Swal.fire({
+                title: 'Delete User',
+                text: 'Are you sure you want to delete this user?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form when the user confirms
+                    document.getElementById('post-form').submit();
+                }
+            });
+        }
+    </script>
+
+
+
     <!-- JS Libraies -->
     <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
     <script src="{% static 'assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>

@@ -23,7 +23,7 @@ def add_intern_records(request):
             intern_record.user = request.user
             intern_record.form_filled_out = True
             intern_record.save()
-            return redirect('intern_announcement_list')
+            return redirect('view_internship_info')
 
     else:
         # If the user has an existing record, load the data into the form for editing
