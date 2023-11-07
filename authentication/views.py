@@ -17,6 +17,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from authentication.forms import UserRegistrationForm
 from dashboard.models import Announcement
 from django.shortcuts import render, redirect, get_object_or_404
+
 # Create your views here.
 from signup.models import Intern_Records
 
@@ -24,18 +25,8 @@ from signup.models import Intern_Records
 @login_required(login_url='login')
 def homepage(request):
     if request.user.is_superuser:
-        if request.method == 'POST' and 'delete_announcement' in request.POST:
-            announcement_id = request.POST.get('announcement_id')
-            announcement = get_object_or_404(Announcement, pk=announcement_id)
-            announcement.delete()
-            return redirect('announcement_list')
 
-        announcements = Announcement.objects.all().order_by('-pub_date')
-        context = {
-            'announcements': announcements,
-        }
-
-        return render(request, 'dashboard/admin_dashboard.html', context)
+        return redirect('announcement_list')
 
     # Check if the user has already filled out the form
     try:
@@ -46,11 +37,9 @@ def homepage(request):
                 'announcements': announcements,
             }
 
-            return render(request, 'dashboard/intern_dashboard.html', context)
+            return redirect('intern_announcement_list')
     except Intern_Records.DoesNotExist:
-        pass  # Intern record doesn't exist, indicating the form has not been filled out
-
-    # If the user is not a superuser and hasn't filled out the form, redirect to the form page
+        pass
     return redirect('add_intern_records')
 
 

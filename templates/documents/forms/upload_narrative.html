@@ -15,7 +15,7 @@
     <div class="main-content" style="min-height: 569px;">
 
         <section class="section mr-3" style="margin-top: 2px;">
-<div class="hero text-white hero-bg-image hero-bg-parallax text-center"
+            <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
                  style="background-image: url('{% static 'assets/img/unsplash/night2.jpg' %}');  margin-left: -35px;  margin-right: -46px;">
 
                 <div class="hero-inner" style="height: 220px;">
@@ -34,32 +34,38 @@
             </div>
 
             <div class="document-container">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
+                <div class="row">
                     {% for narrative in narrative %}
-                        <li class="document-item" data-requirement="{{ narrative.Narrative_Number }}">
-                            <div class="row">
-                                <div class="col-12 col-md-12 display: block;" style="margin-top: 15px;">
-                                    <div class="card card-warning">
-                                        <div class="card-header">
-                                            <h4>Narrative Number:</h4> <u>{{ narrative.Narrative_Number }}</u><br>
-                                        </div>
-                                        <div class="card-body">
-                                            <h6>Narrative Content:</h6>
-                                            <span class="narrative-text">{{ narrative.Narrative_Text|safe }}</span><br>
+                        <div class="col-md-6">
+                            <div class="card card-primary" style="margin-top: 15px;">
+                                <div class="card-header">
+                                    <h4>Narrative No.:</h4> <u>{{ narrative.Narrative_Number }}</u>
+                                    <a data-collapse="#mycard-collapse-{{ forloop.counter }}"
+                                       class="btn btn-icon btn-info" href="#" style="margin-left: 260px;"><i
+                                            class="fas fa-plus"></i></a>
+                                </div>
+                                <div class="collapse" id="mycard-collapse-{{ forloop.counter }}">
+                                    <div class="card-body">
+                                        <h6>Narrative Content:</h6>
+                                        <span class="narrative-text">{{ narrative.Narrative_Text|safe }}</span><br>
 
-                                            <h6>Narrative Report Submission:</h6>
-                                            <a href="{{ form.document_submission.url }}"
-                                               target="_blank">{{ narrative.document_submission.name }}</a><br>
-                                            <!-- Add a button for preview or download if needed -->
-                                        </div>
+                                        <h6>Narrative Report Submission:</h6>
+                                        <a href="{{ form.document_submission.url }}"
+                                           target="_blank">{{ narrative.document_submission.name }}</a><br>
+                                        <!-- Add a button for preview or download if needed -->
+                                    </div>
+                                    <div class="card-footer">
+                                        Card Footer
                                     </div>
                                 </div>
                             </div>
-                        </li>
+                        </div>
                     {% empty %}
-                        <li>No Narrative Reports have been uploaded yet.</li>
+                        <div class="col-md-6">
+                            No Narrative Reports have been uploaded yet.
+                        </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
 
 

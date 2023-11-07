@@ -18,12 +18,14 @@
     <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
 
     <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/adminstyle.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/ionicons/css/ionicons.min.css' %}">
 
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -44,17 +46,31 @@
 </head>
 
 <body style="background-color: #e7e7e7;">
+
+<div class="wrapper" id="loader">
+    <div class="box-wrap">
+        <div class="box one"></div>
+        <div class="box two"></div>
+        <div class="box three"></div>
+        <div class="box four"></div>
+        <div class="box five"></div>
+        <div class="box six"></div>
+    </div>
+</div>
+
+
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-          </ul>
-            <h4 style="color: white; margin-top: 6px;">{{ user.username }}</h4>
-        </form>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+                    class="fas fa-search"></i></a></li>
+        </ul>
+        <h4 style="color: white; margin-top: 6px;">{{ user.username }}</h4>
+    </form>
 
-      </nav>
+</nav>
 <div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -66,7 +82,8 @@
         </div>
 
         <div class="sidebar-brand">
-            <h6 style="color: white; padding-left: 15px; padding-right: 15px;">Sorsogon State University-Bulan Campus</h6>
+            <h6 style="color: white; padding-left: 15px; padding-right: 15px;">Sorsogon State University-Bulan
+                Campus</h6>
         </div>
 
         <div class="sidebar-brand sidebar-brand-sm">
@@ -78,23 +95,71 @@
 
             <li class="menu-header">Admin UI</li>
 
-            <li><a class="nav-link" href="{% url 'announcement_list' %}"><i class="fa fa-map" aria-hidden="true"></i><span>Dashboard</span></a></li>
-            <li><a class="nav-link" href="{% url 'intern_list' %}"><i class="fa fa-users" aria-hidden="true"></i><span>Intern List</span></a></li>
-
+            <li><a class="nav-link" href="{% url 'announcement_list' %}"><i class="fa fa-map"
+                                                                            aria-hidden="true"></i><span>Dashboard</span></a>
+            </li>
+            <li><a class="nav-link" href="{% url 'intern_list' %}"><i class="fa fa-users" aria-hidden="true"></i><span>Intern List</span></a>
+            </li>
 
 
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href={% url 'logout' %} class="btn btn-primary btn-lg btn-block btn-icon-split">
+            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split" onclick="confirmLogout()">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>
     </aside>
 </div>
-
+</div>
 {% block content %}
 {% endblock %}
+
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: "Logout Confirmation",
+        text: "Are you sure you want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, logout",
+        cancelButtonText: "No, cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // The user clicked the "Yes" button, so you can log them out here.
+            window.location.href = "{% url 'logout' %}";
+        } else {
+            // The user clicked the "No" button or closed the dialog, no action needed.
+        }
+    });
+}
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        setTimeout(function () {
+            loader.style.opacity = '0';
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 1000); // Hide the loader 1 second after fading out
+        }, 2000); // Start fading out after 2 seconds
+    });
+
+</script>
+<script>
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+
+        setTimeout(function () {
+            loader.style.opacity = '0'; // Start fading out
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 1000); // Hide the loader 1 second after fading out
+        }, 1500); // Start fading out after 1.5 seconds
+    });
+</script>
+
 
 <script src="{% static 'assets/modules/jquery.min.js' %}"></script>
 <script src="{% static 'assets/modules/popper.js' %}"></script>
@@ -103,7 +168,6 @@
 <script src="{% static 'assets/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'assets/modules/moment.min.js' %}"></script>
 <script src="{% static 'assets/js/stisla.js' %}"></script>
-
 
 
 <!-- JS Libraries -->
@@ -119,6 +183,7 @@
 <!-- Template JS File -->
 <script src="{% static 'assets/js/scripts.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'assets/js/page_reload_script.js' %}"></script>
 
 {% block scripts %}
 {% endblock %}

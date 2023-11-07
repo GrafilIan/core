@@ -18,12 +18,14 @@
     <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
 
     <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/ionicons/css/ionicons.min.css' %}">
 
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -44,17 +46,30 @@
 </head>
 
 <body style="background-color: #e7e7e7;">
+
+<div class="wrapper" id="loader">
+    <div class="box-wrap">
+        <div class="box one"></div>
+        <div class="box two"></div>
+        <div class="box three"></div>
+        <div class="box four"></div>
+        <div class="box five"></div>
+        <div class="box six"></div>
+    </div>
+</div>
+
 <div class="navbar-bg"></div>
 <nav class="navbar navbar-expand-lg main-navbar">
-        <form class="form-inline mr-auto">
-          <ul class="navbar-nav mr-3">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
-          </ul>
-            <h5 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h5>
-        </form>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+                    class="fas fa-search"></i></a></li>
+        </ul>
+        <h5 style="color: white; margin-top: 6px;">{{ user.first_name }} {{ user.last_name }}</h5>
+    </form>
 
-      </nav>
+</nav>
 <div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -66,7 +81,8 @@
         </div>
 
         <div class="sidebar-brand">
-            <h6 style="color: white; padding-left: 15px; padding-right: 15px;">Sorsogon State University-Bulan Campus</h6>
+            <h6 style="color: white; padding-left: 15px; padding-right: 15px;">Sorsogon State University-Bulan
+                Campus</h6>
         </div>
 
         <div class="sidebar-brand sidebar-brand-sm">
@@ -78,8 +94,10 @@
 
             <li class="menu-header">Intern UI</li>
 
-            <li><a class="nav-link" href="{% url 'intern_announcement_list' %}"><i class="ion-easel"></i> <span>Dashboard</span></a></li>
-            <li><a class="nav-link" href="{% url 'view_internship_info' %}"><i class="ion-calendar"></i> <span>Internship Schedule</span></a></li>
+            <li><a class="nav-link" href="{% url 'intern_announcement_list' %}"><i class="ion-easel"></i> <span>Dashboard</span></a>
+            </li>
+            <li><a class="nav-link" href="{% url 'view_internship_info' %}"><i class="ion-calendar"></i> <span>Internship Schedule</span></a>
+            </li>
 
             <li class="menu-header">Intern's Documents</li>
 
@@ -89,16 +107,16 @@
                     <li><a class="nav-link" href="{% url 'upload_requirements' %}">Internship Requirements</a></li>
                     <li><a class="nav-link" href="{% url 'upload_dtr' %}">DTR Repository</a></li>
                     <li><a class="nav-link" href="{% url 'upload_narrative' %}">Narrative Report</a></li>
-                    <li><a class="nav-link" href="{% url 'upload_post_requirements' %}" style="white-space: nowrap;">Post OJT Requirements</a></li>
+                    <li><a class="nav-link" href="{% url 'upload_post_requirements' %}" style="white-space: nowrap;">Post
+                        OJT Requirements</a></li>
                 </ul>
             </li>
-
 
 
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href={% url 'logout' %} class="btn btn-primary btn-lg btn-block btn-icon-split">
+            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split" onclick="confirmLogout()">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>
@@ -108,6 +126,37 @@
 {% block content %}
 {% endblock %}
 
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: "Logout Confirmation",
+        text: "Are you sure you want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, logout",
+        cancelButtonText: "No, cancel",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // The user clicked the "Yes" button, so you can log them out here.
+            window.location.href = "{% url 'logout' %}";
+        } else {
+            // The user clicked the "No" button or closed the dialog, no action needed.
+        }
+    });
+}
+</script>
+
+<script>
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        setTimeout(function () {
+            loader.style.opacity = '0';
+            setTimeout(function () {
+                loader.style.display = 'none';
+            }, 1000); // Hide the loader 1 second after fading out
+        }, 1500); // Start fading out after 2 seconds
+    });
+</script>
 <script src="{% static 'assets/modules/jquery.min.js' %}"></script>
 <script src="{% static 'assets/modules/popper.js' %}"></script>
 <script src="{% static 'assets/modules/tooltip.js' %}"></script>
