@@ -1,38 +1,49 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Sum
-from django.shortcuts import render, get_object_or_404
-from documents.models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
+from documents.models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements, \
+    Folder, Record
+from signup.forms import InternStatusEditForm
 from signup.models import Intern_Records
 from .forms import UserDeleteForm
 
 # Create your views here.
 def intern_list(request):
-    interns = Intern_Records.objects.all()
-
+    folders = Folder.objects.all()
     if request.method == 'POST':
-        # Handle form submission
         form = UserDeleteForm(request.POST)
         if form.is_valid():
             user_id = form.cleaned_data.get('user_id')
-            # Perform the delete action here
             try:
                 user_to_delete = User.objects.get(id=user_id)
                 user_to_delete.delete()
             except User.DoesNotExist:
-                # If the user doesn't exist, you can log or display a message
                 pass
-
     else:
         form = UserDeleteForm()
+
+    interns = Intern_Records.objects.filter(folder__isnull=True)  # Filter interns not associated with any folder
 
     for intern in interns:
         intern.max_hours = intern.get_ojt_hours()
         intern.remaining_hours = intern.get_remaining_ojt_hours()
         intern.remaining_percentage = 100 - ((intern.remaining_hours / intern.max_hours) * 100)
 
-    return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form})
+    return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form, 'folders': folders})
 
+def archive_intern(request, intern_id, folder_id):
+    intern = get_object_or_404(Intern_Records, id=intern_id)
+    folder = get_object_or_404(Folder, id=folder_id)
+
+    Record.objects.create(name=intern.user.get_full_name(), folder=folder)
+    intern.folder = folder
+    intern.save()
+
+    return redirect('intern_list')
 
 def intern_detail(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
@@ -51,6 +62,15 @@ def intern_detail(request, intern_id):
 
     total_hours_rendered = weekly_bins.aggregate(Sum('rendered_hours'))['rendered_hours__sum'] or 0
 
+    # Handle form submission for editing intern status
+    if request.method == 'POST':
+        form = InternStatusEditForm(request.POST, instance=intern)
+        if form.is_valid():
+            form.save()
+            return redirect('intern_list')  # Redirect to the intern_list or intern_detail as needed
+    else:
+        form = InternStatusEditForm(instance=intern)
+
     return render(request, 'internlist/intern_detail.html', {
         'intern': intern,
         'weekly_bins': weekly_bins,
@@ -60,6 +80,7 @@ def intern_detail(request, intern_id):
         'post_requirements': post_requirements,
         'interns': interns,
         'total_hours_rendered': total_hours_rendered,
+        'form': form,  # Include the form in the context for rendering in the template
     })
 
 
@@ -144,3 +165,24 @@ def view_weekly_report(request, intern_id):
         'weekly_bins': weekly_bins,
 
     })
+
+def archive_selected_interns(request):
+    if request.method == 'GET':
+        intern_ids = request.GET.get('intern_ids', '').split(',')
+        folder_id = request.GET.get('folder_id', None)
+
+        if folder_id is None:
+            return HttpResponseBadRequest('Invalid request. Missing folder_id.')
+
+        folder = get_object_or_404(Folder, id=folder_id)
+
+        interns = Intern_Records.objects.filter(id__in=intern_ids, folder__isnull=True)
+
+        for intern in interns:
+            Record.objects.create(name=intern.user.get_full_name(), folder=folder)
+            intern.folder = folder
+            intern.save()
+
+        return HttpResponseRedirect(reverse('intern_list'))
+
+    return HttpResponseBadRequest('Invalid request.')

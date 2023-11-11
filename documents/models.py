@@ -24,6 +24,14 @@ class WeeklyBin(models.Model):
         return f"Week {self.week_number} - {self.internship.user.username}"
 
 
+
+class Folder(models.Model):
+    name = models.CharField(max_length=255)
+
+class Record(models.Model):
+    name = models.CharField(max_length=255)
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
+
 class Requirements(models.Model):
     REQUIREMENT_CHOICES = [
         ('Acceptance Form for OJT', 'Acceptance Form for OJT'),

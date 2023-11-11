@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Register Page|SorSU-BC Monitoring System</title>
+    <title>Set Up Account Page|SorSU-BC Monitoring System</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
@@ -63,7 +63,7 @@
             </div>
 
             <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.9);">
-                <div class="card-header"><h4>Register</h4></div>
+                <div class="card-header"><h4>Set Up Account</h4></div>
 
                 {% if messages %}
                     <ul class="messages">
@@ -136,7 +136,7 @@
 
                             <div class="form-group col-6">
                                 <label for="ojt_hours">OJT Hours:</label>
-                                <span id="ojt_hours_value">{{ form.get_ojt_hours }} hrs</span>
+                                <span id="ojt_hours_value">{{ max_hours }} hrs</span>
                             </div>
                         </div>
 
@@ -254,7 +254,8 @@
                 'BSCS': 182,
                 'BSA': 300,
                 'BSAIS': 400,
-                'BPA': 300
+                'BPA': 300,
+                'BSE': 300,
             };
 
             var ojtHoursValue = ojtHours[selectedCourse] || 0;

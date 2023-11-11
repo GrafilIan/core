@@ -3,14 +3,36 @@
 from django import forms
 from .models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
 from signup.models import Intern_Records
+from .models import Folder, Record
+
+
+class MoveInternForm(forms.Form):
+    folder = forms.ModelChoiceField(queryset=Folder.objects.all(), empty_label="Select a Folder")
+class FolderForm(forms.ModelForm):
+    class Meta:
+        model = Folder
+        fields = ['name']
+
+class RecordForm(forms.ModelForm):
+    class Meta:
+        model = Record
+        fields = ['name', 'folder']
 
 class InternshipForm(forms.ModelForm):
     class Meta:
-        model = Internship
+        model = Internship  # Set the model to Internship
         fields = ['starting_month']
         widgets = {
             'starting_month': forms.DateInput(attrs={'type': 'date'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(InternshipForm, self).__init__(*args, **kwargs)
+        self.fields['starting_month'].widget.attrs.update({
+            'class': 'form-control',  # Add necessary CSS classes
+            'placeholder': 'Starting Date',  # Set the placeholder text
+            'required': False
+        })
 
 class WeeklyBinForm(forms.ModelForm):
     Weekly_text = forms.CharField(
@@ -23,15 +45,10 @@ class WeeklyBinForm(forms.ModelForm):
 
     class Meta:
         model = WeeklyBin
-        fields = ['week_number', 'Weekly_text','document_submission','rendered_hours']
+        fields = ['Weekly_text','document_submission','rendered_hours']
 
     def __init__(self, *args, **kwargs):
         super(WeeklyBinForm, self).__init__(*args, **kwargs)
-        self.fields['week_number'].widget.attrs.update({
-            'class': 'form-group',  # Add necessary CSS classes
-            'placeholder': 'Week Number',  # Set the placeholder text
-            'required': False
-        })
         self.fields['document_submission'].widget.attrs.update({
             'class': 'form-control',  # Add necessary CSS classes
             'placeholder': 'Weekly Report',  # Set the placeholder text

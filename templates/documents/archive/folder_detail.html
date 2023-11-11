@@ -25,7 +25,7 @@
                     <div class="col-12">
                         <div class="card" style="margin-top: 20px;">
                             <div class="card-header">
-                                <h4>Intern List</h4>
+                                <h3>{{ folder.name }}</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -133,14 +133,7 @@
                                                                         User</a>
                                                                 </form>
                                                             {% endif %}
-                                                            {% for folder in folders %}
-                                                                <a href="{% url 'archive_intern' intern.id folder.id %}"
-                                                                   class="dropdown-item">
-                                                                    Archive to {{ folder.name }}
-                                                                </a>
-                                                            {% endfor %}
                                                         </div>
-
 
                                                     </div>
 
@@ -151,8 +144,6 @@
 
                                         </tbody>
                                     </table>
-                                    <a href="{% url 'create_folder' %}" class="btn btn-primary">Create Folder</a>
-                                    <a href="{% url 'folder_list' %}" class="btn btn-primary">Folder List</a>
                                 </div>
                             </div>
                         </div>
@@ -183,6 +174,7 @@
             });
         }
     </script>
+
 
 
     <!-- JS Libraies -->

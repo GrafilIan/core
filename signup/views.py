@@ -29,10 +29,12 @@ def add_intern_records(request):
         # If the user has an existing record, load the data into the form for editing
         if existing_record:
             form = InternForm(instance=existing_record)
+            intern_record = existing_record
         else:
             form = InternForm()
+            intern_record = None
 
-    return render(request, 'authentication/intern_create.html', {'form': form})
+    return render(request, 'authentication/intern_create.html', {'form': form, 'intern_record': intern_record})
 
 
 @user_passes_test(lambda user: user.is_superuser)

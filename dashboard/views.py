@@ -36,9 +36,39 @@ def create_announcement(request):
 def announcement_list(request):
     announcements = Announcement.objects.all().order_by('-pub_date')
 
+    course_records = Intern_Records.objects.filter(folder__isnull=True)
+    interns = Intern_Records.objects.filter(folder__isnull=True)
+
+    BSIT_records = Intern_Records.objects.filter(course='BSIT', folder__isnull=True)
+    BSIS_records = Intern_Records.objects.filter(course='BSIS', folder__isnull=True)
+    BSCS_records = Intern_Records.objects.filter(course='BSCS', folder__isnull=True)
+    BSA_records = Intern_Records.objects.filter(course='BSA', folder__isnull=True)
+    BSAIS_records = Intern_Records.objects.filter(course='BSAIS', folder__isnull=True)
+    BPA_records = Intern_Records.objects.filter(course='BPA', folder__isnull=True)
+
+    BSIT_count = BSIT_records.count()
+    BSIS_count = BSIS_records.count()
+    BSCS_count = BSCS_records.count()
+    BSA_count = BSA_records.count()
+    BSAIS_count = BSAIS_records.count()
+    BPA_count = BPA_records.count()
+    course_count = course_records.count()
+
+    for intern in interns:
+        intern.max_hours = intern.get_ojt_hours()
+        intern.remaining_hours = intern.get_remaining_ojt_hours()
+        intern.remaining_percentage = 100 - ((intern.remaining_hours / intern.max_hours) * 100)
 
     context = {
         'announcements': announcements,
+        'BSIT_count': BSIT_count,
+        'BSIS_count': BSIS_count,
+        'BSCS_count': BSCS_count,
+        'BSA_count': BSA_count,
+        'BSAIS_count': BSAIS_count,
+        'BPA_count': BPA_count,
+        'course_count': course_count,
+        'interns': interns,
     }
 
     return render(request, 'dashboard/admin_dashboard.html', context)
@@ -80,7 +110,11 @@ def intern_announcement_list(request):
 def delete_item(request, item_type, item_id):
     if item_type == 'announcement':
         item = get_object_or_404(Announcement, pk=item_id)
+        if request.method == 'POST':
+            item.delete()
+            return redirect('announcement_list')
         # Handle deletion and redirection for announcements
+
 
     else:
         # Handle invalid item type

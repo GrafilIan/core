@@ -6,25 +6,25 @@ from django import forms
 class InternForm(forms.ModelForm):
     class MiddleNameWidget(forms.TextInput):
         def render(self, name, value, attrs=None, renderer=None):
-            if value.lower() == 'n/a':
+            if value.lower() == 'na':
                 return ''
             return super().render(name, value, attrs, renderer)
 
     class SuffixNameWidget(forms.TextInput):
         def render(self, name, value, attrs=None, renderer=None):
-            if value.lower() == 'n/a':
+            if value.lower() == 'na':
                 return ''
             return super().render(name, value, attrs, renderer)
 
     class CompanyNameWidget(forms.TextInput):
         def render(self, name, value, attrs=None, renderer=None):
-            if value.lower() == 'n/a':
+            if value.lower() == 'na':
                 return ''
             return super().render(name, value, attrs, renderer)
 
     class AddressWidget(forms.TextInput):
         def render(self, name, value, attrs=None, renderer=None):
-            if value.lower() == 'n/a':
+            if value.lower() == 'na':
                 return ''
             return super().render(name, value, attrs, renderer)
 
@@ -58,13 +58,13 @@ class InternForm(forms.ModelForm):
 
         self.fields['middle_name'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Type "n/a" if not applicable',
+            'placeholder': 'Type "na" if not applicable',
             'required': False
         })
 
         self.fields['suffix'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Type "n/a" if not applicable',
+            'placeholder': 'Type "na" if not applicable',
             'required': False
         })
 
@@ -97,23 +97,14 @@ class InternForm(forms.ModelForm):
             ('BSA', 'BSA'),
             ('BSAIS', 'BSAIS'),
             ('BPA', 'BPA'),
+            ('BSE', 'BSE'),
         ]
         self.fields['course'].widget = Select(attrs={
             'class': 'form-control',
             'required': 'True'
         })
-        self.fields['course'].choices = COURSE_CHOICES
 
-        def get_ojt_hours(self):
-            COURSE_OJT_HOURS = {
-                'BSIT': 366,
-                'BSIS': 366,
-                'BSCS': 182,
-                'BSA': 300,
-                'BSAIS': 400,
-                'BPA': 300,
-            }
-            return COURSE_OJT_HOURS.get(self.cleaned_data['course'], 0)
+        self.fields['course'].choices = COURSE_CHOICES
 
         self.fields['year_level'].widget.attrs.update({
             'class': 'form-control',
@@ -127,12 +118,12 @@ class InternForm(forms.ModelForm):
         })
         self.fields['company_name'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Company Name',
+            'placeholder': 'Type "na" if not applicable',
             'required': 'True'
         })
         self.fields['address'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Company Address',
+            'placeholder': 'Type "na" if not applicable',
             'required': 'True'
         })
         self.fields['contact_person'].widget.attrs.update({
@@ -150,7 +141,10 @@ class InternForm(forms.ModelForm):
         STATUS_CHOICES = [
             ('Not Placed', 'Not Placed'),
             ('On OJT', 'On OJT'),
+            ('On Leave', 'On Leave'),
             ('Late OJT', 'Late OJT'),
+            ('Extended', 'Extended'),
+            ('Completed', 'Completed'),
 
         ]
         self.fields['status'].widget = Select(attrs={
@@ -158,6 +152,7 @@ class InternForm(forms.ModelForm):
             'required': 'True'
         })
         self.fields['status'].choices = STATUS_CHOICES
+
 
 class InternStatusEditForm(forms.ModelForm):
     class Meta:

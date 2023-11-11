@@ -86,7 +86,7 @@ button:hover {
 
 img.announcement-image,
 img.recommendation-image {
-    max-width: 70%;
+    max-width: 100%;
     height: auto;
     margin: 10px auto;
     display: block;

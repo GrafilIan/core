@@ -6,8 +6,11 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
-
     <link rel="stylesheet" href="{% static 'assets/css/create_announcement.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/datatables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
 
 {% endblock %}
 
@@ -25,192 +28,216 @@
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
-                            <i class="far fa-user"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Total Interns</h4>
-                            </div>
-                            <div class="card-body">
-                                362
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3"> <!-- Added mb-3 for spacing on small screens -->
+                        <div class="card1" style="background-color: #0f0f0f; color: #0da8ee;">
+                            <div class="card1-content">
+                                <h5>{{ course_count }} SorSU-BC Interns</h5>
+                                <p>Total Interns</p>
+                                <p style="line-height: 1; font-size: 13px;">Sorsogon State University-OJT</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger">
-                            <i class="far fa-newspaper"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>BSIT</h4>
-                            </div>
-                            <div class="card-body">
-                                184
+
+                    <div class="col-lg-3 col-md-6 mb-3"> <!-- Added mb-3 for spacing on small screens -->
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;">{{ BSIT_count }} BSIT Interns</h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Information Technology</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-warning">
-                            <i class="far fa-file"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>BPA</h4>
-                            </div>
-                            <div class="card-body">
-                                84
+                    <div class="col-lg-3 col-md-6 mb-3"> <!-- Added mb-3 for spacing on small screens -->
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;">{{ BSIS_count }} BSIS Interns</h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Information System</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-success">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>BSCS</h4>
-                            </div>
-                            <div class="card-body">
-                                94
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;"> {{ BSCS_count }} BSCS Interns </h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Computer Science</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card col-md-5 float-right mb-3" style="margin-top: -5px;">
+            <div class="container-fluid" style="margin-top: 10px;">
+                <div class="row">
+
+
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;">{{ BSA_count }} BSA Interns</h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Accountancy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 21px;">{{ BSAIS_count }} BSAIS Interns</h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Accounting Information System</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;"> {{ BPA_count }} BPA Interns </h5>
+                                <p style="line-height: 1; font-size: 13px;">Bachelor of Public Administration</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card1">
+                            <div class="card1-content">
+                                <h5 style="margin-bottom: 35px;"> {{ BSCS_count }} BSE Interns </h5>
+                                <p style="line-height: 1; font-size: 13px;">BS in Entrepreneurship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card col-md-5 float-right mb-3" style="margin-top: 20px;">
                 <div class="card-header">
                     <h4>Intern Progress</h4>
                 </div>
                 <div class="card-body">
-                    <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-                        <li class="media">
-                            <img alt="image" class="mr-3 rounded-circle" width="50"
-                                 src="{% static 'assets/img/avatar/avatar-1.png' %}">
-                            <div class="media-body">
-                                <div class="media-title">Princess Kaye Rogacion</div>
-                                <div class="text-job text-muted">GSAC</div>
-                            </div>
-                            <div class="media-progressbar">
-                                <div class="progress-text">30%</div>
-                                <div class="progress" data-height="6" style="height: 6px;">
-                                    <div class="progress-bar bg-primary" data-width="30%" style="width: 30%;"></div>
-                                </div>
-                            </div>
-                            <div class="media-cta">
-                                <a href="#" class="btn btn-outline-primary">Detail</a>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <img alt="image" class="mr-3 rounded-circle" width="50"
-                                 src="{% static 'assets/img/avatar/avatar-5.png' %}">
-                            <div class="media-body">
-                                <div class="media-title">Vanessa Gracela</div>
-                                <div class="text-job text-muted">Jollibee Bulan</div>
-                            </div>
-                            <div class="media-progressbar">
-                                <div class="progress-text">67%</div>
-                                <div class="progress" data-height="6" style="height: 6px;">
-                                    <div class="progress-bar bg-primary" data-width="67%" style="width: 67%;"></div>
-                                </div>
-                            </div>
-                            <div class="media-cta">
-                                <a href="#" class="btn btn-outline-primary">Detail</a>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <img src="{% static 'assets/img/avatar/avatar-4.png' %}" alt="image"
-                                 class="mr-3 rounded-circle" width="50">
-
-                            <div class="media-body">
-                                <div class="media-title">Sherrelyn Chavez</div>
-                                <div class="text-job text-muted">PNB Bulan</div>
-                            </div>
-                            <div class="media-progressbar">
-                                <div class="progress-text">45%</div>
-                                <div class="progress" data-height="6" style="height: 6px;">
-                                    <div class="progress-bar bg-primary" data-width="45%" style="width: 45%;"></div>
-                                </div>
-                            </div>
-                            <div class="media-cta">
-                                <a href="#" class="btn btn-outline-primary">Detail</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <div class="section-body" style="margin-top: -5px; margin-left: -14px; padding-top: 0;">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header col-md-11">
-                                <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
-                                <div class="col-md-8 text-right">
-                                    <button class="btn btn-primary"
-                                            onclick="window.location.href='{% url 'create_announcement' %}' ">Create
-                                        Announcement
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-
-                                <ul style="list-style-type: none; padding: 0px;">
-                                    {% for announcement in announcements %}
-                                        {% if announcement.announcement_list %}
-                                            <li class="list-item announcement-item" style="text-align: center;">
-                                                <div class="card card-primary"
-                                                     style="margin-top: 10px; background-color: #f3f3f3;">
-
-                                                <span class="announcement-text">
-                                                    Posted on: {{ announcement.pub_date|date:"F d, Y" }}<br>
-                                                    {{ announcement.announcement_list|safe }}
-                                                </span>
-                                                    {% if announcement.image_announcement %}
-                                                        <img src="{{ announcement.image_announcement.url|safe }}"
-                                                             alt="Announcement Image" class="announcement-image">
-                                                    {% endif %}
-                                                    {% if announcement.document_announcement %}
-                                                        <a href="{{ announcement.document_announcement.url|safe }}"
-                                                           target="_blank" class="announcement-link">View Document</a>
-                                                    {% endif %}
-
-                                                    <form method="post" action="{% url 'homepage' %}"
-                                                          class="delete-announcement-form">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="delete_announcement" value="1">
-                                                        <input type="hidden" name="announcement_id"
-                                                               value="{{ announcement.id }}">
-                                                        <button type="button" class="btn delete-button"
-                                                                style="margin-top: 7px;"
-                                                                data-announcement-id="{{ announcement.id }}">Delete
-                                                        </button>
-                                                    </form>
-                                                </div>
-
-                                            </li>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table-2">
+                            <thead>
+                            <tr>
+                                <th class="sorting" tabindex="0" aria-controls="table-2"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Task Name: activate to sort column ascending"
+                                    style="width: 135.344px;">Name
+                                </th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1"
+                                    aria-label="Members" style="width: 100px;">Progress
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="table-2"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Status: activate to sort column ascending"
+                                    style="width: 97.4688px;">Status
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for intern in interns %}
+                                <tr role="row" class="odd">
+                                    <td>{{ intern.user.first_name }}
+                                        {% if intern.middle_name != 'na' %}
+                                            {{ intern.middle_name }}
                                         {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
+
+                                        {{ intern.user.last_name }}
+
+                                        {% if intern.suffix != 'na' %}
+                                            {{ intern.suffix }}
+                                        {% endif %}</td>
+                                    <td class="align-middle">
+                                        <div class="progress" data-height="4" style="height: 4px;">
+                                            <div class="progress-bar bg-warning"
+                                                 style="width: {{ intern.remaining_percentage }}%;"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {{ intern.status_badge }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                    <div class="card-header col-md-11">
+                        <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
+                        <div class="col-md-8 text-right">
+                            <button class="btn btn-primary"
+                                    onclick="window.location.href='{% url 'create_announcement' %}'">Create Announcement
+                            </button>
+                        </div>
+                    </div>
 
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            {% for announcement in announcements %}
+                                {% if announcement.announcement_list %}
+                                    <li data-target="#carouselExampleIndicators2" data-slide-to="{{ forloop.counter0 }}"
+                                            {% if forloop.first %} class="active"{% endif %}></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for announcement in announcements %}
+                                {% if announcement.announcement_list %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="announcement-image-container">
+                                            {% if announcement.image_announcement %}
+                                                <img src="{{ announcement.image_announcement.url|safe }}"
+                                                     alt="Announcement Image" class="announcement-image">
+                                                <div class="image-overlay"></div>
+                                            {% else %}
+                                                <!-- Default Image with Gradient Overlay -->
+                                                <img src="{% static 'assets/img/news/img02.jpg' %}" alt="Default Image"
+                                                     class="announcement-image">
+                                                <div class="image-overlay"></div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ announcement.title }}</h5>
+                                            <p>{{ announcement.announcement_list|safe }}</p>
+                                            <p class="announcement-date">Posted
+                                                on: {{ announcement.pub_date|date:"F d, Y" }}</p>
+                                            {% if announcement.document_announcement %}
+                                                <a href="{{ announcement.document_announcement.url|safe }}"
+                                                   target="_blank" class="announcement-link">View Document</a>
+                                            {% endif %}
+                                            <form method="post"
+                                                  action="{% url 'delete_item' 'announcement' announcement.id %}"
+                                                  id="delete-announcement-form-{{ announcement.id }}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="delete_announcement" value="1">
+                                                <input type="hidden" name="announcement_id"
+                                                       value="{{ announcement.id }}">
+                                                <button type="button" class="btn delete-button" style="margin-top: 7px;"
+                                                        data-announcement-id="{{ announcement.id }}">Delete
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
         </section>
     </div>
 
@@ -226,6 +253,13 @@
 
     <!-- Page Specific JS File -->
     <script src="{% static 'assets/js/page/features-post-create.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{% static 'assets/js/page/modules-datatables.js' %}"></script>
 
 
     <script src="{% static 'assets/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
@@ -236,7 +270,7 @@
     <script src="{% static 'assets/modules/sweetalert/sweetalert.min.js' %}"></script>
     <!-- Page Specific JS File -->
     <script src="{% static 'assets/js/page/modules-sweetalert.js' %}"></script>
-    <script src="https://unpkg.com/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
@@ -258,25 +292,30 @@
             deleteButtons.forEach(function (button) {
                 button.addEventListener("click", function () {
                     const announcementId = this.getAttribute("data-announcement-id");
+                    const form = document.querySelector(`#delete-announcement-form-${announcementId}`);
 
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: 'You won\'t be able to revert this!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const form = this.closest(".delete-announcement-form");
-                            form.submit();
-                        }
-                    });
+                    if (form) {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: 'You won\'t be able to revert this!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    }
                 });
             });
         });
     </script>
+
+
+
 
 {% endblock %}
 

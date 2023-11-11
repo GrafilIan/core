@@ -139,24 +139,12 @@ function confirmLogout() {
 <script>
     window.addEventListener('load', function () {
         const loader = document.getElementById('loader');
-        setTimeout(function () {
-            loader.style.opacity = '0';
-            setTimeout(function () {
-                loader.style.display = 'none';
-            }, 1000); // Hide the loader 1 second after fading out
-        }, 2000); // Start fading out after 2 seconds
-    });
-
-</script>
-<script>
-    window.addEventListener('load', function () {
-        const loader = document.getElementById('loader');
 
         setTimeout(function () {
             loader.style.opacity = '0'; // Start fading out
             setTimeout(function () {
                 loader.style.display = 'none';
-            }, 1000); // Hide the loader 1 second after fading out
+            }, 300); // Hide the loader 1 second after fading out
         }, 1500); // Start fading out after 1.5 seconds
     });
 </script>

@@ -1,18 +1,56 @@
 {% extends 'studentbase.html' %}
+
+{% block title %}Set Up Internship Starting Month{% endblock %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/datatables.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
+{% endblock %}
+
 {% block content %}
-
-    <div class="main-content" style="min-height: 569px;">
-
-        <section class="section" style="margin-top: 12px;">
-
-            <form method="post">
-                {% csrf_token %}
-                {{ internship_form.as_p }}
-                <button type="submit">Submit</button>
-            </form>
-
+    <div class="main-content">
+        <section class="section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.9); margin-top: 10px;">
+                            <div class="card-header" style="padding: 20px;"><h4>Enter your Internship Starting Date</h4></div>
+                            <div class="card-body" style="padding-top: 1px;">
+                                <section class="section" style="margin-top: 12px;">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {{ internship_form.as_p }}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Right-side content goes here, if any -->
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
-
 {% endblock %}
-```
+
+{% block scripts %}
+    <!-- JS Libraries -->
+    <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{% static 'assets/js/page/modules-datatables.js' %}"></script>
+    <script src="{% static 'assets/modules/owlcarousel2/dist/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/page/components-user.js' %}"></script>
+{% endblock %}

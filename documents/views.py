@@ -1,13 +1,17 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.db.models import Sum, Max
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+from internlist.forms import UserDeleteForm
 from signup.models import Intern_Records
 from .forms import InternshipForm, WeeklyBinForm, AddBinForm, RequirementsForm, DTRForm, NarrativeForm, \
     PostRequirementsForm
 from .models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
 from django.http import Http404
+from .models import Folder, Record
+from .forms import FolderForm, RecordForm
 
 @login_required
 def intern_schedule(request):
@@ -218,3 +222,41 @@ def upload_post_requirements(request):
     post_requirements = Post_Requirements.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_post_requirements.html', {'form': form, 'post_requirements': post_requirements})
+
+def folder_list(request):
+    folders = Folder.objects.all()
+    return render(request, 'documents/archive/folder_list.html', {'folders': folders})
+
+def create_folder(request):
+    if request.method == 'POST':
+        form = FolderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('folder_list')
+    else:
+        form = FolderForm()
+    return render(request, 'documents/archive/create_folder.html', {'form': form})
+
+def folder_detail(request, folder_id):
+    folder = get_object_or_404(Folder, id=folder_id)
+    records = Record.objects.filter(folder=folder)
+    interns = Intern_Records.objects.filter(folder=folder)
+
+    if request.method == 'POST':
+        # Handle form submission
+        form = UserDeleteForm(request.POST)
+        if form.is_valid():
+            user_id = form.cleaned_data.get('user_id')
+            # Perform the delete action here
+            try:
+                user_to_delete = User.objects.get(id=user_id)
+                user_to_delete.delete()
+            except User.DoesNotExist:
+                # If the user doesn't exist, you can log or display a message
+                pass
+    else:
+        form = UserDeleteForm()
+
+    return render(request, 'documents/archive/folder_detail.html', {'folder': folder, 'records': records, 'interns': interns, 'form': form})
+
+

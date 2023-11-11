@@ -4,10 +4,13 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.utils.safestring import mark_safe
 
+from documents.models import Folder
+
 
 # Create your models here.
 class Intern_Records(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    folder = models.ForeignKey(Folder, on_delete=models.SET_NULL, blank=True, null=True)
     student_id = models.CharField(max_length=200, verbose_name='Student ID', null=True)
     middle_name = models.CharField(max_length=200, verbose_name='Middle Name', null=True)
     suffix = models.CharField(max_length=200, verbose_name='suffix', null=True)
@@ -29,6 +32,7 @@ class Intern_Records(models.Model):
             ('BSA', 'BSA'),
             ('BSAIS', 'BSAIS'),
             ('BPA', 'BPA'),
+            ('BSE', 'BSE'),
         ),
         null=True
     )
@@ -36,25 +40,26 @@ class Intern_Records(models.Model):
     # Method to get OJT hours based on the selected course
     def get_ojt_hours(self):
         COURSE_OJT_HOURS = {
-            'BSIT': 366,
+            'BSIT': 200,
             'BSIS': 366,
             'BSCS': 182,
             'BSA': 300,
             'BSAIS': 400,
             'BPA': 300,
+            'BSE': 300,
         }
         return COURSE_OJT_HOURS.get(self.course, 0)
 
 
-
     def get_remaining_ojt_hours(self):
         COURSE_OJT_HOURS = {
-            'BSIT': 366,
+            'BSIT': 200,
             'BSIS': 366,
             'BSCS': 182,
             'BSA': 300,
             'BSAIS': 400,
             'BPA': 300,
+            'BSE': 300,
         }
         total_required_hours = COURSE_OJT_HOURS.get(self.course, 0)
         remaining_hours = total_required_hours - self.weekly_hours

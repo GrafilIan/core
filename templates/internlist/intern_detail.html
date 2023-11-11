@@ -63,7 +63,7 @@
 
                                 {{ intern.user.last_name }}
 
-                                {% if intern.suffix != 'n/a' %}
+                                {% if intern.suffix != 'na' %}
                                     {{ intern.suffix }}
                                 {% endif %}</strong>
                         </div>
@@ -75,10 +75,32 @@
                         <div class="profile-widget-item-value"><strong>{{ intern.user.email }}</strong>
                             <div class="profile-widget-item-label">{{ intern.present_address }}</div>
                         </div>
+
                     </div>
 
-
                     <div class="form-column col-8">
+                    <div class="profile-widget-item" style="margin-right: 100px;">
+
+                            <form method="post">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="{{ form.status.id_for_label }}">Edit Status:</label>
+                                    <select name="{{ form.status.name }}" class="custom-select" required>
+                                        {% for value, label in form.status.field.choices %}
+                                            <option value="{{ value }}"
+                                                    {% if value == form.status.value %}selected{% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary">Save Status</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="form-column col-12">
                         <div class="row">
 
                             <div class="col-lg-6" style="text-align: left">

@@ -12,5 +12,9 @@ urlpatterns = [
     path('upload-dtr/', views.upload_dtr, name='upload_dtr'),
     path('upload-narrative/', views.upload_narrative, name='upload_narrative'),
     path('upload-post-requirements/', views.upload_post_requirements, name='upload_post_requirements'),
+    path('folder_list', views.folder_list, name='folder_list'),
+    path('create_folder/', views.create_folder, name='create_folder'),
+    path('folder/<int:folder_id>/', views.folder_detail, name='folder_detail'),
+
 
 ]
