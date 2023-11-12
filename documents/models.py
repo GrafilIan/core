@@ -48,7 +48,7 @@ class Requirements(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     requirement = models.CharField(max_length=300, choices=REQUIREMENT_CHOICES)
-    document_image = models.ImageField(upload_to='documents/')
+    document_image = models.ImageField(upload_to='documents/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.requirement} - {self.id}"

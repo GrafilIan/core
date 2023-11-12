@@ -5,6 +5,7 @@ from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
+from documents.forms import FolderForm
 from documents.models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements, \
     Folder, Record
 from signup.forms import InternStatusEditForm
@@ -26,6 +27,14 @@ def intern_list(request):
     else:
         form = UserDeleteForm()
 
+    if request.method == 'POST':
+        folder_form = FolderForm(request.POST)
+        if folder_form.is_valid():
+            folder_form.save()
+            return redirect('intern_list')
+    else:
+        folder_form = FolderForm()
+
     interns = Intern_Records.objects.filter(folder__isnull=True)  # Filter interns not associated with any folder
 
     for intern in interns:
@@ -33,7 +42,7 @@ def intern_list(request):
         intern.remaining_hours = intern.get_remaining_ojt_hours()
         intern.remaining_percentage = 100 - ((intern.remaining_hours / intern.max_hours) * 100)
 
-    return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form, 'folders': folders})
+    return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form, 'folders': folders, 'folder_form': folder_form})
 
 def archive_intern(request, intern_id, folder_id):
     intern = get_object_or_404(Intern_Records, id=intern_id)

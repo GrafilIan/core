@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/create_announcement.css' %}">
 {% endblock %}
 
 
@@ -162,44 +163,73 @@
                     </article>
                 </div>
             </div>
-            <div class="section-body" style="margin-top: -5px; padding-top: 0;">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <h3 id="currentDate" style="margin-left: 24px;"></h3>
-                            <div class="card-body">
-                                <ul style="list-style-type: none; padding: 0px;">
-                                    {% for announcement in announcements %}
-                                        {% if announcement.announcement_list %}
-                                            <li class="list-item announcement-item" style="text-align: center;">
-                                                <div class="card card-primary"
-                                                     style="margin-top: 10px; background-color: #f3f3f3;">
 
-                                                <span class="announcement-text">
-                                                    Posted on: {{ announcement.pub_date|date:"F d, Y" }}<br>
-                                                    {{ announcement.announcement_list|safe }}
-                                                </span>
-                                                    {% if announcement.image_announcement %}
-                                                        <img src="{{ announcement.image_announcement.url|safe }}"
-                                                             width="50%"
-                                                             alt="Announcement Image" class="announcement-image"
-                                                             style="display: block; margin: 0 auto;">
-                                                    {% endif %}
-                                                    {% if announcement.document_announcement %}
-                                                        <a href="{{ announcement.document_announcement.url|safe }}"
-                                                           target="_blank" class="announcement-link">View Document</a>
-                                                    {% endif %}
-                                                </div>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
+                <div class="col-6 col-md-6 col-lg-10" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="card-header col-lg-11">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3>Announcements</h3>
+                                <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
                             </div>
                         </div>
                     </div>
+
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            {% for announcement in announcements %}
+                                {% if announcement.announcement_list %}
+                                    <li data-target="#carouselExampleIndicators2" data-slide-to="{{ forloop.counter0 }}"
+                                            {% if forloop.first %} class="active"{% endif %}></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for announcement in announcements %}
+                                {% if announcement.announcement_list %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="announcement-image-container">
+                                            {% if announcement.image_announcement %}
+                                                <img src="{{ announcement.image_announcement.url|safe }}"
+                                                     alt="Announcement Image" class="announcement-image">
+                                                <div class="image-overlay"></div>
+                                            {% else %}
+                                                <!-- Default Image with Gradient Overlay -->
+                                                <img src="{% static 'assets/img/news/img02.jpg' %}" alt="Default Image"
+                                                     class="announcement-image">
+                                                <div class="image-overlay"></div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ announcement.title }}</h5>
+                                            <p>{{ announcement.announcement_list|safe }}</p>
+                                            <p class="announcement-date">{{ announcement.pub_date|date:"F d, Y" }}</p>
+                                            {% if announcement.document_announcement %}
+                                                <a href="{{ announcement.document_announcement.url|safe }}"
+                                                   target="_blank" class="announcement-link">View Document</a>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
                 </div>
             </div>
+
         </section>
     </div>
 

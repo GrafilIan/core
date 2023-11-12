@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+
+     <style>
+        .document-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100%; /* This ensures that the ellipsis works even if the width is less than the content */
+        }
+
+    </style>
+
 {% endblock %}
 
 {% block content %}
@@ -67,36 +79,37 @@
 
 
             <div class="document-container">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
-                    {% for requirement in requirements %}
-                        <li class="document-item" data-requirement="{{ requirement.requirement }}">
-                            <div class="row">
-                                <div class="col-12 col-md-7 offset-md-3" style="margin-top: 15px;">
-                                    <div class="card card-secondary">
-                                        <div class="card-header">
-                                            <h4>Requirement:</h4> <u>{{ requirement.requirement }}</u><br>
+            <ul class="document-list row" style="list-style-type: none; padding: 0px;">
+                {% for requirement in requirements %}
+                    <li class="document-item col-12 col-md-4" data-requirement="{{ requirement.requirement }}">
+                        <div class="card card-primary" style="margin-top: 10px;">
+                            <div class="card-header d-flex justify-content-between">
+                                <h4>{{ requirement.requirement }}</h4>
+                                <button class="download-button btn btn-primary btn-lg btn-lg-block"
+                                        data-image="{{ requirement.document_image.url }}">
+                                    Download
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h6>Document:</h6>
+                                <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
+                                <div class="chocolat-parent">
+                                    <a href="{{ requirement.document_image.url }}" class="chocolat-image"
+                                       title="{{ requirement.document_image.name|cut:'document/' }}">
+                                        <div>
+                                            <img alt="image" src="{{ requirement.document_image.url }}"
+                                                 class="img-fluid">
                                         </div>
-                                        <div class="card-body">
-                                            <h6>Document:</h6>
-                                            <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
-                                            <button class="preview-button btn btn-dark btn-block"
-                                                    data-image="{{ requirement.document_image.url }}">
-                                                Toggle Image Preview
-                                            </button>
-                                            <div class="card-body" style="text-align: center;">
-                                                <img src="{{ requirement.document_image.url }}" alt="Image Preview"
-                                                     style="max-width: 60%; height: auto; margin: 0 auto;">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                        </li>
-                    {% empty %}
-                        <li>No documents have been uploaded yet.</li>
-                    {% endfor %}
-                </ul>
-            </div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="col-12">No documents have been uploaded yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
 
             <!-------------------------------REQUIREMENTS-------------------------------->
 
@@ -208,6 +221,30 @@
                 } else {
                     imagePreview.style.display = "none";
                 }
+            });
+        });
+    </script>
+    <script>
+        // JavaScript to handle image download
+        const downloadButtons = document.querySelectorAll(".download-button");
+
+        downloadButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const imageURL = button.getAttribute("data-image");
+
+                // Create a link element
+                const downloadLink = document.createElement("a");
+                downloadLink.href = imageURL;
+
+                // Set the download attribute to force download
+                downloadLink.download = "image.jpg";  // You can set the desired filename
+
+                // Append the link to the body and trigger a click event
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                // Remove the link from the body
+                document.body.removeChild(downloadLink);
             });
         });
     </script>

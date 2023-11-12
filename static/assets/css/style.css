@@ -2852,3 +2852,21 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     font-weight: 700;
 }
 /*# sourceMappingURL=style.css.map */
+.announcement-image-container {
+    position: relative;
+}
+
+.announcement-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%);
+}

@@ -162,14 +162,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-6">
+            <div class="col-12 col-md-6 col-lg-7" style="margin-top: 20px;">
                 <div class="card">
-                    <div class="card-header col-md-11">
-                        <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
-                        <div class="col-md-8 text-right">
-                            <button class="btn btn-primary"
-                                    onclick="window.location.href='{% url 'create_announcement' %}'">Create Announcement
-                            </button>
+                    <div class="card-header col-lg-11">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h4 id="currentDate" style="font-size: 13px; white-space: nowrap;"></h4>
+                            </div>
+                            <div class="col-lg-4 text-lg-right">
+                                <button class="btn btn-primary btn-lg btn-lg-block"
+                                        onclick="window.location.href='{% url 'create_announcement' %}'">Create
+                                    Announcement
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -201,8 +206,7 @@
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5>{{ announcement.title }}</h5>
                                             <p>{{ announcement.announcement_list|safe }}</p>
-                                            <p class="announcement-date">Posted
-                                                on: {{ announcement.pub_date|date:"F d, Y" }}</p>
+                                            <p class="announcement-date">{{ announcement.pub_date|date:"F d, Y" }}</p>
                                             {% if announcement.document_announcement %}
                                                 <a href="{{ announcement.document_announcement.url|safe }}"
                                                    target="_blank" class="announcement-link">View Document</a>

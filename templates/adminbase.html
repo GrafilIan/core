@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/ionicons/css/ionicons.min.css' %}">
 
+    <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
+
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -173,6 +175,12 @@ function confirmLogout() {
 <script src="{% static 'assets/js/scripts.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
 <script src="{% static 'assets/js/page_reload_script.js' %}"></script>
+
+  <!-- JS Libraies -->
+  <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="{% static 'assets/js/page/bootstrap-modal.js' %}"></script>
 
 {% block scripts %}
 {% endblock %}

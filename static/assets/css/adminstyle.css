@@ -4086,3 +4086,10 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
+.modal{
+    z-index: 1050;
+}
+
+.modal-backdrop{
+    z-index: 1000;
+}

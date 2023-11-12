@@ -1,7 +1,7 @@
 {% extends 'studentbase.html' %}
 {% load static %}
 
-{% block title %}Create Weekly Report{% endblock %}
+{% block title %}Upload Requirements{% endblock %}
 
 {% block head %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -9,90 +9,107 @@
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+
+    <style>
+        .document-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100%; /* This ensures that the ellipsis works even if the width is less than the content */
+        }
+
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="main-content" style="min-height: 569px;">
-        <section class="section" style="margin-top: 2px;">
-            <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-     style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); margin-left: -35px; margin-right: -46px;">
+    <div class="section" style="margin-top: 2px;">
+        <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
+             style="background-image: url('{% static 'assets/img/unsplash/notes.jpg' %}'); margin-left: -35px; margin-right: -30px;">
 
-    <div class="hero-inner" style="padding: 20px; text-align: center;">
-        <h1>Internship Requirement</h1>
-        <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
+            <div class="hero-inner" style="padding: 20px; text-align: center;">
+                <h1>Internship Requirement</h1>
+                <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
-                   data-target="#addWeeklyBinModal">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
-                </a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                           data-target="#addWeeklyBinModal">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-lg-12">
+                        <label for="requirement-filter">
+                            <p>Click the dropdown to filter options in accordance to your needs.</p>
+                        </label>
+
+                        <select id="requirement-filter" class="form-control">
+                            <option value="">All</option>
+                            <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
+                            <option value="Barangay Clearance">Barangay Clearance</option>
+                            <option value="Cedula">Cedula</option>
+                            <option value="Internship Agreement">Internship Agreement</option>
+                            <option value="Medical Certificate">Medical Certificate</option>
+                            <option value="Parent Consent">Parent Consent</option>
+                            <option value="Parent ID">Parent ID</option>
+                            <option value="Police Clearance">Police Clearance</option>
+                            <option value="Student INFO Sheet">Student Information Sheet</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row" style="margin-top: 15px;">
-            <div class="col-lg-12">
-                <label for="requirement-filter">
-                    <p>Click the dropdown to filter options in accordance to your needs.</p>
-                </label>
 
-                <select id="requirement-filter" class="form-control">
-                    <option value="">All</option>
-                    <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
-                    <option value="Barangay Clearance">Barangay Clearance</option>
-                    <option value="Cedula">Cedula</option>
-                    <option value="Internship Agreement">Internship Agreement</option>
-                    <option value="Medical Certificate">Medical Certificate</option>
-                    <option value="Parent Consent">Parent Consent</option>
-                    <option value="Parent ID">Parent ID</option>
-                    <option value="Police Clearance">Police Clearance</option>
-                    <option value="Student INFO Sheet">Student Information Sheet</option>
-                    <!-- Add more options as needed -->
-                </select>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-------------------------------REQUIREMENTS-------------------------------->
 
-
-
-            <!-------------------------------REQUIREMENTS-------------------------------->
-
-
-            <div class="document-container">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
-                    {% for requirement in requirements %}
-                        <li class="document-item" data-requirement="{{ requirement.requirement }}">
-                            <div class="row">
-                                <div class="col-12 col-md-8 offset-md-2" style="margin-top: 15px;">
-                                    <div class="card card-secondary" style="width: 100%;">
-                                        <div class="card-header">
-                                            <h4>Requirement:</h4> <u>{{ requirement.requirement }}</u><br>
+        <div class="document-container">
+            <ul class="document-list row" style="list-style-type: none; padding: 0px;">
+                {% for requirement in requirements %}
+                    <li class="document-item col-12 col-md-4" data-requirement="{{ requirement.requirement }}">
+                        <div class="card card-primary" style="margin-top: 10px;">
+                            <div class="card-header d-flex justify-content-between">
+                                <h4>{{ requirement.requirement }}</h4>
+                                <button class="download-button btn btn-primary btn-lg btn-lg-block"
+                                        data-image="{{ requirement.document_image.url }}">
+                                    Download
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <h6>Document:</h6>
+                                <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
+                                <div class="button-container" style="margin-bottom: 20px; ">
+                                    <form method="post" action="{% url 'upload_requirements' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delete_requirement" value="{{ requirement.id }}">
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    </form>
+                                </div>
+                                <div class="chocolat-parent">
+                                    <a href="{{ requirement.document_image.url }}" class="chocolat-image"
+                                       title="{{ requirement.document_image.name|cut:'document/' }}">
+                                        <div>
+                                            <img alt="image" src="{{ requirement.document_image.url }}"
+                                                 class="img-fluid">
                                         </div>
-                                        <div class="card-body">
-                                            <h6>Document:</h6>
-                                            <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
-                                            <button class="preview-button btn btn-dark"
-                                                    data-image="{{ requirement.document_image.url }}">
-                                                Toggle Image Preview
-                                            </button>
-                                            <div class="card-body" style="text-align: center;">
-                                                <img src="{{ requirement.document_image.url }}" alt="Image Preview"
-                                                     style="max-width: 100%; height: auto; margin: 0 auto;">
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                        </li>
-                    {% empty %}
-                        <li>No documents have been uploaded yet.</li>
-                    {% endfor %}
-                </ul>
-            </div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="col-12">No documents have been uploaded yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
 
 
-            <!-------------------------------REQUIREMENTS-------------------------------->
+        <!-------------------------------REQUIREMENTS-------------------------------->
 
         </section>
     </div>
@@ -109,7 +126,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data"
+                          {% if instance %}action="{% url 'upload_requirements' requirement_id=instance.id %}"{% endif %}>
+                        {% csrf_token %}
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Upload</button>
@@ -121,6 +140,8 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'assets/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
     <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
     <script>
         function updateClock() {
@@ -202,5 +223,28 @@
             });
         });
     </script>
+    <script>
+        // JavaScript to handle image download
+        const downloadButtons = document.querySelectorAll(".download-button");
 
+        downloadButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const imageURL = button.getAttribute("data-image");
+
+                // Create a link element
+                const downloadLink = document.createElement("a");
+                downloadLink.href = imageURL;
+
+                // Set the download attribute to force download
+                downloadLink.download = "image.jpg";  // You can set the desired filename
+
+                // Append the link to the body and trigger a click event
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                // Remove the link from the body
+                document.body.removeChild(downloadLink);
+            });
+        });
+    </script>
 {% endblock %}

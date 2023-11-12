@@ -9,78 +9,106 @@
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
+    <style>
+        .document-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100%; /* This ensures that the ellipsis works even if the width is less than the content */
+        }
+
+    </style>
 {% endblock %}
 
 {% block content %}
     <div class="main-content" style="min-height: 569px;">
         <section class="section" style="margin-top: 2px;">
             <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-     style="background-image: url('{% static 'assets/img/unsplash/bookshelf.jpg' %}');  margin-left: -35px;  margin-right: -46px;">
+                 style="background-image: url('{% static 'assets/img/unsplash/bookshelf.jpg' %}');  margin-left: -35px;  margin-right: -46px;">
 
-    <div class="hero-inner" style="padding: 20px;">
-        <h1>Internship Post Requirement</h1>
-        <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
+                <div class="hero-inner" style="padding: 20px;">
+                    <h1>Internship Post Requirement</h1>
+                    <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
-                   data-target="#addWeeklyBinModal">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
-                </a><br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                               data-target="#addWeeklyBinModal">
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
+                            </a><br>
 
-                <label for="requirement-filter" style="margin-top: 15px;">
-                    <p>Click the dropdown to filter options in accordance to your needs.</p>
-                </label>
+                            <label for="requirement-filter" style="margin-top: 15px;">
+                                <p>Click the dropdown to filter options in accordance to your needs.</p>
+                            </label>
 
-                <select id="requirement-filter" class="form-control">
-                    <option value="">All</option>
-                    <option value="Monitoring Evaluation Sheet">Monitoring Evaluation Sheet</option>
-                    <option value="Merit of Rating">Merit of Rating</option>
-                    <option value="Student Feedback Form">Student Feedback Form</option>
-                    <option value="Supervisor Feedback Form">Supervisor Feedback Form</option>
-                    <!-- Add more options as needed -->
-                </select>
+                            <select id="requirement-filter" class="form-control">
+                                <option value="">All</option>
+                                <option value="Monitoring Evaluation Sheet">Monitoring Evaluation Sheet</option>
+                                <option value="Merit of Rating">Merit of Rating</option>
+                                <option value="Student Feedback Form">Student Feedback Form</option>
+                                <option value="Supervisor Feedback Form">Supervisor Feedback Form</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
 
 
             <!-------------------------------REQUIREMENTS-------------------------------->
 
-
             <div class="document-container">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
-                    {% for post_requirement in post_requirements %}
-                        <li class="document-item" data-requirement="{{ post_requirement.post_requirement }}">
-                            <div class="row">
-                                <div class="col-12 col-md-8 offset-md-2" style="margin-top: 15px;">
-                                    <div class="card card-secondary">
-                                        <div class="card-header">
-                                            <h4>Requirement:</h4> <u>{{ post_requirement.post_requirement }}</u><br>
-                                        </div>
-                                        <div class="card-body">
-                                            <h6>Document:</h6>
-                                            <span class="document-name">{{ post_requirement.document_image.name|cut:"documents/" }}</span><br>
-                                            <button class="preview-button btn btn-dark"
-                                                    data-image="{{ post_requirement.document_image.url }}">
-                                                Toggle Image Preview
-                                            </button>
-                                            <div class="card-body" style="text-align: center;">
-                                                <img src="{{ post_requirement.document_image.url }}" alt="Image Preview"
-                                                     style="width: 80%; ">
-                                            </div>
-                                        </div>
-                                    </div>
+    <ul class="document-list" style="list-style-type: none; padding: 0px;">
+        {% for post_requirement in post_requirements %}
+            {% if forloop.counter0|divisibleby:3 %}
+                <div class="row">
+            {% endif %}
+
+            <li class="document-item col-12 col-md-4" data-requirement="{{ post_requirement.post_requirement }}">
+                <div class="card card-primary" style="margin-top: 10px;">
+                    <div class="card-header d-flex justify-content-between">
+                        <h4>{{ post_requirement.post_requirement }}</h4>
+                        <button class="download-button btn btn-primary btn-lg btn-lg-block"
+                                data-image="{{ post_requirement.document_image.url }}">
+                            Download
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h6>Document:</h6>
+                        <span class="document-name">{{ post_requirement.document_image.name|cut:"documents/" }}</span><br>
+                        <div class="button-container" style="margin-bottom: 20px;">
+                            <!-- Form for deletion -->
+                            <form method="post" action="{% url 'upload_post_requirements' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="delete_post_requirement" value="{{ post_requirement.id }}">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </div>
+                        <div class="chocolat-parent">
+                            <a href="{{ post_requirement.document_image.url }}"
+                                class="chocolat-image"
+                                title="{{ post_requirement.document_image.name|cut:'documents/' }}">
+                                <div>
+                                    <img alt="image" src="{{ post_requirement.document_image.url }}" class="img-fluid">
                                 </div>
-                            </div>
-                        </li>
-                    {% empty %}
-                        <li>No documents have been uploaded yet.</li>
-                    {% endfor %}
-                </ul>
-            </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            {% if forloop.counter0|add:1|divisibleby:3 or forloop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if post_requirements|length == 0 %}
+            <li>No documents have been uploaded yet.</li>
+        {% endif %}
+    </ul>
+</div>
+
 
 
             <!-------------------------------REQUIREMENTS-------------------------------->
@@ -115,7 +143,11 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="{% static 'assets/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+    <script src="{% static 'assets/modules/jquery-ui/jquery-ui.min.js' %}"></script>
     <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+
+
     <script>
         function updateClock() {
             const clockElement = document.getElementById('clock');
@@ -193,6 +225,31 @@
                 } else {
                     imagePreview.style.display = "none";
                 }
+            });
+        });
+    </script>
+
+    <script>
+        // JavaScript to handle image download
+        const downloadButtons = document.querySelectorAll(".download-button");
+
+        downloadButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const imageURL = button.getAttribute("data-image");
+
+                // Create a link element
+                const downloadLink = document.createElement("a");
+                downloadLink.href = imageURL;
+
+                // Set the download attribute to force download
+                downloadLink.download = "image.jpg";  // You can set the desired filename
+
+                // Append the link to the body and trigger a click event
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                // Remove the link from the body
+                document.body.removeChild(downloadLink);
             });
         });
     </script>

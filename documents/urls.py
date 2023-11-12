@@ -16,5 +16,4 @@ urlpatterns = [
     path('create_folder/', views.create_folder, name='create_folder'),
     path('folder/<int:folder_id>/', views.folder_detail, name='folder_detail'),
 
-
 ]

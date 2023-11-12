@@ -170,10 +170,15 @@ def upload_requirements(request):
     else:
         form = RequirementsForm()
 
+    if request.method == 'POST' and 'delete_requirement' in request.POST:
+        requirement_id = request.POST.get('delete_requirement')
+        requirement_to_delete = get_object_or_404(Requirements, id=requirement_id, user=request.user)
+        requirement_to_delete.delete()
+        return redirect('upload_requirements')
+
     requirements = Requirements.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_requirements.html', {'form': form, 'requirements': requirements})
-
 
 def upload_dtr(request):
 
@@ -207,14 +212,23 @@ def upload_narrative(request):
     return render(request, 'documents/forms/upload_narrative.html', {'form': form, 'narrative': narrative})
 
 
+
 @login_required
 def upload_post_requirements(request):
-
     if request.method == 'POST':
         form = PostRequirementsForm(request.POST, request.FILES)
+
+        # Upload post requirement
         if form.is_valid():
             form.instance.user = request.user
             form.save()
+            return redirect('upload_post_requirements')
+
+        # Delete post requirement
+        elif 'delete_post_requirement' in request.POST:
+            post_id = request.POST.get('delete_post_requirement')
+            post_to_delete = get_object_or_404(Post_Requirements, id=post_id, user=request.user)
+            post_to_delete.delete()
             return redirect('upload_post_requirements')
     else:
         form = PostRequirementsForm()

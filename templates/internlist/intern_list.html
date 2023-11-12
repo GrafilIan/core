@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
 
 
+
+
 {% endblock %}
 
 
@@ -133,6 +135,7 @@
                                                                         User</a>
                                                                 </form>
                                                             {% endif %}
+
                                                             {% for folder in folders %}
                                                                 <a href="{% url 'archive_intern' intern.id folder.id %}"
                                                                    class="dropdown-item">
@@ -151,8 +154,70 @@
 
                                         </tbody>
                                     </table>
-                                    <a href="{% url 'create_folder' %}" class="btn btn-primary">Create Folder</a>
-                                    <a href="{% url 'folder_list' %}" class="btn btn-primary">Folder List</a>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between" style="background-color: #920000;">
+                                <h3 style="color: #ffffff">Folder List</h3>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#createFolderModal" data-backdrop="false" style="background-color: #ffad00; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                    Create Folder
+                                </button>
+                            </div>
+                            <div class="row">
+                                {% for folder in folders %}
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card card-primary" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); margin: 15px;">
+                                            <div class="card-header">
+                                                <h4>{{ folder.name }}</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <p><a href="{% url 'folder_detail' folder.id %}">Open Folder</a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="modal fade" id="createFolderModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create a New
+                                                Folder</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                {{ folder_form.as_p }}
+                                                <button type="submit" class="btn btn-primary">Create
+                                                    Folder
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,6 +230,9 @@
 
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'assets/modules/prism/prism.js' %}"></script>
+
+
     <script>
         function createPostWithAlert() {
             // Use the correct id attribute
@@ -186,6 +254,7 @@
 
 
     <!-- JS Libraies -->
+
     <script src="{% static 'assets/modules/datatables/datatables.min.js' %}"></script>
     <script src="{% static 'assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js' %}"></script>
