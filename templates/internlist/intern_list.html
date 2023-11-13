@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="{% static 'assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css' %}">
 
 
-
-
 {% endblock %}
 
 
@@ -27,11 +25,12 @@
                     <div class="col-12">
                         <div class="card" style="margin-top: 20px;">
                             <div class="card-header">
-                                <h4>Intern List</h4>
+                                <h3 style="margin-top: 20px; padding-bottom: 1px;">Intern List</h3>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped" id="table-2">
+                                <div class="table-responsive" style="padding: 1px;">
+                                    <table class="table table-striped" id="table-2"
+                                           style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
                                         <thead>
                                         <tr>
                                             <th class="text-center">
@@ -172,22 +171,23 @@
                                 </button>
                             </div>
                             <div class="row">
-                                {% for folder in folders %}
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card card-primary"
-                                             style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); margin: 15px;">
-                                            <div class="card-header">
-                                                <h4>{{ folder.name }}</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><a href="{% url 'folder_detail' folder.id %}">Open Folder</a>
-                                                </p>
+                                <div class="row">
+                                    {% for folder in folders %}
+                                        <div class="col-md-3 mb-3">
+                                            <div class="card card-primary"
+                                                 style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); margin: 15px; background-image: url('{% static 'assets/img/news/folder_cover1.jpg' %}'); background-size: cover; background-position: center;">
+                                                <div class="card-header">
+                                                    <h4>{{ folder.name }}</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p><a href="{% url 'folder_detail' folder.id %}"
+                                                          style="font-weight: bold;">Open Folder</a></p>
+                                                </div>
                                             </div>
                                         </div>
+                                    {% endfor %}
+                                </div>
 
-
-                                    </div>
-                                {% endfor %}
                             </div>
 
 

@@ -7,9 +7,11 @@ from .models import Announcement
 from signup.models import Intern_Records
 from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def create_announcement(request):
     if request.method == 'POST':
         announcement_form = AnnouncementForm(request.POST, request.FILES, prefix='announcement')
@@ -31,8 +33,8 @@ def create_announcement(request):
 
     return render(request, 'dashboard/create_announcement.html', context)
 
-
 @login_required
+@user_passes_test(lambda user: user.is_superuser)
 def announcement_list(request):
     announcements = Announcement.objects.all().order_by('-pub_date')
 

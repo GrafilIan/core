@@ -18,6 +18,7 @@ def intern_schedule(request):
 
     return render(request, 'documents/schedule.html')
 
+@login_required
 def enter_internship_info(request):
     if request.method == 'POST':
         internship_form = InternshipForm(request.POST)
@@ -32,6 +33,7 @@ def enter_internship_info(request):
     return render(request, 'documents/enter_internship_info.html', {'internship_form': internship_form})
 
 # For dispalying Weekly Submission Bins
+@login_required
 def view_internship_info(request):
     user = request.user
     try:
@@ -99,6 +101,7 @@ def view_internship_info(request):
 
 
 #For Creating Weekly Report
+@login_required
 def add_to_weekly_bin(request, week_number):
     user = request.user
     try:
@@ -132,6 +135,7 @@ def add_to_weekly_bin(request, week_number):
     return render(request, 'documents/add_to_weekly_bin.html', {'form': form,
                                                                 'week_number': week_number})
 
+@login_required
 def add_weekly_bin(request):
     user = request.user
     try:
@@ -158,15 +162,20 @@ def add_weekly_bin(request):
 
     return render(request, 'documents/view_internship_info.html', {'form': form})
 
+
 @login_required
 def upload_requirements(request):
-
     if request.method == 'POST':
         form = RequirementsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect('upload_requirements')
+            if 'document_image' in request.FILES and request.FILES['document_image']:
+                form.instance.user = request.user
+                form.save()
+                messages.success(request, 'File uploaded successfully.')
+                return redirect('upload_requirements')
+            else:
+                messages.error(request, 'You submitted an empty form. Please fill the document image field.')
+
     else:
         form = RequirementsForm()
 
@@ -174,6 +183,7 @@ def upload_requirements(request):
         requirement_id = request.POST.get('delete_requirement')
         requirement_to_delete = get_object_or_404(Requirements, id=requirement_id, user=request.user)
         requirement_to_delete.delete()
+        messages.success(request, 'Requirement deleted successfully.')
         return redirect('upload_requirements')
 
     requirements = Requirements.objects.filter(user=request.user)
@@ -254,16 +264,20 @@ def upload_post_requirements(request):
 
         # Upload post requirement
         if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect('upload_post_requirements')
+            if 'document_image' in request.FILES and request.FILES['document_image']:
+                form.instance.user = request.user
+                form.save()
+                messages.success(request, 'File uploaded successfully.')
+            else:
+                messages.error(request, 'You submitted an empty form. Please fill the document image field.')
 
         # Delete post requirement
         elif 'delete_post_requirement' in request.POST:
             post_id = request.POST.get('delete_post_requirement')
             post_to_delete = get_object_or_404(Post_Requirements, id=post_id, user=request.user)
             post_to_delete.delete()
-            return redirect('upload_post_requirements')
+            messages.success(request, 'Post requirement deleted successfully.')
+
     else:
         form = PostRequirementsForm()
 
@@ -271,10 +285,12 @@ def upload_post_requirements(request):
 
     return render(request, 'documents/forms/upload_post_requirements.html', {'form': form, 'post_requirements': post_requirements})
 
+@login_required
 def folder_list(request):
     folders = Folder.objects.all()
     return render(request, 'documents/archive/folder_list.html', {'folders': folders})
 
+@login_required
 def create_folder(request):
     if request.method == 'POST':
         form = FolderForm(request.POST)
@@ -285,6 +301,7 @@ def create_folder(request):
         form = FolderForm()
     return render(request, 'documents/archive/create_folder.html', {'form': form})
 
+@login_required
 def folder_detail(request, folder_id):
     folder = get_object_or_404(Folder, id=folder_id)
     records = Record.objects.filter(folder=folder)

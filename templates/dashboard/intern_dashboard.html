@@ -116,7 +116,7 @@
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
-                            <div class="article-image" data-background="{% static 'assets/img/news/new2-01.png' %}"
+                            <div class="article-image" data-background="{% static 'assets/img/news/nc1.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img08.jpg&quot;);">
                             </div>
                             <div class="article-title">
@@ -129,7 +129,7 @@
 
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
-                            <div class="article-image" data-background="{% static 'assets/img/news/new3-01.png' %}"
+                            <div class="article-image" data-background="{% static 'assets/img/news/nc2.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
                             </div>
                             <div class="article-title">
@@ -141,7 +141,7 @@
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
-                            <div class="article-image" data-background="{% static 'assets/img/news/dash3.png' %}"
+                            <div class="article-image" data-background="{% static 'assets/img/news/nc3.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img04.jpg&quot;);">
                             </div>
                             <div class="article-title">
@@ -153,7 +153,7 @@
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3" style="padding: 1px; margin-top: -10px;">
                     <article class="article" style="box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);">
                         <div class="article-header">
-                            <div class="article-image" data-background="{% static 'assets/img/news/new1-01.png' %}"
+                            <div class="article-image" data-background="{% static 'assets/img/news/nc4.png' %}"
                                  style="background-image: url(&quot;assets/img/news/img12.jpg&quot;);">
                             </div>
                             <div class="article-title">
@@ -164,8 +164,8 @@
                 </div>
             </div>
 
-
-            <div class="col-6 col-md-6 col-lg-10" style="margin-top: 20px;">
+            <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-12 col-lg-8" style="margin-top: 20px;">
                 <div class="card">
                     <div class="card-header col-lg-11">
                         <div class="row">
@@ -176,7 +176,7 @@
                         </div>
                     </div>
 
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                     <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             {% for announcement in announcements %}
                                 {% if announcement.announcement_list %}
@@ -209,6 +209,10 @@
                                                 <a href="{{ announcement.document_announcement.url|safe }}"
                                                    target="_blank" class="announcement-link">View Document</a>
                                             {% endif %}
+                                        {% if announcement.image_announcement %}
+                                                <a href="{{ announcement.image_announcement.url|safe }}" target="_blank"
+                                                   class="announcement-link">{{ announcement.image_announcement.name }}</a>
+                                            {% endif %}
                                         </div>
 
                                     </div>
@@ -229,7 +233,7 @@
 
                 </div>
             </div>
-
+            </div>
         </section>
     </div>
 

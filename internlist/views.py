@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
@@ -13,6 +13,8 @@ from signup.models import Intern_Records
 from .forms import UserDeleteForm
 
 # Create your views here.
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def intern_list(request):
     folders = Folder.objects.all()
     if request.method == 'POST':
@@ -44,6 +46,8 @@ def intern_list(request):
 
     return render(request, 'internlist/intern_list.html', {'interns': interns, 'form': form, 'folders': folders, 'folder_form': folder_form})
 
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def archive_intern(request, intern_id, folder_id):
     intern = get_object_or_404(Intern_Records, id=intern_id)
     folder = get_object_or_404(Folder, id=folder_id)
@@ -54,6 +58,8 @@ def archive_intern(request, intern_id, folder_id):
 
     return redirect('intern_list')
 
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def intern_detail(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -93,10 +99,8 @@ def intern_detail(request, intern_id):
     })
 
 
-def is_admin(user):
-    return user.is_authenticated and user.is_superuser
-
-@user_passes_test(is_admin)
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def admin_intern_detail(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -116,7 +120,8 @@ def admin_intern_detail(request, intern_id):
         'post_requirements': post_requirements,
     })
 
-@user_passes_test(is_admin)
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def view_requirements(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -132,7 +137,8 @@ def view_requirements(request, intern_id):
 
     })
 
-@user_passes_test(is_admin)
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def view_dtr(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -147,7 +153,8 @@ def view_dtr(request, intern_id):
 
     })
 
-@user_passes_test(is_admin)
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def view_post_requirements(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -161,7 +168,8 @@ def view_post_requirements(request, intern_id):
         'post_requirements': post_requirements,
     })
 
-@user_passes_test(is_admin)
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def view_weekly_report(request, intern_id):
     intern = get_object_or_404(Intern_Records, pk=intern_id)
     weekly_bins = WeeklyBin.objects.filter(internship__user=intern.user)
@@ -175,6 +183,8 @@ def view_weekly_report(request, intern_id):
 
     })
 
+@login_required
+@user_passes_test(lambda user: user.is_superuser)
 def archive_selected_interns(request):
     if request.method == 'GET':
         intern_ids = request.GET.get('intern_ids', '').split(',')

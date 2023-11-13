@@ -198,18 +198,22 @@
                                                 <div class="image-overlay"></div>
                                             {% else %}
                                                 <!-- Default Image with Gradient Overlay -->
-                                                <img src="{% static 'assets/img/news/img02.jpg' %}" alt="Default Image"
+                                                <img src="{% static 'assets/img/news/ann_cover1.png' %}" alt="Default Image"
                                                      class="announcement-image">
                                                 <div class="image-overlay"></div>
                                             {% endif %}
                                         </div>
-                                        <div class="carousel-caption d-none d-md-block">
+                                        <div class="carousel-caption d-none d-md-block text-left">
                                             <h5>{{ announcement.title }}</h5>
                                             <p>{{ announcement.announcement_list|safe }}</p>
                                             <p class="announcement-date">{{ announcement.pub_date|date:"F d, Y" }}</p>
                                             {% if announcement.document_announcement %}
                                                 <a href="{{ announcement.document_announcement.url|safe }}"
                                                    target="_blank" class="announcement-link">View Document</a>
+                                            {% endif %}
+                                            {% if announcement.image_announcement %}
+                                                <a href="{{ announcement.image_announcement.url|safe }}" target="_blank"
+                                                   class="announcement-link">{{ announcement.image_announcement.name }}</a>
                                             {% endif %}
                                             <form method="post"
                                                   action="{% url 'delete_item' 'announcement' announcement.id %}"
@@ -218,7 +222,7 @@
                                                 <input type="hidden" name="delete_announcement" value="1">
                                                 <input type="hidden" name="announcement_id"
                                                        value="{{ announcement.id }}">
-                                                <button type="button" class="btn delete-button" style="margin-top: 7px;"
+                                                <button type="button" class="btn delete-button btn-sm" style="margin-top: 7px;"
                                                         data-announcement-id="{{ announcement.id }}">Delete
                                                 </button>
                                             </form>

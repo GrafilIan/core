@@ -52,6 +52,17 @@
                             </select>
                         </div>
                     </div>
+                     {% if messages %}
+                        <ul class="alert alert-dark alert-dismissible show fade" style="list-style-type: none; margin-top: 10px;">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                <button class="close" data-dismiss="alert">
+                                    <span>×</span>
+                                </button>
+                            {% endfor %}
+
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
 
