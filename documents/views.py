@@ -180,14 +180,23 @@ def upload_requirements(request):
 
     return render(request, 'documents/forms/upload_requirements.html', {'form': form, 'requirements': requirements})
 
-def upload_dtr(request):
 
+def upload_dtr(request):
     if request.method == 'POST':
         form = DTRForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect('upload_dtr')
+            dtr_number = form.cleaned_data['DTR_Number']
+
+            # Check if the DTR_Number is unique for the current user
+            if DailyTimeRecord.objects.filter(user=request.user, DTR_Number=dtr_number).exists():
+                messages.error(request, 'DTR Number already exists for this user.')
+            else:
+                form.instance.user = request.user
+                form.save()
+                messages.success(request, 'DTR uploaded successfully.')
+                return redirect('upload_dtr')
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = DTRForm()
 
@@ -196,23 +205,31 @@ def upload_dtr(request):
     return render(request, 'documents/forms/upload_dtr.html', {'form': form, 'dtr': dtr})
 
 
+@login_required
 def upload_narrative(request):
-
     if request.method == 'POST':
         form = NarrativeForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect('upload_narrative')
+            narrative_number = form.cleaned_data['Narrative_Number']
+
+            # Check if a narrative with the same Narrative_Number already exists
+            if NarrativeReport.objects.filter(user=request.user, Narrative_Number=narrative_number).exists():
+                messages.error(request, 'Narrative number already exists.')
+            else:
+                narrative = form.save(commit=False)
+                narrative.user = request.user
+                narrative.save()
+                messages.success(request, 'Narrative uploaded successfully.')
+                return redirect('upload_narrative')
+        else:
+            messages.error(request, 'Please correct the errors in the form.')
+
     else:
         form = NarrativeForm()
 
     narrative = NarrativeReport.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_narrative.html', {'form': form, 'narrative': narrative})
-
-
-
 @login_required
 def upload_post_requirements(request):
     if request.method == 'POST':

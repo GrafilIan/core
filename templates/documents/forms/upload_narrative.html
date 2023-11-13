@@ -21,6 +21,7 @@
                 <div class="hero-inner" style="height: 220px;">
                     <h1>Narrative Report Panel</h1>
                     <div id="clock" style="font-size: 40px; font-weight: bold;"></div>
+
                     <p>Please write or upload your narrative report below.</p>
 
                     <div class="row">
@@ -30,11 +31,25 @@
                                 <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File</a><br>
                         </div>
                     </div>
+                    {% if messages %}
+                        <ul class="alert alert-light alert-dismissible show fade" style="list-style-type: none; margin-top: 10px;">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                <button class="close" data-dismiss="alert">
+                                    <span>×</span>
+                                </button>
+                            {% endfor %}
+
+                        </ul>
+                    {% endif %}
+
                 </div>
             </div>
 
+
             <div class="document-container">
                 <div class="row">
+
                     {% for narrative in narrative %}
                         <div class="col-md-6">
                             <div class="card card-primary" style="margin-top: 15px;">
@@ -84,6 +99,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}

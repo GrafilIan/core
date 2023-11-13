@@ -1,6 +1,8 @@
 # forms.py
 
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import Internship, WeeklyBin, Requirements, DailyTimeRecord, NarrativeReport, Post_Requirements
 from signup.models import Intern_Records
 from .models import Folder, Record
@@ -97,6 +99,7 @@ class NarrativeForm(forms.ModelForm):
     class Meta:
         model = NarrativeReport
         fields = ['Narrative_Number', 'Narrative_Text','document_submission']
+
 
     def __init__(self, *args, **kwargs):
         super(NarrativeForm, self).__init__(*args, **kwargs)
