@@ -32,7 +32,8 @@
                         </div>
                     </div>
                     {% if messages %}
-                        <ul class="alert alert-light alert-dismissible show fade" style="list-style-type: none; margin-top: 10px;">
+                        <ul class="alert alert-light alert-dismissible show fade"
+                            style="list-style-type: none; margin-top: 10px;">
                             {% for message in messages %}
                                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                                 <button class="close" data-dismiss="alert">
@@ -49,28 +50,29 @@
 
             <div class="document-container">
                 <div class="row">
-
                     {% for narrative in narrative %}
                         <div class="col-md-6">
                             <div class="card card-primary" style="margin-top: 15px;">
-                                <div class="card-header">
-                                    <h4>Narrative No.:</h4> <u>{{ narrative.Narrative_Number }}</u>
-                                    <a data-collapse="#mycard-collapse-{{ forloop.counter }}"
-                                       class="btn btn-icon btn-info" href="#" style="margin-left: 260px;"><i
-                                            class="fas fa-plus"></i></a>
+                                <div class="card-header d-flex justify-content-between">
+                                    <div style="white-space: nowrap;">
+                                        <h4>Narrative No.: {{ narrative.Narrative_Number }}</h4>
+                                    </div>
+                                    <div>
+                                        <a data-collapse="#mycard-collapse-{{ forloop.counter }}"
+                                           class="btn btn-icon btn-info"
+                                           href="#" style="margin-left: 10px;"><i class="fas fa-plus"></i></a>
+                                        <a href="{% url 'delete_narrative' narrative_number=narrative.Narrative_Number %}"
+                                           class="btn btn-primary">Delete</a>
+                                    </div>
                                 </div>
                                 <div class="collapse" id="mycard-collapse-{{ forloop.counter }}">
                                     <div class="card-body">
                                         <h6>Narrative Content:</h6>
                                         <span class="narrative-text">{{ narrative.Narrative_Text|safe }}</span><br>
 
-                                        <h6>Narrative Report Submission:</h6>
                                         <a href="{{ form.document_submission.url }}"
                                            target="_blank">{{ narrative.document_submission.name }}</a><br>
                                         <!-- Add a button for preview or download if needed -->
-                                    </div>
-                                    <div class="card-footer">
-                                        Card Footer
                                     </div>
                                 </div>
                             </div>

@@ -16,4 +16,7 @@ urlpatterns = [
     path('create_folder/', views.create_folder, name='create_folder'),
     path('folder/<int:folder_id>/', views.folder_detail, name='folder_detail'),
 
+    path('delete-narrative/<str:narrative_number>/', views.delete_narrative, name='delete_narrative'),
+    path('delete-dtr/<str:dtr_number>/', views.delete_dtr, name='delete_dtr'),
+
 ]

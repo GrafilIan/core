@@ -181,6 +181,7 @@ def upload_requirements(request):
     return render(request, 'documents/forms/upload_requirements.html', {'form': form, 'requirements': requirements})
 
 
+@login_required
 def upload_dtr(request):
     if request.method == 'POST':
         form = DTRForm(request.POST, request.FILES)
@@ -206,6 +207,14 @@ def upload_dtr(request):
 
 
 @login_required
+def delete_dtr(request, dtr_number):
+    dtr = get_object_or_404(DailyTimeRecord, user=request.user, DTR_Number=dtr_number)
+    dtr.delete()
+    messages.success(request, 'DTR deleted successfully.')
+    return redirect('upload_dtr')
+
+
+@login_required
 def upload_narrative(request):
     if request.method == 'POST':
         form = NarrativeForm(request.POST, request.FILES)
@@ -223,13 +232,21 @@ def upload_narrative(request):
                 return redirect('upload_narrative')
         else:
             messages.error(request, 'Please correct the errors in the form.')
-
     else:
         form = NarrativeForm()
 
     narrative = NarrativeReport.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_narrative.html', {'form': form, 'narrative': narrative})
+
+
+@login_required
+def delete_narrative(request, narrative_number):
+    narrative = get_object_or_404(NarrativeReport, user=request.user, Narrative_Number=narrative_number)
+    narrative.delete()
+    messages.success(request, 'Narrative deleted successfully.')
+    return redirect('upload_narrative')
+
 @login_required
 def upload_post_requirements(request):
     if request.method == 'POST':

@@ -48,30 +48,35 @@
 </div>
 
             <div class="document-container" style="margin-top: -40px;">
-                <ul class="document-list" style="list-style-type: none; padding: 0px;">
-                    <div class="row">
-                        {% for dtr in dtr %}
-                            <div class="col-12 col-md-6" style="margin-top: 15px;">
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
-                                    </div>
-                                    <div class="card-body">
-                                        <h6>DTR Submission:</h6>
-                                        <a href="{{ dtr.DTR_submission.url }}"
-                                           target="_blank">{{ dtr.DTR_submission.name }}</a><br>
-                                        <!-- Add a button for preview or download if needed -->
-                                    </div>
-                                </div>
+    <ul class="document-list" style="list-style-type: none; padding: 0px;">
+        <div class="row">
+            {% for dtr in dtr %}
+                <div class="col-12 col-md-6" style="margin-top: 15px;">
+                    <div class="card card-primary">
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                <h4>DTR Number:</h4> <u>{{ dtr.DTR_Number }}</u><br>
                             </div>
-                            {% if forloop.counter|divisibleby:2 %}
-                                </div>
-                                <div class="row">
-                            {% endif %}
-                        {% endfor %}
+                            <div>
+                                <a href="{% url 'delete_dtr' dtr_number=dtr.DTR_Number %}" class="btn btn-primary ml-auto">Delete</a>
+                            </div>
                         </div>
-                </ul>
-            </div>
+                        <div class="card-body">
+                            <h6>DTR Submission:</h6>
+                            <a href="{{ dtr.DTR_submission.url }}" target="_blank">{{ dtr.DTR_submission.name }}</a><br>
+                            <!-- Add a button for preview or download if needed -->
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:2 %}
+                    </div>
+                    <div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+
 
 
         </section>
