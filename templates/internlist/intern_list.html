@@ -126,13 +126,12 @@
                                                                class="dropdown-item">Detail (ID: {{ intern.id }})</a>
                                                             {% if user.is_superuser %}
                                                                 <form method="post" enctype="multipart/form-data"
-                                                                      id="post-form">
+                                                                      id="post-form-{{ intern.id }}">
                                                                     {% csrf_token %}
                                                                     <input type="hidden" name="user_id"
                                                                            value="{{ intern.user.id }}">
                                                                     <a href="#" class="dropdown-item"
-                                                                       onclick="createPostWithAlert('{{ intern.id }}')">Delete
-                                                                        User</a>
+                                                                       onclick="createPostWithAlert('{{ intern.id }}')">Delete </a>
                                                                 </form>
                                                             {% endif %}
 
@@ -167,14 +166,16 @@
                             <div class="card-header d-flex justify-content-between" style="background-color: #920000;">
                                 <h3 style="color: #ffffff">Folder List</h3>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#createFolderModal" data-backdrop="false" style="background-color: #ffad00; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                        data-target="#createFolderModal" data-backdrop="false"
+                                        style="background-color: #ffad00; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                                     Create Folder
                                 </button>
                             </div>
                             <div class="row">
                                 {% for folder in folders %}
                                     <div class="col-md-3 mb-3">
-                                        <div class="card card-primary" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); margin: 15px;">
+                                        <div class="card card-primary"
+                                             style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); margin: 15px;">
                                             <div class="card-header">
                                                 <h4>{{ folder.name }}</h4>
                                             </div>
@@ -188,12 +189,6 @@
                                     </div>
                                 {% endfor %}
                             </div>
-
-
-
-
-
-
 
 
                             <div class="modal fade" id="createFolderModal" tabindex="-1" role="dialog"
@@ -234,8 +229,8 @@
 
 
     <script>
-        function createPostWithAlert() {
-            // Use the correct id attribute
+        function createPostWithAlert(internId) {
+            const formId = `post-form-${internId}`;
             Swal.fire({
                 title: 'Delete User',
                 text: 'Are you sure you want to delete this user?',
@@ -246,7 +241,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Submit the form when the user confirms
-                    document.getElementById('post-form').submit();
+                    document.getElementById(formId).submit();
                 }
             });
         }

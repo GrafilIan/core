@@ -22,9 +22,8 @@
 
             <div class="card card-dark profile-widget" style="margin-top: 50px;">
                 <div class="profile-widget-header">
-                    <img alt="image"
-                         src="{% static 'assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg' %}"
-                         class="rounded-circle profile-widget-picture" style="width: 140px; height: 140px;">
+                    <img alt="image" src="{{ intern.profile_image.url }}"
+             class="rounded-circle profile-widget-picture" style="width: 140px; height: 140px;">
                     <div class="profile-widget-items">
                         <div class="profile-widget-item" style="background-color: #efb100; margin-left: -10px;">
                             <div class="profile-widget-item-label">Student Number</div>

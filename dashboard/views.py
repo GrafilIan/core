@@ -45,6 +45,7 @@ def announcement_list(request):
     BSA_records = Intern_Records.objects.filter(course='BSA', folder__isnull=True)
     BSAIS_records = Intern_Records.objects.filter(course='BSAIS', folder__isnull=True)
     BPA_records = Intern_Records.objects.filter(course='BPA', folder__isnull=True)
+    BSE_records = Intern_Records.objects.filter(course='BSE', folder__isnull=True)
 
     BSIT_count = BSIT_records.count()
     BSIS_count = BSIS_records.count()
@@ -52,6 +53,7 @@ def announcement_list(request):
     BSA_count = BSA_records.count()
     BSAIS_count = BSAIS_records.count()
     BPA_count = BPA_records.count()
+    BSE_count = BSE_records.count()
     course_count = course_records.count()
 
     for intern in interns:
@@ -67,6 +69,7 @@ def announcement_list(request):
         'BSA_count': BSA_count,
         'BSAIS_count': BSAIS_count,
         'BPA_count': BPA_count,
+        'BSE_count' : BSE_count,
         'course_count': course_count,
         'interns': interns,
     }

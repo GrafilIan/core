@@ -75,7 +75,7 @@ class Intern_Records(models.Model):
     contact_person = models.CharField(max_length=200, verbose_name='Contact Person', null=True)
     contact_number = models.CharField(max_length=200, verbose_name='Contact Number', null=True)
 
-    profile_image = models.ImageField(upload_to='profile_images/', default='images/default_profile_image.png')
+    profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/SSUlogo.png')
     pub_date = models.DateTimeField(default=now)
 
     # Intern Status
