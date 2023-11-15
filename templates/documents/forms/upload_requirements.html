@@ -38,6 +38,7 @@
                            data-target="#addWeeklyBinModal">
                             <i class="fa fa-folder-open" aria-hidden="true"></i>Upload File
                         </a>
+
                     </div>
                 </div>
 
@@ -50,12 +51,13 @@
                         <select id="requirement-filter" class="form-control">
                             <option value="">All</option>
                             <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
-                            <option value="Barangay Clearance">Barangay Clearance</option>
-                            <option value="Cedula">Cedula</option>
+                            <option value="Cedula or CTC/GSIS/SSS No.">Cedula or CTC/GSIS/SSS No.</option>
+                            <option value="Driver License/National ID/Senior Citizen ID">Driver License/National ID/Senior Citizen ID</option>
+                            <option value="Evaluation of Grades">Evaluation of Grades</option>
                             <option value="Internship Agreement">Internship Agreement</option>
                             <option value="Medical Certificate">Medical Certificate</option>
+                            <option value="Memorandum of Agreement (MOA)">Memorandum of Agreement (MOA)</option>
                             <option value="Parent Consent">Parent Consent</option>
-                            <option value="Parent ID">Parent ID</option>
                             <option value="Police Clearance">Police Clearance</option>
                             <option value="Student INFO Sheet">Student Information Sheet</option>
                             <!-- Add more options as needed -->
@@ -106,7 +108,7 @@
                                        title="{{ requirement.document_image.name|cut:'document/' }}">
                                         <div>
                                             <img alt="image" src="{{ requirement.document_image.url }}"
-                                                 class="img-fluid">
+                                                 class="img-fluid" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                                         </div>
                                     </a>
                                 </div>

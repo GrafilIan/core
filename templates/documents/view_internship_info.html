@@ -19,36 +19,37 @@
 
         <section class="section" style="margin-top: 2px;">
             <div class="hero text-white hero-bg-image hero-bg-parallax text-center"
-     style="background-image: url('{% static 'assets/img/unsplash/andre-benz-1214056-unsplash.jpg' %}'); margin-left: -35px; margin-right: -46px;">
+                 style="background-image: url('{% static 'assets/img/unsplash/andre-benz-1214056-unsplash.jpg' %}'); margin-left: -35px; margin-right: -30px;">
 
-    <div class="hero-inner" style="padding: 20px;">
-        <h1>Internship Weekly Report View</h1>
-        <div id="clock" style="font-size: 30px;"></div>
-        <h5>Internship Started on {{ internship.starting_month }}</h5>
+                <div class="hero-inner" style="padding: 20px;">
+                    <h1>Internship Weekly Report View</h1>
+                    <div id="clock" style="font-size: 30px;"></div>
+                    <h5>Internship Started on {{ internship.starting_month }}</h5>
 
-        <div class="row">
-            <div class="col-md-4">
-                <p class="text-left">Rendered Hours:</p>
-                <h2>{{ total_hours_rendered }} hrs</h2>
-            </div>
-            <div class="col-md-4 text-center">
-                <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal" data-target="#addWeeklyBinModal">
-                    <i class="fa fa-folder-open" aria-hidden="true"></i> Add Weekly Bin
-                </a>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right">OJT Hours:</p>
-                <h2>{{ max_hours }} hrs</h2>
-            </div>
-        </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="text-left">Rendered Hours:</p>
+                            <h2>{{ total_hours_rendered }} hrs</h2>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="#" class="btn btn-outline-white btn-lg btn-icon icon-left" data-toggle="modal"
+                               data-target="#addWeeklyBinModal">
+                                <i class="fa fa-folder-open" aria-hidden="true"></i> Add Weekly Bin
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-right">OJT Hours:</p>
+                            <h2>{{ max_hours }} hrs</h2>
+                        </div>
+                    </div>
 
-        <div class="progress mb-1">
-            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ remaining_hours }}" aria-valuemin="0" aria-valuemax="366" style="width: {{ remaining_percentage }}%;">
+                    <div class="progress mb-1">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ remaining_hours }}"
+                             aria-valuemin="0" aria-valuemax="366" style="width: {{ remaining_percentage }}%;">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
 
 
             <ul id="weekly-bins-list" class="list-unstyled row" style="margin-top: 15px;">
@@ -76,7 +77,11 @@
                                     {{ weekly_bin.Weekly_text|safe }}
                                 </div>
                                 <div class="card-footer">
-                                    Weekly Hours Rendered: <H6>{{ weekly_bin.rendered_hours }} hours</H6>
+                                    Weekly Hours Rendered: <h6>{{ weekly_bin.rendered_hours }} hours</h6>
+                                    {% if weekly_bin.document_submission %}
+                                        <a href="{{ weekly_bin.document_submission.url }}" class="btn btn-info"
+                                           download>{{ weekly_bin.document_submission.name }}</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

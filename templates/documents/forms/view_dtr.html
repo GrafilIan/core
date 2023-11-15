@@ -20,13 +20,13 @@
                 <div class="hero-inner" style="height: 220px;">
                     <div style="font-size: 35px; font-weight: 700;">
                     <strong>{{ intern.user.first_name }}
-                        {% if intern.middle_name != 'n/a' %}
+                        {% if intern.middle_name != 'na' %}
                             {{ intern.middle_name }}
                         {% endif %}
 
                         {{ intern.user.last_name }}
 
-                        {% if intern.suffix != 'n/a' %}
+                        {% if intern.suffix != 'na' %}
                             {{ intern.suffix }}
                         {% endif %}</strong><br>
                     Record of Requirements

@@ -26,13 +26,13 @@
                 <div class="hero-inner" style="height: 200px;">
                     <div style="font-size: 35px; font-weight: 700;">
                     <strong>{{ intern.user.first_name }}
-                        {% if intern.middle_name != 'n/a' %}
+                        {% if intern.middle_name != 'na' %}
                             {{ intern.middle_name }}
                         {% endif %}
 
                         {{ intern.user.last_name }}
 
-                        {% if intern.suffix != 'n/a' %}
+                        {% if intern.suffix != 'na' %}
                             {{ intern.suffix }}
                         {% endif %}</strong><br>
                     Record of Weekly Report
@@ -56,16 +56,19 @@
                                     </button>
 
                                     <a data-collapse="#mycard-collapse-{{ forloop.counter }}"
-                                       class="btn btn-icon btn-info" style="background-color: #0E1112" href="#"><i class="fas fa-minus"></i></a>
+                                       class="btn btn-icon btn-info" style="background-color: #0E1112" href="#"><i class="fas fa-plus"></i></a>
                                 </div>
                             </div>
                             <div class="collapse" id="mycard-collapse-{{ forloop.counter }}" style="">
                                 <div class="card-body">
                                     {{ weekly_bin.Weekly_text|safe }}
                                 </div>
-                                <div class="card-footer">
-                                    Weekly Hours Rendered: <H6>{{ weekly_bin.rendered_hours }} hours</H6>
-                                    Posted on: {{ weekly_bin.pub_date|date:"F d, Y" }}<br>
+                                 <div class="card-footer">
+                                    Weekly Hours Rendered: <h6>{{ weekly_bin.rendered_hours }} hours</h6>
+                                    {% if weekly_bin.document_submission %}
+                                        <a href="{{ weekly_bin.document_submission.url }}" class="btn btn-info"
+                                           download>{{ weekly_bin.document_submission.name }}</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

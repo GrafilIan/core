@@ -35,14 +35,16 @@ class Record(models.Model):
 class Requirements(models.Model):
     REQUIREMENT_CHOICES = [
         ('Acceptance Form for OJT', 'Acceptance Form for OJT'),
+        ('Cedula or CTC/GSIS/SSS No.', 'Cedula or CTC/GSIS/SSS No.'),
+        ('Driver License/National ID/Senior Citizen ID', 'Driver License/National ID/Senior Citizen ID'),
+        ('Evaluation of Grades', 'Evaluation of Grades'),
         ('Internship Agreement', 'Internship Agreement'),
-        ('Student Information Sheet', 'Student Information Sheet'),
-        ('Parent Consent', 'Parent Consent'),
-        ('Barangay Clearance', 'Barangay Clearance'),
-        ('Police Clearance', 'Police Clearance'),
-        ('Parent ID', 'Parent ID'),
         ('Medical Certificate', 'Medical Certificate'),
-        ('Cedula', 'Cedula'),
+        ('Memorandum of Agreement (MOA)', 'Memorandum of Agreement (MOA)'),
+        ('Parent Consent', 'Parent Consent'),
+        ('Police Clearance', 'Police Clearance'),
+        ('Student Information Sheet', 'Student Information Sheet'),
+
         # Add more choices as needed
     ]
 

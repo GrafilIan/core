@@ -197,15 +197,20 @@ def upload_dtr(request):
         form = DTRForm(request.POST, request.FILES)
         if form.is_valid():
             dtr_number = form.cleaned_data['DTR_Number']
+            dtr_submission = form.cleaned_data['DTR_submission']
 
-            # Check if the DTR_Number is unique for the current user
-            if DailyTimeRecord.objects.filter(user=request.user, DTR_Number=dtr_number).exists():
-                messages.error(request, 'DTR Number already exists for this user.')
+            # Check if the DTR_submission file is empty
+            if not dtr_submission:
+                messages.error(request, 'DTR submission file cannot be empty.')
             else:
-                form.instance.user = request.user
-                form.save()
-                messages.success(request, 'DTR uploaded successfully.')
-                return redirect('upload_dtr')
+                # Check if the DTR_Number is unique for the current user
+                if DailyTimeRecord.objects.filter(user=request.user, DTR_Number=dtr_number).exists():
+                    messages.error(request, 'DTR Number already exists for this user.')
+                else:
+                    form.instance.user = request.user
+                    form.save()
+                    messages.success(request, 'DTR uploaded successfully.')
+                    return redirect('upload_dtr')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
@@ -214,6 +219,7 @@ def upload_dtr(request):
     dtr = DailyTimeRecord.objects.filter(user=request.user)
 
     return render(request, 'documents/forms/upload_dtr.html', {'form': form, 'dtr': dtr})
+
 
 
 @login_required

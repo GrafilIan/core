@@ -40,7 +40,7 @@ class Intern_Records(models.Model):
     # Method to get OJT hours based on the selected course
     def get_ojt_hours(self):
         COURSE_OJT_HOURS = {
-            'BSIT': 200,
+            'BSIT': 366,
             'BSIS': 366,
             'BSCS': 182,
             'BSA': 300,
@@ -53,7 +53,7 @@ class Intern_Records(models.Model):
 
     def get_remaining_ojt_hours(self):
         COURSE_OJT_HOURS = {
-            'BSIT': 200,
+            'BSIT': 366,
             'BSIS': 366,
             'BSCS': 182,
             'BSA': 300,
@@ -75,7 +75,7 @@ class Intern_Records(models.Model):
     contact_person = models.CharField(max_length=200, verbose_name='Contact Person', null=True)
     contact_number = models.CharField(max_length=200, verbose_name='Contact Number', null=True)
 
-    profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/SSUlogo.png')
+    profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/SSUProfile.png')
     pub_date = models.DateTimeField(default=now)
 
     # Intern Status

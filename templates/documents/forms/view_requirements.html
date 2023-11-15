@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'assets/modules/prism/prism.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/chocolat/dist/css/chocolat.css' %}">
 
-     <style>
+    <style>
         .document-name {
             white-space: nowrap;
             overflow: hidden;
@@ -32,13 +32,13 @@
                 <div class="hero-inner" style="height: 220px;">
                     <div style="font-size: 35px; font-weight: 700;">
                         <strong>{{ intern.user.first_name }}
-                            {% if intern.middle_name != 'n/a' %}
+                            {% if intern.middle_name != 'na' %}
                                 {{ intern.middle_name }}
                             {% endif %}
 
                             {{ intern.user.last_name }}
 
-                            {% if intern.suffix != 'n/a' %}
+                            {% if intern.suffix != 'na' %}
                                 {{ intern.suffix }}
                             {% endif %}</strong><br>
                         Record of Requirements
@@ -55,18 +55,15 @@
                             <select id="requirement-filter" class="form-control">
                                 <option value="">All</option>
                                 <option value="Acceptance Form for OJT">Acceptance Form for OJT</option>
-                                <option value="Barangay Clearance">Barangay Clearance</option>
-                                <option value="Cedula">Cedula</option>
+                                <option value="Cedula or CTC/GSIS/SSS No.">Cedula or CTC/GSIS/SSS No.</option>
+                                <option value="Driver License/National ID/Senior Citizen ID">Driver License/National ID/Senior Citizen ID</option>
+                                <option value="Evaluation of Grades">Evaluation of Grades</option>
                                 <option value="Internship Agreement">Internship Agreement</option>
                                 <option value="Medical Certificate">Medical Certificate</option>
-                                <option value="Merit of Rating">Merit of Rating</option>
+                                <option value="Memorandum of Agreement (MOA)">Memorandum of Agreement (MOA)</option>
                                 <option value="Parent Consent">Parent Consent</option>
-                                <option value="Parent ID">Parent ID</option>
                                 <option value="Police Clearance">Police Clearance</option>
-                                <option value="Student Feedback Form">Student Feedback Form</option>
                                 <option value="Student INFO Sheet">Student Information Sheet</option>
-                                <option value="Supervisor Feedback Form">Supervisor Feedback Form</option>
-                                <!-- Add more options as needed -->
                             </select>
                         </div>
                     </div>
@@ -79,37 +76,37 @@
 
 
             <div class="document-container">
-            <ul class="document-list row" style="list-style-type: none; padding: 0px;">
-                {% for requirement in requirements %}
-                    <li class="document-item col-12 col-md-4" data-requirement="{{ requirement.requirement }}">
-                        <div class="card card-primary" style="margin-top: 10px;">
-                            <div class="card-header d-flex justify-content-between">
-                                <h4>{{ requirement.requirement }}</h4>
-                                <button class="download-button btn btn-primary btn-lg btn-lg-block"
-                                        data-image="{{ requirement.document_image.url }}">
-                                    Download
-                                </button>
-                            </div>
-                            <div class="card-body">
-                                <h6>Document:</h6>
-                                <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
-                                <div class="chocolat-parent">
-                                    <a href="{{ requirement.document_image.url }}" class="chocolat-image"
-                                       title="{{ requirement.document_image.name|cut:'document/' }}">
-                                        <div>
-                                            <img alt="image" src="{{ requirement.document_image.url }}"
-                                                 class="img-fluid">
-                                        </div>
-                                    </a>
+                <ul class="document-list row" style="list-style-type: none; padding: 0px;">
+                    {% for requirement in requirements %}
+                        <li class="document-item col-12 col-md-4" data-requirement="{{ requirement.requirement }}">
+                            <div class="card card-primary" style="margin-top: 10px;">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h4>{{ requirement.requirement }}</h4>
+                                    <button class="download-button btn btn-primary btn-lg btn-lg-block"
+                                            data-image="{{ requirement.document_image.url }}">
+                                        Download
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Document:</h6>
+                                    <span class="document-name">{{ requirement.document_image.name|cut:"document/" }}</span><br>
+                                    <div class="chocolat-parent">
+                                        <a href="{{ requirement.document_image.url }}" class="chocolat-image"
+                                           title="{{ requirement.document_image.name|cut:'document/' }}">
+                                            <div>
+                                                <img alt="image" src="{{ requirement.document_image.url }}"
+                                                     class="img-fluid">
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                {% empty %}
-                    <li class="col-12">No documents have been uploaded yet.</li>
-                {% endfor %}
-            </ul>
-        </div>
+                        </li>
+                    {% empty %}
+                        <li class="col-12">No documents have been uploaded yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
             <!-------------------------------REQUIREMENTS-------------------------------->
 

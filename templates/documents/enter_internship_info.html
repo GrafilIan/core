@@ -12,6 +12,28 @@
     <link rel="stylesheet" href="{% static 'assets/modules/bootstrap-social/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
+    <style>
+        body {
+            background-image: url('{% static 'assets/img/SorSu_cover.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .card-warning {
+            content: "";
+            background-color: rgba(51, 51, 51, 0.84);
+            color: #d9d9d9;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -19,9 +41,35 @@
         <section class="section">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.9); margin-top: 10px;">
-                            <div class="card-header" style="padding: 20px;"><h4>Enter your Internship Starting Date</h4></div>
+                    <div class="col-md-6">
+                        <div class="card card-warning position-relative" style="margin-top: 20px;">
+                            <div class="card-body">
+                                <h4>Sorsogon State University-Bulan Campus Internship Monitoring System</h4>
+                                <p style="text-indent: 2em; text-align: justify;">
+                                    Technological advancements have significantly transformed societal functions, with
+                                    traditional data monitoring tools in educational institutions such as their manual
+                                    recordkeeping and its semi-computerized system, demanding a progressive approach
+                                    that prioritizes transparency and efficiency. Recognizing the importance of accurate
+                                    data management, a proposal for a Web-based Internship Records Monitoring System has
+                                    emerged.
+                                </p>
+                                <p style="text-indent: 2em; text-align: justify;">
+                                    This proposed system aims to centralize monitoring, streamline record-keeping, and
+                                    enhance interaction between students and office management as it caters to both
+                                    students and administrators, offering distinct features for each to optimize
+                                    internship management. The primary goal is to establish a secure and effective
+                                    platform, replacing outdated methods with innovative approaches to ensure accurate
+                                    and efficient internship management.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-primary"
+                             style="background-color: rgba(255, 255, 255, 0.9); margin-top: 20px;">
+                            <div class="card-header" style="padding: 20px;"><h4>Enter your Internship Starting Date</h4>
+                            </div>
                             <div class="card-body" style="padding-top: 1px;">
                                 <section class="section" style="margin-top: 12px;">
                                     <form method="post">
@@ -32,9 +80,6 @@
                                 </section>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <!-- Right-side content goes here, if any -->
                     </div>
                 </div>
             </div>
